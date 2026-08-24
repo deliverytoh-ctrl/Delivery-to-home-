@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DELIVERY TO HOME</title>
+<meta name="theme-color" content="#1769AA">
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f3f6f9;
+  color:#222
+}
+header{
+  background:#1769aa;
+  color:white;
+  padding:16px;
+  text-align:center
+}
+.container{
+  max-width:950px;
+  margin:auto;
+  padding:12px
+}
+.card{
+  background:white;
+  padding:16px;
+  margin:12px 0;
+  border-radius:12px;
+  box-shadow:0 2px 8px #ccc
+}
+input,select,textarea{
+  width:100%;
+  padding:12px;
+  margin:6px 0 12px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size:16px
+}
+textarea{min-height:80px}
+button{
+  border:0;
+  border-radius:8px;
+  padding:11px 15px;
+  margin:4px;
+  cursor:pointer;
+  font-size:15px
+}
+.primary{
+  background:#1769aa;
+  color:white
+}
+.green{
+  background:#198754;
+  color:white
+}
+.red{
+  background:#dc3545;
+  color:white
+}
+.orange{
+  background:#ff9800;
+  color:white
+}
+.gray{
+  background:#666;
+  color:white
+}
+.login{
+  max-width:450px;
+  margin:40px auto
+}
+.hidden{display:none}
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px
+}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px
+}
+.stat{
+  background:white;
+  padding:15px;
+  text-align:center;
+  border-radius:10px;
+  box-shadow:0 2px 6px #ddd
+}
+.stat b{
+  display:block;
+  font-size:21px;
+  margin-top:6px
+}
+.delivery{
+  border-top:1px solid #ddd;
+  padding:15px 0
+}
+.badge{
+  padding:5px 8px;
+  border-radius:6px;
+  display:inline-block
+}
+.paid{
+  background:#d1e7dd;
+  color:#075c35
+}
+.unpaid{
+  background:#fff0c2;
+  color:#6b5200
+}
+.actions{
+  margin-top:10px
+}
+.error{
+  background:#ffe5e5;
+  color:#a00;
+  padding:12px;
+  border-radius:8px
+}
+.success{
+  background:#d1e7dd;
+  color:#075c35;
+  padding:12px;
+  border-radius:8px
+}
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap
+}
+@media(max-width:700px){
+  .grid,.stats{
+    grid-template-columns:1fr 1fr
+  }
+}
+@media(max-width:500px){
+  .grid,.stats{
+    grid-template-columns:1fr
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🚚 DELIVERY TO HOME</h1>
+<div id="userEmail"></div>
+</header>
+
+<!-- LOGIN -->
+<div id="loginPage" class="container">
+
+<div class="card login">
+
+<h2 id="authTitle">🔐 Login</h2>
+
+<input id="email" type="email" placeholder="Email">
+
+<input id="password" type="password" placeholder="Password">
+
+<button class="primary" style="width:100%" onclick="login()">
+🔐 Login
+</button>
+
+<button class="green" style="width:100%" onclick="signup()">
+➕ Create Account
+</button>
+
+<p id="authMessage"></p>
+
+</div>
+
+</div>
+
+
+<!-- APP -->
+<div id="app" class="container hidden">
+
+<div class="card">
+
+<div class="topbar">
+
+<div>
+<b>👤 Logged in:</b>
+<span id="loggedEmail"></span>
+</div>
+
+<button class="red" onclick="logout()">
+🚪 Logout
+</button>
+
+</div>
+
+</div>
+
+
+<!-- FIRM -->
+<div class="card">
+
+<h2>🏢 Your Firm</h2>
+
+<select id="firmSelect" onchange="changeFirm()">
+<option value="">Select Firm</option>
+</select>
+
+<input id="firmName"
+placeholder="New firm name">
+
+<button class="primary" onclick="createFirm()">
+➕ Create Firm
+</button>
+
+</div>
+
+
+<div id="mainArea" class="hidden">
+
+
+<!-- STATS -->
+<div class="stats">
+
+<div class="stat">
+📦 Deliveries
+<b id="count">0</b>
+</div>
+
+<div class="stat">
+💰 Amount
+<b id="total">₹0</b>
+</div>
+
+<div class="stat">
+✅ Paid
+<b id="paid">₹0</b>
+</div>
+
+<div class="stat">
+⚠️ Unpaid
+<b id="unpaid">₹0</b>
+</div>
+
+</div>
+
+
+<!-- FILTER -->
+<div class="card">
+
+<h2>🔎 Delivery Filter</h2>
+
+<div class="grid">
+
+<div>
+<label>📅 Date</label>
+<input type="date" id="filterDate">
+</div>
+
+<div>
+<label>💳 Payment Status</label>
+<select id="filterPayment">
+<option value="All">All</option>
+<option value="Paid">Paid</option>
+<option value="Unpaid">Unpaid</option>
+</select>
+</div>
+
+<div>
+<label>💰 Payment Type</label>
+<select id="filterType">
+<option value="All">All</option>
+<option value="Cash">Cash</option>
+<option value="Online">Online</option>
+<option value="Credit">Credit</option>
+</select>
+</div>
+
+<div>
+<label>🚚 Delivery Status</label>
+<select id="filterStatus">
+<option value="All">All</option>
+<option value="Pending">Pending</option>
+<option value="Out for Delivery">Out for Delivery</option>
+<option value="Delivered">Delivered</option>
+<option value="Cancelled">Cancelled</option>
+</select>
+</div>
+
+</div>
+
+<button class="primary" onclick="today()">
+📅 Today
+</button>
+
+<button onclick="yesterday()">
+⬅️ Yesterday
+</button>
+
+<button class="gray" onclick="resetFilters()">
+🔄 Reset
+</button>
+
+</div>
+
+
+<!-- NEW DELIVERY -->
+<div class="card">
+
+<h2>➕ New Delivery</h2>
+
+<label>Delivery Boy Name</label>
+<input id="boy" placeholder="Delivery boy name">
+
+<label>Customer Name</label>
+<input id="customer" placeholder="Customer name">
+
+<label>Customer Mobile</label>
+<input id="mobile" placeholder="Mobile number">
+
+<label>Customer Address</label>
+<textarea id="address" placeholder="Customer address"></textarea>
+
+<label>Order Amount</label>
+<input id="amount" type="number" placeholder="₹ Order amount">
+
+<label>Received Amount</label>
+<input id="received" type="number" placeholder="₹ Received amount">
+
+<p>
+🔄 Change:
+<b id="change">₹0</b>
+</p>
+
+<p>
+⚠️ Balance:
+<b id="balance">₹0</b>
+</p>
+
+<label>Payment Type</label>
+
+<select id="newType">
+<option value="Cash">💵 Cash</option>
+<option value="Online">📱 Online</option>
+<option value="Credit">📒 Credit</option>
+</select>
+
+<label>Payment Status</label>
+
+<select id="newPayment">
+<option value="Unpaid">Unpaid</option>
+<option value="Paid">Paid</option>
+</select>
+
+<label>Delivery Status</label>
+
+<select id="newStatus">
+<option value="Pending">Pending</option>
+<option value="Out for Delivery">Out for Delivery</option>
+<option value="Delivered">Delivered</option>
+<option value="Cancelled">Cancelled</option>
+</select>
+
+<button class="primary" style="width:100%" onclick="saveDelivery()">
+💾 Save Delivery
+</button>
+
+</div>
+
+
+<!-- DELIVERY LIST -->
+<div class="card">
+
+<h2>📦 Delivery List</h2>
+
+<input id="search"
+placeholder="🔎 Search customer / delivery boy / mobile">
+
+<div id="list">
+Loading...
+</div>
+
+</div>
+
+</div>
+</div>
+
+
+<script>
+
+/* ==============================
+   SUPABASE
+============================== */
+
+const SUPABASE_URL =
+"https://mrozcbaendyheujcmfpi.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_p5tiMbyZOZR9_bcTbHuYbw_5JFSFiSF";
+
+let session=null;
+let firms=[];
+let currentFirm=null;
+let deliveries=[];
+
+
+/* ==============================
+   API
+============================== */
+
+async function api(path,options={}){
+
+  const headers={
+    "apikey":SUPABASE_KEY,
+    "Authorization":"Bearer "+(session?.access_token || SUPABASE_KEY),
+    "Content-Type":"application/json",
+    "Prefer":"return=representation"
+  };
+
+  const response=await fetch(
+    SUPABASE_URL+"/rest/v1/"+path,
+    {...options,headers}
+  );
+
+  const text=await response.text();
+
+  if(!response.ok){
+    throw new Error(text);
+  }
+
+  return text ? JSON.parse(text) : [];
+}
+
+
+/* ==============================
+   AUTH
+============================== */
+
+async function signup(){
+
+  const email=document.getElementById("email").value.trim();
+  const password=document.getElementById("password").value;
+
+  if(!email || !password){
+    message("Email और Password भरें","error");
+    return;
+  }
+
+  if(password.length<6){
+    message("Password कम से कम 6 characters का होना चाहिए","error");
+    return;
+  }
+
+  try{
+
+    const res=await fetch(
+      SUPABASE_URL+"/auth/v1/signup",
+      {
+        method:"POST",
+        headers:{
+          "apikey":SUPABASE_KEY,
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          email,
+          password
+        })
+      }
+    );
+
+    const data=await res.json();
+
+    if(!res.ok){
+      throw new Error(data.msg || data.message || "Signup failed");
+    }
+
+    if(data.access_token){
+
+      session=data;
+      showApp();
+
+    }else{
+
+      message(
+        "✅ Account created. Email confirmation required हो सकती है। Email check करें.",
+        "success"
+      );
+
+    }
+
+  }catch(e){
+
+    message("❌ "+e.message,"error");
+
+  }
+}
+
+
+async function login(){
+
+  const email=document.getElementById("email").value.trim();
+  const password=document.getElementById("password").value;
+
+  if(!email || !password){
+    message("Email और Password भरें","error");
+    return;
+  }
+
+  try{
+
+    const res=await fetch(
+      SUPABASE_URL+"/auth/v1/token?grant_type=password",
+      {
+        method:"POST",
+        headers:{
+          "apikey":SUPABASE_KEY,
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          email,
+          password
+        })
+      }
+    );
+
+    const data=await res.json();
+
+    if(!res.ok){
+      throw new Error(data.error_description || data.msg || "Login failed");
+    }
+
+    session=data;
+
+    localStorage.setItem(
+      "delivery_session",
+      JSON.stringify(session)
+    );
+
+    showApp();
+
+  }catch(e){
+
+    message("❌ "+e.message,"error");
+
+  }
+}
+
+
+function logout(){
+
+  localStorage.removeItem("delivery_session");
+
+  session=null;
+  currentFirm=null;
+
+  document.getElementById("app").classList.add("hidden");
+  document.getElementById("loginPage").classList.remove("hidden");
+
+}
+
+
+/* ==============================
+   UI
+============================== */
+
+function message(text,type){
+
+  const el=document.getElementById("authMessage");
+
+  el.className=type==="error"?"error":"success";
+  el.innerHTML=text;
+
+}
+
+
+function showApp(){
+
+  document.getElementById("loginPage")
+    .classList.add("hidden");
+
+  document.getElementById("app")
+    .classList.remove("hidden");
+
+  document.getElementById("loggedEmail")
+    .textContent=session.user?.email || "";
+
+  document.getElementById("userEmail")
+    .textContent=session.user?.email || "";
+
+  loadFirms();
+
+}
+
+
+/* ==============================
+   FIRMS
+============================== */
+
+async function loadFirms(){
+
+  try{
+
+    firms=await api(
+      "firms?select=*&order=created_at.asc"
+    );
+
+    const select=document.getElementById("firmSelect");
+
+    select.innerHTML=
+      '<option value="">Select Firm</option>';
+
+    firms.forEach(f=>{
+
+      const option=document.createElement("option");
+
+      option.value=f.id;
+      option.textContent=f.name;
+
+      select.appendChild(option);
+
+    });
+
+  }catch(e){
+
+    alert("Firm loading error: "+e.message);
+
+  }
+}
+
+
+async function createFirm(){
+
+  const name=document.getElementById("firmName")
+    .value.trim();
+
+  if(!name){
+
+    alert("Firm name डालें");
+    return;
+
+  }
+
+  try{
+
+    const result=await api(
+      "firms",
+      {
+        method:"POST",
+        body:JSON.stringify({
+          name:name,
+          owner_id:session.user.id
+        })
+      }
+    );
+
+    document.getElementById("firmName").value="";
+
+    await loadFirms();
+
+    if(result[0]){
+
+      document.getElementById("firmSelect").value=
+        result[0].id;
+
+      currentFirm=result[0];
+
+      document.getElementById("mainArea")
+        .classList.remove("hidden");
+
+      loadDeliveries();
+
+    }
+
+    alert("✅ Firm created");
+
+  }catch(e){
+
+    alert("❌ Firm Error: "+e.message);
+
+  }
+
+}
+
+
+function changeFirm(){
+
+  const id=document.getElementById("firmSelect").value;
+
+  currentFirm=firms.find(f=>f.id===id);
+
+  if(!currentFirm){
+
+    document.getElementById("mainArea")
+      .classList.add("hidden");
+
+    return;
+
+  }
+
+  document.getElementById("mainArea")
+    .classList.remove("hidden");
+
+  loadDeliveries();
+
+}
+
+
+/* ==============================
+   DELIVERY
+============================== */
+
+function updateMoney(){
+
+  const amount=
+    Number(document.getElementById("amount").value)||0;
+
+  const received=
+    Number(document.getElementById("received").value)||0;
+
+  document.getElementById("change")
+    .textContent=
+    "₹"+Math.max(received-amount,0).toFixed(2);
+
+  document.getElementById("balance")
+    .textContent=
+    "₹"+Math.max(amount-received,0).toFixed(2);
+
+}
+
+
+document.getElementById("amount")
+.addEventListener("input",updateMoney);
+
+document.getElementById("received")
+.addEventListener("input",updateMoney);
+
+
+async function saveDelivery(){
+
+  if(!currentFirm){
+
+    alert("पहले Firm select करें");
+    return;
+
+  }
+
+  const boy=
+    document.getElementById("boy").value.trim();
+
+  const customer=
+    document.getElementById("customer").value.trim();
+
+  const mobile=
+    document.getElementById("mobile").value.trim();
+
+  const address=
+    document.getElementById("address").value.trim();
+
+  const amount=
+    Number(document.getElementById("amount").value)||0;
+
+  const received=
+    Number(document.getElementById("received").value)||0;
+
+  const type=
+    document.getElementById("newType").value;
+
+  let payment=
+    document.getElementById("newPayment").value;
+
+  const status=
+    document.getElementById("newStatus").value;
+
+  if(!customer || !address || amount<=0){
+
+    alert(
+      "Customer Name, Address और Order Amount भरें"
+    );
+
+    return;
+
+  }
+
+  const balance=
+    Math.max(amount-received,0);
+
+  const change=
+    Math.max(received-amount,0);
+
+  if(balance===0){
+    payment="Paid";
+  }else{
+    payment="Unpaid";
+  }
+
+  try{
+
+    await api(
+      "deliveries",
+      {
+        method:"POST",
+        body:JSON.stringify({
+
+          firm_id:currentFirm.id,
+
+          user_id:session.user.id,
+
+          delivery_boy_name:boy,
+
+          customer_name:customer,
+
+          customer_mobile:mobile,
+
+          customer_address:address,
+
+          order_amount:amount,
+
+          received_amount:received,
+
+          change_amount:change,
+
+          payment_type:type,
+
+          payment_status:payment,
+
+          delivery_status:status
+
+        })
+      }
+    );
+
+    alert("✅ Delivery Saved");
+
+    [
+      "boy",
+      "customer",
+      "mobile",
+      "address",
+      "amount",
+      "received"
+    ].forEach(id=>{
+      document.getElementById(id).value="";
+    });
+
+    updateMoney();
+
+    loadDeliveries();
+
+  }catch(e){
+
+    alert("❌ Save Error: "+e.message);
+
+  }
+
+}
+
+
+/* ==============================
+   LOAD DELIVERIES
+============================== */
+
+async function loadDeliveries(){
+
+  if(!currentFirm)return;
+
+  try{
+
+    deliveries=await api(
+      "deliveries?select=*&firm_id=eq."+
+      encodeURIComponent(currentFirm.id)+
+      "&order=delivery_date.desc"
+    );
+
+    showDeliveries();
+
+  }catch(e){
+
+    document.getElementById("list").innerHTML=
+      "<div class='error'>"+e.message+"</div>";
+
+  }
+
+}
+
+
+/* ==============================
+   SHOW
+============================== */
+
+function showDeliveries(){
+
+  const search=
+    document.getElementById("search")
+      .value.toLowerCase();
+
+  const date=
+    document.getElementById("filterDate").value;
+
+  const payment=
+    document.getElementById("filterPayment").value;
+
+  const type=
+    document.getElementById("filterType").value;
+
+  const status=
+    document.getElementById("filterStatus").value;
+
+
+  const filtered=deliveries.filter(d=>{
+
+    const text=(
+      (d.customer_name||"")+" "+
+      (d.delivery_boy_name||"")+" "+
+      (d.customer_mobile||"")
+    ).toLowerCase();
+
+    if(search && !text.includes(search))
+      return false;
+
+    if(date){
+
+      const x=new Date(d.delivery_date);
+
+      const local=
+        x.getFullYear()+"-"+
+        String(x.getMonth()+1).padStart(2,"0")+"-"+
+        String(x.getDate()).padStart(2,"0");
+
+      if(local!==date)return false;
+
+    }
+
+    if(payment!=="All" &&
+       d.payment_status!==payment)
+      return false;
+
+    if(type!=="All" &&
+       d.payment_type!==type)
+      return false;
+
+    if(status!=="All" &&
+       d.delivery_status!==status)
+      return false;
+
+    return true;
+
+  });
+
+
+  let total=0;
+  let paid=0;
+  let unpaid=0;
+
+
+  filtered.forEach(d=>{
+
+    const amount=
+      Number(d.order_amount)||0;
+
+    total+=amount;
+
+    if(d.payment_status==="Paid")
+      paid+=amount;
+    else
+      unpaid+=amount;
+
+  });
+
+
+  document.getElementById("count")
+    .textContent=filtered.length;
+
+  document.getElementById("total")
+    .textContent="₹"+total.toFixed(2);
+
+  document.getElementById("paid")
+    .textContent="₹"+paid.toFixed(2);
+
+  document.getElementById("unpaid")
+    .textContent="₹"+unpaid.toFixed(2);
+
+
+  if(!filtered.length){
+
+    document.getElementById("list").innerHTML=
+      "<p style='text-align:center'>📦 No deliveries found</p>";
+
+    return;
+
+  }
+
+
+  document.getElementById("list").innerHTML=
+    filtered.map(d=>{
+
+      const amount=
+        Number(d.order_amount)||0;
+
+      const received=
+        Number(d.received_amount)||0;
+
+      const balance=
+        Math.max(amount-received,0);
+
+      const date=
+        d.delivery_date
+        ?new Date(d.delivery_date)
+          .toLocaleString("en-IN")
+        :"-";
+
+
+      return `
+
+      <div class="delivery">
+
+        <h3>👤 ${esc(d.customer_name)}</h3>
+
+        <p>
+        👨‍✈️ Delivery Boy:
+        <b>${esc(d.delivery_boy_name||"-")}</b>
+        </p>
+
+        <p>
+        📞 ${esc(d.customer_mobile||"-")}
+        </p>
+
+        <p>
+        📍 ${esc(d.customer_address||"-")}
+        </p>
+
+        <p>📅 ${date}</p>
+
+        <p>
+        💰 Order Amount:
+        <b>₹${amount.toFixed(2)}</b>
+        </p>
+
+        <p>
+        💵 Received:
+        <b>₹${received.toFixed(2)}</b>
+        </p>
+
+        <p>
+        ⚠️ Balance:
+        <b>₹${balance.toFixed(2)}</b>
+        </p>
+
+        <p>
+        💳 Payment:
+        <span class="badge ${
+          d.payment_status==="Paid"
+          ?"paid":"unpaid"
+        }">
+        ${esc(d.payment_status)}
+        </span>
+        </p>
+
+        <p>
+        💰 Type:
+        <b>${esc(d.payment_type)}</b>
+        </p>
+
+        <p>
+        🚚 Status:
+        <b>${esc(d.delivery_status)}</b>
+        </p>
+
+        <div class="actions">
+
+        <button class="primary"
+        onclick="callCustomer('${js(d.customer_mobile||"")}')">
+        📞 Call
+        </button>
+
+        <button class="primary"
+        onclick="openMap('${js(d.customer_address||"")}')">
+        📍 Map
+        </button>
+
+        ${
+          d.payment_status!=="Paid"
+          ?
+          `
+          <button class="green"
+          onclick="receivePayment('${js(d.id)}')">
+          💳 Receive Payment
+          </button>
+          `
+          :""
+        }
+
+        ${
+          d.delivery_status!=="Delivered"
+          ?
+          `
+          <button class="green"
+          onclick="markDelivered('${js(d.id)}')">
+          ✅ Delivered
+          </button>
+          `
+          :""
+        }
+
+        <button class="red"
+        onclick="deleteDelivery('${js(d.id)}')">
+        🗑 Delete
+        </button>
+
+        </div>
+
+      </div>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* ==============================
+   RECEIVE PAYMENT
+============================== */
+
+async function receivePayment(id){
+
+  const delivery=
+    deliveries.find(d=>d.id===id);
+
+  if(!delivery)return;
+
+  const amount=
+    Number(delivery.order_amount)||0;
+
+  const oldReceived=
+    Number(delivery.received_amount)||0;
+
+  const balance=
+    Math.max(amount-oldReceived,0);
+
+  if(balance<=0){
+
+    alert("यह payment पहले ही पूरा हो चुका है।");
+    return;
+
+  }
+
+  const received=prompt(
+    "कितना payment मिला?\nबाकी: ₹"+balance.toFixed(2)
+  );
+
+  if(received===null)return;
+
+  const paymentAmount=
+    Number(received);
+
+  if(!paymentAmount || paymentAmount<=0){
+
+    alert("Valid amount डालें");
+    return;
+
+  }
+
+  if(paymentAmount>balance){
+
+    alert("Payment बाकी amount से ज्यादा है");
+    return;
+
+  }
+
+
+  const newReceived=
+    oldReceived+paymentAmount;
+
+  const newBalance=
+    amount-newReceived;
+
+  const paymentType=prompt(
+    "Payment Type लिखें:\nCash / Online / Credit",
+    "Cash"
+  );
+
+  if(!paymentType)return;
+
+  const cleanType=
+    paymentType.trim();
+
+  if(!["Cash","Online","Credit"].includes(cleanType)){
+
+    alert("Payment Type केवल Cash, Online या Credit होना चाहिए");
+    return;
+
+  }
+
+
+  try{
+
+    await api(
+      "deliveries?id=eq."+encodeURIComponent(id),
+      {
+        method:"PATCH",
+        body:JSON.stringify({
+
+          received_amount:newReceived,
+
+          payment_type:cleanType,
+
+          payment_status:
+            newBalance<=0
+            ?"Paid"
+            :"Unpaid"
+
+        })
+      }
+    );
+
+    alert(
+      newBalance<=0
+      ?"✅ Payment complete — Paid"
+      :"✅ Payment received — Balance ₹"+newBalance.toFixed(2)
+    );
+
+    loadDeliveries();
+
+  }catch(e){
+
+    alert("❌ "+e.message);
+
+  }
+
+}
+
+
+/* ==============================
+   DELIVERED
+============================== */
+
+async function markDelivered(id){
+
+  try{
+
+    await api(
+      "deliveries?id=eq."+encodeURIComponent(id),
+      {
+        method:"PATCH",
+        body:JSON.stringify({
+          delivery_status:"Delivered"
+        })
+      }
+    );
+
+    loadDeliveries();
+
+  }catch(e){
+
+    alert("❌ "+e.message);
+
+  }
+
+}
+
+
+/* ==============================
+   DELETE
+============================== */
+
+async function deleteDelivery(id){
+
+  if(!confirm("यह delivery delete करें?"))
+    return;
+
+  try{
+
+    await api(
+      "deliveries?id=eq."+encodeURIComponent(id),
+      {
+        method:"DELETE"
+      }
+    );
+
+    loadDeliveries();
+
+  }catch(e){
+
+    alert("❌ "+e.message);
+
+  }
+
+}
+
+
+/* ==============================
+   CALL / MAP
+============================== */
+
+function callCustomer(number){
+
+  if(number)
+    location.href="tel:"+number;
+
+}
+
+function openMap(address){
+
+  window.open(
+    "https://www.google.com/maps/search/?api=1&query="+
+    encodeURIComponent(address),
+    "_blank"
+  );
+
+}
+
+
+/* ==============================
+   FILTERS
+============================== */
+
+function today(){
+
+  const d=new Date();
+
+  document.getElementById("filterDate")
+    .value=
+    d.getFullYear()+"-"+
+    String(d.getMonth()+1).padStart(2,"0")+"-"+
+    String(d.getDate()).padStart(2,"0");
+
+  showDeliveries();
+
+}
+
+
+function yesterday(){
+
+  const d=new Date();
+
+  d.setDate(d.getDate()-1);
+
+  document.getElementById("filterDate")
+    .value=
+    d.getFullYear()+"-"+
+    String(d.getMonth()+1).padStart(2,"0")+"-"+
+    String(d.getDate()).padStart(2,"0");
+
+  showDeliveries();
+
+}
+
+
+function resetFilters(){
+
+  document.getElementById("filterDate").value="";
+  document.getElementById("filterPayment").value="All";
+  document.getElementById("filterType").value="All";
+  document.getElementById("filterStatus").value="All";
+  document.getElementById("search").value="";
+
+  showDeliveries();
+
+}
+
+
+[
+ "filterDate",
+ "filterPayment",
+ "filterType",
+ "filterStatus",
+ "search"
+].forEach(id=>{
+
+  document.getElementById(id)
+    .addEventListener("input",showDeliveries);
+
+});
+
+
+/* ==============================
+   SECURITY HELPERS
+============================== */
+
+function esc(value){
+
+  return String(value||"")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function js(value){
+
+  return String(value||"")
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'")
+    .replace(/\n/g," ");
+
+}
+
+
+/* ==============================
+   RESTORE SESSION
+============================== */
+
+try{
+
+  const saved=
+    localStorage.getItem("delivery_session");
+
+  if(saved){
+
+    session=JSON.parse(saved);
+
+    if(session?.access_token){
+
+      showApp();
+
+    }
+
+  }
+
+}catch(e){
+
+  localStorage.removeItem("delivery_session");
+
+}
+
+</script>
+
+</body>
+  </html>
