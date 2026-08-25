@@ -14,7 +14,7 @@ body{
 margin:0;
 font-family:Arial,sans-serif;
 background:
-linear-gradient(rgba(255,255,255,.84),rgba(255,255,255,.84)),
+linear-gradient(rgba(255,255,255,.88),rgba(255,255,255,.88)),
 url("./delivery-staff-ride-motorcycles-shopping-concept_1150-34879.jpg");
 background-size:cover;
 background-position:center;
@@ -28,7 +28,7 @@ color:white;
 padding:12px;
 position:sticky;
 top:0;
-z-index:20;
+z-index:100;
 }
 
 .head{
@@ -58,7 +58,7 @@ padding:10px;
 }
 
 .card{
-background:rgba(255,255,255,.97);
+background:rgba(255,255,255,.98);
 border-radius:14px;
 padding:16px;
 margin:12px 0;
@@ -81,6 +81,7 @@ font-size:16px;
 
 textarea{
 min-height:80px;
+resize:vertical;
 }
 
 button{
@@ -237,6 +238,63 @@ background:#ffe5b4;
 color:#8a4b00;
 }
 
+/* CUSTOMER / BOY SEARCH */
+
+.searchBox{
+background:#f8f9fa;
+border:1px solid #ddd;
+border-radius:10px;
+padding:10px;
+margin-bottom:12px;
+}
+
+.searchTitle{
+font-weight:bold;
+margin-bottom:5px;
+}
+
+.suggestionList{
+max-height:240px;
+overflow-y:auto;
+margin-top:5px;
+}
+
+.suggestion{
+background:white;
+border:1px solid #ddd;
+border-radius:8px;
+padding:10px;
+margin:5px 0;
+cursor:pointer;
+}
+
+.suggestion:hover{
+background:#eef7ff;
+}
+
+.suggestion b{
+display:block;
+font-size:16px;
+}
+
+.suggestion small{
+color:#666;
+}
+
+.noSuggestion{
+padding:10px;
+color:#777;
+text-align:center;
+}
+
+.selectedBox{
+background:#dff5e5;
+border-radius:8px;
+padding:9px;
+margin:5px 0 10px;
+display:none;
+}
+
 .paymentHistory{
 background:#f8f9fa;
 border-radius:10px;
@@ -253,28 +311,17 @@ padding:8px 0;
 border-bottom:0;
 }
 
-.savedHint{
-font-size:13px;
-color:#666;
-margin-top:-5px;
-margin-bottom:8px;
-}
-
-.newContactBtn{
-background:#198754;
-color:white;
-width:100%;
-margin:0 0 8px;
-}
-
-.autofill{
-background:#f0fff5;
-border:1px solid #b7e4c7;
+.amountBox{
+background:#f8f9fa;
+border-radius:10px;
+padding:12px;
+margin:10px 0;
 }
 
 @media(max-width:600px){
 .grid{grid-template-columns:1fr}
 .summary{grid-template-columns:1fr}
+.stats{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
@@ -297,7 +344,7 @@ src="https://ui-avatars.com/api/?name=Delivery&background=1769AA&color=fff">
 </header>
 
 
-<!-- LOGIN -->
+<!-- ================= LOGIN ================= -->
 
 <div id="loginPage" class="container">
 
@@ -306,10 +353,16 @@ src="https://ui-avatars.com/api/?name=Delivery&background=1769AA&color=fff">
 <h2>🔐 Login</h2>
 
 <label>Email</label>
-<input id="loginEmail" type="email" placeholder="Enter email">
+<input
+id="loginEmail"
+type="email"
+placeholder="Enter email">
 
 <label>Password</label>
-<input id="loginPassword" type="password" placeholder="Enter password">
+<input
+id="loginPassword"
+type="password"
+placeholder="Enter password">
 
 <button id="loginBtn" class="blue full">
 🔐 Login
@@ -329,7 +382,7 @@ src="https://ui-avatars.com/api/?name=Delivery&background=1769AA&color=fff">
 </div>
 
 
-<!-- APP -->
+<!-- ================= APP ================= -->
 
 <div id="appPage" class="container hidden">
 
@@ -379,11 +432,18 @@ DELIVERY TO HOME
 <input id="firmNameInput">
 
 <label>📷 Profile Image</label>
-<input id="profileFile" type="file" accept="image/*">
+<input
+id="profileFile"
+type="file"
+accept="image/*">
 
-<img id="profilePreview" class="preview">
+<img
+id="profilePreview"
+class="preview">
 
-<button id="saveProfileBtn" class="blue full">
+<button
+id="saveProfileBtn"
+class="blue full">
 💾 Save Profile
 </button>
 
@@ -392,7 +452,7 @@ DELIVERY TO HOME
 </div>
 
 
-<!-- BACKUP -->
+<!-- ================= BACKUP ================= -->
 
 <div class="card backupBox">
 
@@ -402,14 +462,17 @@ DELIVERY TO HOME
 
 <p>
 आपकी delivery history Supabase Cloud में सुरक्षित रहती है।
-Extra backup के लिए नीचे options इस्तेमाल करें।
 </p>
 
-<button id="backupNowBtn" class="blue">
+<button
+id="backupNowBtn"
+class="blue">
 ☁️ Backup Now
 </button>
 
-<button id="downloadBackupBtn" class="green">
+<button
+id="downloadBackupBtn"
+class="green">
 📥 Download Backup
 </button>
 
@@ -422,7 +485,9 @@ id="restoreFile"
 type="file"
 accept=".json,application/json">
 
-<button id="restoreBackupBtn" class="purple full">
+<button
+id="restoreBackupBtn"
+class="purple full">
 📤 Restore Backup
 </button>
 
@@ -431,7 +496,7 @@ accept=".json,application/json">
 </div>
 
 
-<!-- STATS -->
+<!-- ================= STATS ================= -->
 
 <div class="stats">
 
@@ -458,7 +523,7 @@ accept=".json,application/json">
 </div>
 
 
-<!-- SUMMARY -->
+<!-- ================= PAYMENT SUMMARY ================= -->
 
 <div class="card">
 
@@ -489,7 +554,7 @@ accept=".json,application/json">
 </div>
 
 
-<!-- FILTER -->
+<!-- ================= FILTER ================= -->
 
 <div class="card">
 
@@ -514,7 +579,6 @@ accept=".json,application/json">
 </div>
 
 <div>
-
 <label>💰 Payment Type</label>
 
 <select id="filterType">
@@ -527,7 +591,6 @@ accept=".json,application/json">
 </div>
 
 <div>
-
 <label>🚚 Delivery Status</label>
 
 <select id="filterStatus">
@@ -557,54 +620,48 @@ accept=".json,application/json">
 </div>
 
 
-<!-- NEW DELIVERY -->
+<!-- ================= NEW DELIVERY ================= -->
 
 <div class="card">
 
 <h2>➕ New Delivery</h2>
 
 
-<!-- DELIVERY BOY -->
+<!-- CUSTOMER SEARCH -->
 
-<label>👨‍✈️ Delivery Boy Name</label>
+<div class="searchBox">
 
-<select id="boySelect">
-<option value="">-- Select Delivery Boy --</option>
-<option value="__NEW__">➕ New Delivery Boy</option>
-</select>
+<div class="searchTitle">
+👤 पुराने Customer को Search करें
+</div>
 
 <input
-id="boy"
-placeholder="Delivery boy name"
-class="hidden">
+id="customerSearch"
+placeholder="Customer name या mobile search करें">
 
-<div class="savedHint">
-पुराने delivery boy को select करें या नया नाम डालें।
+<div
+id="customerSuggestions"
+class="suggestionList">
+</div>
+
 </div>
 
 
-<!-- CUSTOMER -->
+<div
+id="selectedCustomer"
+class="selectedBox">
+✅ Customer selected
+</div>
 
-<label>👤 Customer</label>
 
-<select id="customerSelect">
-<option value="">-- Select Customer --</option>
-<option value="__NEW__">➕ New Customer</option>
-</select>
+<label>Customer Name</label>
 
 <input
 id="customer"
-placeholder="Customer name"
-class="hidden">
-
-<div class="savedHint">
-Customer select करते ही mobile और address automatically भरेंगे।
-</div>
+placeholder="Customer name">
 
 
-<!-- MOBILE -->
-
-<label>📞 Customer Mobile</label>
+<label>Customer Mobile</label>
 
 <input
 id="mobile"
@@ -612,13 +669,45 @@ type="tel"
 placeholder="Mobile number">
 
 
-<!-- ADDRESS -->
-
-<label>📍 Customer Address</label>
+<label>Customer Address</label>
 
 <textarea
 id="address"
 placeholder="Customer address"></textarea>
+
+
+<!-- DELIVERY BOY SEARCH -->
+
+<div class="searchBox">
+
+<div class="searchTitle">
+👨‍✈️ पुराने Delivery Boy को Search करें
+</div>
+
+<input
+id="boySearch"
+placeholder="Delivery boy name search करें">
+
+<div
+id="boySuggestions"
+class="suggestionList">
+</div>
+
+</div>
+
+
+<div
+id="selectedBoy"
+class="selectedBox">
+✅ Delivery Boy selected
+</div>
+
+
+<label>Delivery Boy Name</label>
+
+<input
+id="boy"
+placeholder="Delivery boy name">
 
 
 <label>📷 Order Image</label>
@@ -629,7 +718,7 @@ type="file"
 accept="image/*">
 
 
-<label>💰 Order Amount</label>
+<label>Order Amount</label>
 
 <input
 id="orderAmount"
@@ -639,7 +728,7 @@ step="0.01"
 placeholder="₹ Order amount">
 
 
-<label>💵 Received Amount</label>
+<label>Customer Se Received Amount</label>
 
 <input
 id="receivedAmount"
@@ -648,6 +737,8 @@ min="0"
 step="0.01"
 placeholder="₹ Received amount">
 
+
+<div class="amountBox">
 
 <p>
 🔄 Change to Give:
@@ -659,8 +750,10 @@ placeholder="₹ Received amount">
 <b id="balanceAmount">₹0.00</b>
 </p>
 
+</div>
 
-<label>💳 Payment Type</label>
+
+<label>Payment Type</label>
 
 <select id="paymentType">
 
@@ -717,7 +810,9 @@ Cancelled
 </select>
 
 
-<button id="saveDeliveryBtn" class="blue full">
+<button
+id="saveDeliveryBtn"
+class="blue full">
 💾 Save Delivery
 </button>
 
@@ -726,7 +821,7 @@ Cancelled
 </div>
 
 
-<!-- DELIVERY LIST -->
+<!-- ================= DELIVERY LIST ================= -->
 
 <div class="card">
 
@@ -747,9 +842,9 @@ Loading...
 
 <script>
 
-/* =========================================
+/* =====================================================
 SUPABASE
-========================================= */
+===================================================== */
 
 const SUPABASE_URL =
 "https://mrozcbaendyheujcmfpi.supabase.co";
@@ -771,9 +866,9 @@ detectSessionInUrl:true
 );
 
 
-/* =========================================
+/* =====================================================
 FIRM
-========================================= */
+===================================================== */
 
 const DEFAULT_FIRM_ID =
 "0bd649e8-3326-4bc7-9ff8-1d7b64c49e02";
@@ -786,13 +881,14 @@ let currentUser = null;
 let deliveries = [];
 
 
-/* =========================================
+/* =====================================================
 HELPERS
-========================================= */
+===================================================== */
 
 function $(id){
 return document.getElementById(id);
 }
+
 
 function escapeHTML(value){
 
@@ -805,6 +901,7 @@ return String(value ?? "")
 
 }
 
+
 function jsEscape(value){
 
 return String(value ?? "")
@@ -816,9 +913,13 @@ return String(value ?? "")
 
 }
 
+
 function money(value){
+
 return "₹"+Number(value||0).toFixed(2);
+
 }
+
 
 function message(id,text,type="error"){
 
@@ -830,14 +931,17 @@ ${escapeHTML(text)}
 }
 
 
-/* =========================================
+/* =====================================================
 LOGIN
-========================================= */
+===================================================== */
 
 $("loginBtn").onclick=async()=>{
 
-const email=$("loginEmail").value.trim();
-const password=$("loginPassword").value;
+const email=
+$("loginEmail").value.trim();
+
+const password=
+$("loginPassword").value;
 
 if(!email||!password){
 
@@ -862,7 +966,8 @@ password
 if(result.error)
 throw result.error;
 
-currentUser=result.data.user;
+currentUser=
+result.data.user;
 
 await showApp();
 
@@ -884,14 +989,17 @@ $("loginBtn").disabled=false;
 };
 
 
-/* =========================================
+/* =====================================================
 CREATE ACCOUNT
-========================================= */
+===================================================== */
 
 $("createBtn").onclick=async()=>{
 
-const email=$("loginEmail").value.trim();
-const password=$("loginPassword").value;
+const email=
+$("loginEmail").value.trim();
+
+const password=
+$("loginPassword").value;
 
 if(!email||!password){
 
@@ -928,7 +1036,8 @@ throw result.error;
 
 if(result.data.session){
 
-currentUser=result.data.user;
+currentUser=
+result.data.user;
 
 await showApp();
 
@@ -960,13 +1069,14 @@ $("createBtn").disabled=false;
 };
 
 
-/* =========================================
+/* =====================================================
 PASSWORD RESET
-========================================= */
+===================================================== */
 
 $("resetBtn").onclick=async()=>{
 
-const email=$("loginEmail").value.trim();
+const email=
+$("loginEmail").value.trim();
 
 if(!email){
 
@@ -1010,16 +1120,17 @@ e.message
 };
 
 
-/* =========================================
+/* =====================================================
 AUTH
-========================================= */
+===================================================== */
 
 supabaseClient.auth.onAuthStateChange(
 async(event,session)=>{
 
 if(session){
 
-currentUser=session.user;
+currentUser=
+session.user;
 
 await showApp();
 
@@ -1028,6 +1139,7 @@ await showApp();
 currentUser=null;
 
 $("loginPage").classList.remove("hidden");
+
 $("appPage").classList.add("hidden");
 
 }
@@ -1036,27 +1148,31 @@ $("appPage").classList.add("hidden");
 );
 
 
-/* =========================================
+/* =====================================================
 SHOW APP
-========================================= */
+===================================================== */
 
 async function showApp(){
 
 $("loginPage").classList.add("hidden");
+
 $("appPage").classList.remove("hidden");
 
-$("userEmail").textContent=currentUser.email;
+$("userEmail").textContent=
+currentUser.email;
 
 await ensureProfile();
+
 await loadProfile();
+
 await loadDeliveries();
 
 }
 
 
-/* =========================================
+/* =====================================================
 PROFILE
-========================================= */
+===================================================== */
 
 async function ensureProfile(){
 
@@ -1107,11 +1223,13 @@ return;
 if(result.data){
 
 const name=
-result.data.firm_name||
+result.data.firm_name ||
 "DELIVERY TO HOME";
 
 $("firmNameText").textContent=name;
+
 $("headerFirm").textContent=name;
+
 $("firmNameInput").value=name;
 
 if(result.data.profile_image){
@@ -1129,9 +1247,9 @@ result.data.profile_image;
 }
 
 
-/* =========================================
+/* =====================================================
 EDIT PROFILE
-========================================= */
+===================================================== */
 
 $("editProfileBtn").onclick=()=>{
 
@@ -1140,6 +1258,7 @@ $("profileEditor")
 
 };
 
+
 $("profileFile").onchange=function(){
 
 const file=this.files[0];
@@ -1147,21 +1266,22 @@ const file=this.files[0];
 if(!file){
 
 $("profilePreview").style.display="none";
-return;
 
+return;
 }
 
 $("profilePreview").src=
 URL.createObjectURL(file);
 
-$("profilePreview").style.display="block";
+$("profilePreview").style.display=
+"block";
 
 };
 
 
-/* =========================================
+/* =====================================================
 SAVE PROFILE
-========================================= */
+===================================================== */
 
 $("saveProfileBtn").onclick=async()=>{
 
@@ -1258,9 +1378,9 @@ e.message
 };
 
 
-/* =========================================
+/* =====================================================
 LOGOUT
-========================================= */
+===================================================== */
 
 $("logoutBtn").onclick=async()=>{
 
@@ -1269,9 +1389,9 @@ await supabaseClient.auth.signOut();
 };
 
 
-/* =========================================
+/* =====================================================
 MONEY
-========================================= */
+===================================================== */
 
 function updateMoney(){
 
@@ -1282,10 +1402,16 @@ const received=
 Number($("receivedAmount").value)||0;
 
 const balance=
-Math.max(amount-received,0);
+Math.max(
+amount-received,
+0
+);
 
 const change=
-Math.max(received-amount,0);
+Math.max(
+received-amount,
+0
+);
 
 $("balanceAmount").textContent=
 money(balance);
@@ -1306,38 +1432,18 @@ $("paymentStatus").value="Unpaid";
 }
 
 $("orderAmount").oninput=updateMoney;
+
 $("receivedAmount").oninput=updateMoney;
 
 
-/* =========================================
-OLD CONTACTS FROM DELIVERIES
-========================================= */
+/* =====================================================
+CUSTOMER HISTORY
+===================================================== */
 
-function getUniqueDeliveryBoys(){
-
-const map=new Map();
-
-deliveries.forEach(d=>{
-
-const name=
-String(d.delivery_boy_name||"").trim();
-
-if(name){
-
-const key=name.toLowerCase();
-
-if(!map.has(key))
-map.set(key,name);
-
-}
-
-});
-
-return Array.from(map.values())
-.sort((a,b)=>a.localeCompare(b));
-
-}
-
+/*
+  Existing deliveries table से unique customers
+  automatically बनाए जाते हैं.
+*/
 
 function getUniqueCustomers(){
 
@@ -1346,253 +1452,256 @@ const map=new Map();
 deliveries.forEach(d=>{
 
 const name=
-String(d.customer_name||"").trim();
+(d.customer_name||"").trim();
 
-if(!name)
+const mobile=
+(d.customer_mobile||"").trim();
+
+const address=
+(d.customer_address||"").trim();
+
+if(!name && !mobile)
 return;
 
 const key=
-(
-name+"|"+
-String(d.customer_mobile||"")
-).toLowerCase();
+(mobile || name.toLowerCase());
 
 if(!map.has(key)){
 
 map.set(key,{
 name:name,
-mobile:String(d.customer_mobile||""),
-address:String(d.customer_address||"")
+mobile:mobile,
+address:address
 });
 
 }
 
 });
 
-return Array.from(map.values())
-.sort((a,b)=>a.name.localeCompare(b.name));
+return Array.from(map.values());
 
 }
 
 
-/* =========================================
-BUILD BOY DROPDOWN
-========================================= */
+/* =====================================================
+CUSTOMER SEARCH
+===================================================== */
 
-function updateDeliveryBoyDropdown(){
+$("customerSearch").oninput=function(){
 
-const select=
-$("boySelect");
+const query=
+this.value.trim().toLowerCase();
 
-const oldValue=
-select.value;
+const box=
+$("customerSuggestions");
 
-select.innerHTML=
-`
-<option value="">-- Select Delivery Boy --</option>
-<option value="__NEW__">➕ New Delivery Boy</option>
-`;
+box.innerHTML="";
 
-getUniqueDeliveryBoys().forEach(name=>{
+if(!query){
 
-const option=
-document.createElement("option");
-
-option.value=name;
-option.textContent="👨‍✈️ "+name;
-
-select.appendChild(option);
-
-});
-
-if(
-[...select.options]
-.some(o=>o.value===oldValue)
-){
-
-select.value=oldValue;
-
+return;
 }
 
-}
+const customers=
+getUniqueCustomers().filter(c=>{
 
-
-/* =========================================
-BUILD CUSTOMER DROPDOWN
-========================================= */
-
-function updateCustomerDropdown(){
-
-const select=
-$("customerSelect");
-
-const oldValue=
-select.value;
-
-select.innerHTML=
-`
-<option value="">-- Select Customer --</option>
-<option value="__NEW__">➕ New Customer</option>
-`;
-
-getUniqueCustomers().forEach((customer,index)=>{
-
-const option=
-document.createElement("option");
-
-option.value=String(index);
-
-option.textContent=
-"👤 "+
-customer.name+
-(
-customer.mobile
-?
-" - "+customer.mobile
-:""
+return(
+(c.name||"").toLowerCase().includes(query) ||
+(c.mobile||"").toLowerCase().includes(query) ||
+(c.address||"").toLowerCase().includes(query)
 );
 
-option.dataset.name=
-customer.name;
+});
 
-option.dataset.mobile=
-customer.mobile;
 
-option.dataset.address=
-customer.address;
+if(!customers.length){
 
-select.appendChild(option);
+box.innerHTML=
+`<div class="noSuggestion">
+कोई पुराना customer नहीं मिला.
+</div>`;
+
+return;
+
+}
+
+
+box.innerHTML=
+customers.map((c,index)=>{
+
+return`
+
+<div
+class="suggestion"
+onclick="selectCustomer(${index})">
+
+<b>
+👤 ${escapeHTML(c.name||"Unknown")}
+</b>
+
+<small>
+📞 ${escapeHTML(c.mobile||"-")}
+</small>
+
+<br>
+
+<small>
+📍 ${escapeHTML(c.address||"-")}
+</small>
+
+</div>
+
+`;
+
+}).join("");
+
+
+window.customerSearchResults=
+customers;
+
+};
+
+
+function selectCustomer(index){
+
+const c=
+window.customerSearchResults[index];
+
+if(!c)
+return;
+
+$("customer").value=
+c.name||"";
+
+$("mobile").value=
+c.mobile||"";
+
+$("address").value=
+c.address||"";
+
+$("customerSearch").value=
+c.name||c.mobile||"";
+
+$("customerSuggestions").innerHTML="";
+
+$("selectedCustomer").textContent=
+"✅ Selected: "+
+(c.name||"Customer");
+
+$("selectedCustomer").style.display=
+"block";
+
+}
+
+
+/* =====================================================
+DELIVERY BOY HISTORY
+===================================================== */
+
+function getUniqueBoys(){
+
+const set=new Set();
+
+deliveries.forEach(d=>{
+
+const name=
+(d.delivery_boy_name||"").trim();
+
+if(name)
+set.add(name);
 
 });
 
-if(
-[...select.options]
-.some(o=>o.value===oldValue)
-){
-
-select.value=oldValue;
-
-}
+return Array.from(set);
 
 }
 
 
-/* =========================================
-DELIVERY BOY SELECT
-========================================= */
+/* =====================================================
+DELIVERY BOY SEARCH
+===================================================== */
 
-$("boySelect").onchange=function(){
+$("boySearch").oninput=function(){
 
-if(this.value==="__NEW__"){
+const query=
+this.value.trim().toLowerCase();
 
-$("boy").value="";
+const box=
+$("boySuggestions");
 
-$("boy").classList.remove("hidden");
+box.innerHTML="";
 
-$("boy").focus();
+if(!query)
+return;
+
+const boys=
+getUniqueBoys()
+.filter(name=>
+name.toLowerCase().includes(query)
+);
+
+if(!boys.length){
+
+box.innerHTML=
+`<div class="noSuggestion">
+कोई पुराना Delivery Boy नहीं मिला.
+</div>`;
 
 return;
 
 }
 
-if(this.value){
+box.innerHTML=
+boys.map((name,index)=>{
 
-$("boy").value=this.value;
+return`
 
-$("boy").classList.add("hidden");
+<div
+class="suggestion"
+onclick="selectBoy(${index})">
 
-}else{
+<b>
+👨‍✈️ ${escapeHTML(name)}
+</b>
 
-$("boy").value="";
-$("boy").classList.add("hidden");
+</div>
 
-}
+`;
+
+}).join("");
+
+window.boySearchResults=
+boys;
 
 };
 
 
-/* =========================================
-CUSTOMER SELECT
-========================================= */
+function selectBoy(index){
 
-$("customerSelect").onchange=function(){
+const name=
+window.boySearchResults[index];
 
-if(this.value==="__NEW__"){
-
-$("customer").value="";
-$("mobile").value="";
-$("address").value="";
-
-$("customer").classList.remove("hidden");
-
-$("customer").focus();
-
+if(!name)
 return;
 
-}
+$("boy").value=name;
 
-if(!this.value){
+$("boySearch").value=name;
 
-$("customer").value="";
-$("mobile").value="";
-$("address").value="";
+$("boySuggestions").innerHTML="";
 
-$("customer").classList.add("hidden");
+$("selectedBoy").textContent=
+"✅ Selected: "+name;
 
-return;
-
-}
-
-const option=
-this.options[this.selectedIndex];
-
-$("customer").value=
-option.dataset.name||"";
-
-$("mobile").value=
-option.dataset.mobile||"";
-
-$("address").value=
-option.dataset.address||"";
-
-$("customer").classList.add("hidden");
-
-};
-
-
-/* =========================================
-NEW DELIVERY BOY INPUT
-========================================= */
-
-$("boy").oninput=function(){
-
-if(this.value.trim()){
-
-$("boySelect").value="__NEW__";
+$("selectedBoy").style.display=
+"block";
 
 }
 
-};
 
-
-/* =========================================
-NEW CUSTOMER INPUT
-========================================= */
-
-$("customer").oninput=function(){
-
-if(this.value.trim()){
-
-$("customerSelect").value="__NEW__";
-
-}
-
-};
-
-
-/* =========================================
+/* =====================================================
 UPLOAD ORDER IMAGE
-========================================= */
+===================================================== */
 
 async function uploadOrderImage(file){
 
@@ -1633,9 +1742,9 @@ return supabaseClient
 }
 
 
-/* =========================================
+/* =====================================================
 SAVE DELIVERY
-========================================= */
+===================================================== */
 
 $("saveDeliveryBtn").onclick=async()=>{
 
@@ -1666,6 +1775,7 @@ $("paymentStatus").value;
 const deliveryStatus=
 $("deliveryStatus").value;
 
+
 if(
 !boy||
 !customer||
@@ -1676,12 +1786,13 @@ amount<=0
 
 message(
 "deliveryMessage",
-"सभी जरूरी details भरें."
+"Delivery Boy, Customer Name, Mobile, Address और Amount भरें."
 );
 
 return;
 
 }
+
 
 if(received>amount){
 
@@ -1694,18 +1805,27 @@ return;
 
 }
 
+
 const balance=
-Math.max(amount-received,0);
+Math.max(
+amount-received,
+0
+);
 
 const change=
-Math.max(received-amount,0);
+Math.max(
+received-amount,
+0
+);
 
 if(balance===0)
 paymentStatus="Paid";
 else
 paymentStatus="Unpaid";
 
+
 $("saveDeliveryBtn").disabled=true;
+
 
 try{
 
@@ -1758,32 +1878,29 @@ image_url:imageUrl,
 
 order_image:imageUrl,
 
-total_amount:amount,
-
-last_payment_amount:
-received>0 ? received : 0,
-
-last_payment_type:
-received>0 ? paymentType : null,
-
-payment_received_at:
-received>0 ? now : null
+total_amount:amount
 
 };
+
 
 const result=
 await supabaseClient
 .from("deliveries")
 .insert(row);
 
+
 if(result.error)
 throw result.error;
 
+
 message(
 "deliveryMessage",
-"✅ Delivery saved successfully. Customer अब आगे dropdown में मिलेगा.",
+"✅ Delivery saved successfully. Customer अगली बार search में मिलेगा.",
 "success"
 );
+
+
+/* CLEAR */
 
 $("boy").value="";
 $("customer").value="";
@@ -1792,12 +1909,11 @@ $("address").value="";
 $("orderAmount").value="";
 $("receivedAmount").value="";
 $("orderFile").value="";
+$("customerSearch").value="";
+$("boySearch").value="";
 
-$("boySelect").value="";
-$("customerSelect").value="";
-
-$("boy").classList.add("hidden");
-$("customer").classList.add("hidden");
+$("selectedCustomer").style.display="none";
+$("selectedBoy").style.display="none";
 
 updateMoney();
 
@@ -1821,9 +1937,9 @@ $("saveDeliveryBtn").disabled=false;
 };
 
 
-/* =========================================
+/* =====================================================
 LOAD DELIVERIES
-========================================= */
+===================================================== */
 
 async function loadDeliveries(){
 
@@ -1838,6 +1954,7 @@ await supabaseClient
 ascending:false
 }
 );
+
 
 if(result.error){
 
@@ -1856,17 +1973,14 @@ return;
 deliveries=
 result.data||[];
 
-updateDeliveryBoyDropdown();
-updateCustomerDropdown();
-
 renderDeliveries();
 
 }
 
 
-/* =========================================
-FILTER
-========================================= */
+/* =====================================================
+FILTER EVENTS
+===================================================== */
 
 [
 "filterDate",
@@ -1876,28 +1990,41 @@ FILTER
 "search"
 ].forEach(id=>{
 
-$(id).oninput=renderDeliveries;
+$(id).oninput=
+renderDeliveries;
 
 });
 
 
-/* =========================================
+/* =====================================================
 RENDER
-========================================= */
+===================================================== */
 
 function renderDeliveries(){
 
-let list=[...deliveries];
+let list=
+[...deliveries];
 
 const search=
-$("search").value.trim().toLowerCase();
+$("search").value
+.trim()
+.toLowerCase();
 
-const date=$("filterDate").value;
-const payment=$("filterPayment").value;
-const type=$("filterType").value;
-const status=$("filterStatus").value;
+const date=
+$("filterDate").value;
 
-list=list.filter(d=>{
+const payment=
+$("filterPayment").value;
+
+const type=
+$("filterType").value;
+
+const status=
+$("filterStatus").value;
+
+
+list=
+list.filter(d=>{
 
 const text=
 (
@@ -1905,11 +2032,18 @@ const text=
 " "+
 (d.delivery_boy_name||"")+
 " "+
-(d.customer_mobile||"")
+(d.customer_mobile||"")+
+" "+
+(d.customer_address||"")
 ).toLowerCase();
 
-if(search&&!text.includes(search))
+
+if(
+search &&
+!text.includes(search)
+)
 return false;
+
 
 if(
 payment!=="All" &&
@@ -1917,11 +2051,13 @@ d.payment_status!==payment
 )
 return false;
 
+
 if(
 type!=="All" &&
 d.payment_type!==type
 )
 return false;
+
 
 if(
 status!=="All" &&
@@ -1929,9 +2065,11 @@ d.delivery_status!==status
 )
 return false;
 
+
 if(date){
 
-const x=new Date(d.delivery_date);
+const x=
+new Date(d.delivery_date);
 
 const ds=
 x.getFullYear()+"-"+
@@ -1942,6 +2080,7 @@ if(ds!==date)
 return false;
 
 }
+
 
 return true;
 
@@ -1955,6 +2094,7 @@ let cash=0;
 let online=0;
 let credit=0;
 
+
 list.forEach(d=>{
 
 const amount=
@@ -1965,22 +2105,30 @@ d.order_amount ??
 );
 
 const received=
-Number(d.received_amount||0);
+Number(
+d.received_amount||0
+);
+
 
 total+=amount;
 
-if(d.payment_status==="Paid"){
+
+if(
+d.payment_status==="Paid"
+){
 
 paid+=received;
 
 }else{
 
-unpaid+=Math.max(
+unpaid+=
+Math.max(
 amount-received,
 0
 );
 
 }
+
 
 if(d.payment_type==="Cash")
 cash+=received;
@@ -1993,13 +2141,27 @@ credit+=received;
 
 });
 
-$("totalDeliveries").textContent=list.length;
-$("totalAmount").textContent=money(total);
-$("paidAmount").textContent=money(paid);
-$("unpaidAmount").textContent=money(unpaid);
-$("cashAmount").textContent=money(cash);
-$("onlineAmount").textContent=money(online);
-$("creditAmount").textContent=money(credit);
+
+$("totalDeliveries").textContent=
+list.length;
+
+$("totalAmount").textContent=
+money(total);
+
+$("paidAmount").textContent=
+money(paid);
+
+$("unpaidAmount").textContent=
+money(unpaid);
+
+$("cashAmount").textContent=
+money(cash);
+
+$("onlineAmount").textContent=
+money(online);
+
+$("creditAmount").textContent=
+money(credit);
 
 
 if(!list.length){
@@ -2023,36 +2185,58 @@ d.order_amount ??
 );
 
 const received=
-Number(d.received_amount||0);
+Number(
+d.received_amount||0
+);
 
 const balance=
-Math.max(amount-received,0);
+Math.max(
+amount-received,
+0
+);
 
 const date=
 d.delivery_date
 ?
-new Date(d.delivery_date).toLocaleString("en-IN")
+new Date(d.delivery_date)
+.toLocaleString("en-IN")
 :"-";
 
-const id=jsEscape(d.id);
+
+const id=
+jsEscape(d.id);
 
 const mobile=
-jsEscape(d.customer_mobile||"");
+jsEscape(
+d.customer_mobile||""
+);
 
 const address=
-jsEscape(d.customer_address||"");
+jsEscape(
+d.customer_address||""
+);
 
 const image=
 d.order_image||
 d.image_url||
 "";
 
+
 let statusClass="unpaid";
 
-if(d.payment_status==="Paid")
+if(
+d.payment_status==="Paid"
+){
+
 statusClass="paid";
-else if(received>0)
+
+}else if(
+received>0
+){
+
 statusClass="partial";
+
+}
 
 
 return`
@@ -2060,57 +2244,88 @@ return`
 <div class="delivery">
 
 <h3>
-👤 ${escapeHTML(d.customer_name||"-")}
+👤 ${escapeHTML(
+d.customer_name||"-"
+)}
 </h3>
+
 
 <p>
 👨‍✈️ Delivery Boy:
-<b>${escapeHTML(d.delivery_boy_name||"-")}</b>
+<b>
+${escapeHTML(
+d.delivery_boy_name||"-"
+)}
+</b>
 </p>
 
-<p>
-📞 ${escapeHTML(d.customer_mobile||"-")}
-</p>
 
 <p>
-📍 ${escapeHTML(d.customer_address||"-")}
+📞 ${escapeHTML(
+d.customer_mobile||"-"
+)}
 </p>
+
+
+<p>
+📍 ${escapeHTML(
+d.customer_address||"-"
+)}
+</p>
+
 
 <p>
 📅 ${escapeHTML(date)}
 </p>
+
 
 <p>
 💰 Order:
 <b>${money(amount)}</b>
 </p>
 
+
 <p>
 💵 Total Received:
 <b>${money(received)}</b>
 </p>
+
 
 <p>
 ⚠️ Remaining:
 <b>${money(balance)}</b>
 </p>
 
+
 <p>
 💳 Payment:
 <span class="badge ${statusClass}">
-${escapeHTML(d.payment_status||"Unpaid")}
+${escapeHTML(
+d.payment_status||"Unpaid"
+)}
 </span>
 </p>
 
+
 <p>
 💰 Payment Type:
-<b>${escapeHTML(d.payment_type||"-")}</b>
+<b>
+${escapeHTML(
+d.payment_type||"-"
+)}
+</b>
 </p>
+
 
 <p>
 🚚 Status:
-<b>${escapeHTML(d.delivery_status||"-")}</b>
+<b>
+${escapeHTML(
+d.delivery_status||"-"
+)}
+</b>
 </p>
+
 
 ${
 image
@@ -2123,6 +2338,7 @@ alt="Order Image">
 `
 :""
 }
+
 
 ${
 received>0
@@ -2142,48 +2358,32 @@ Remaining:
 <strong>${money(balance)}</strong>
 </div>
 
-${
-d.last_payment_amount
-?
-`
-<div class="paymentRow">
-Last Payment:
-<strong>${money(d.last_payment_amount)}</strong>
 </div>
 `
 :""
 }
 
-${
-d.last_payment_type
-?
-`
-<div class="paymentRow">
-Last Payment Type:
-<strong>${escapeHTML(d.last_payment_type)}</strong>
-</div>
-`
-:""
-}
-
-</div>
-`
-:""
-}
 
 <br>
+
 
 <button
 class="green"
 onclick="callCustomer('${mobile}')">
+
 📞 Call
+
 </button>
+
 
 <button
 class="blue"
 onclick="openMap('${address}')">
+
 📍 Map
+
 </button>
+
 
 ${
 balance>0
@@ -2192,11 +2392,14 @@ balance>0
 <button
 class="orange"
 onclick="markPaid('${id}')">
+
 💳 Receive Payment
+
 </button>
 `
 :""
 }
+
 
 ${
 d.delivery_status!=="Delivered"
@@ -2205,17 +2408,23 @@ d.delivery_status!=="Delivered"
 <button
 class="green"
 onclick="markDelivered('${id}')">
+
 ✅ Delivered
+
 </button>
 `
 :""
 }
 
+
 <button
 class="red"
 onclick="deleteDelivery('${id}')">
+
 🗑 Delete
+
 </button>
+
 
 </div>
 
@@ -2226,21 +2435,26 @@ onclick="deleteDelivery('${id}')">
 }
 
 
-/* =========================================
+/* =====================================================
 PARTIAL PAYMENT
-========================================= */
+===================================================== */
 
 async function markPaid(id){
 
 const d=
-deliveries.find(x=>x.id===id);
+deliveries.find(
+x=>x.id===id
+);
+
 
 if(!d){
 
 alert("Delivery नहीं मिली.");
+
 return;
 
 }
+
 
 const totalAmount=
 Number(
@@ -2249,47 +2463,71 @@ d.order_amount ??
 0
 );
 
+
 const alreadyReceived=
-Number(d.received_amount||0);
+Number(
+d.received_amount||0
+);
+
 
 const remainingAmount=
 Math.max(
-totalAmount-alreadyReceived,
+totalAmount-
+alreadyReceived,
 0
 );
 
-if(remainingAmount<=0){
 
-alert("यह order पहले ही पूरी तरह Paid है.");
+if(
+remainingAmount<=0
+){
+
+alert(
+"यह order पहले ही पूरी तरह Paid है."
+);
+
 return;
 
 }
 
 
+/* PAYMENT AMOUNT */
+
 const input=
 prompt(
 "बाकी Amount: ₹"+
 remainingAmount.toFixed(2)+
-"\n\nअभी कितना payment मिला?\n\nकम amount भी डाल सकते हैं.",
+"\n\nअभी कितना payment मिला?\n\n"+
+"कम amount भी डाल सकते हैं.",
 remainingAmount.toFixed(2)
 );
+
 
 if(input===null)
 return;
 
-const payment=Number(input);
+
+const payment=
+Number(input);
+
 
 if(
 isNaN(payment) ||
 payment<=0
 ){
 
-alert("सही payment amount डालें.");
+alert(
+"सही payment amount डालें."
+);
+
 return;
 
 }
 
-if(payment>remainingAmount){
+
+if(
+payment>remainingAmount
+){
 
 alert(
 "आप maximum ₹"+
@@ -2302,6 +2540,8 @@ return;
 }
 
 
+/* PAYMENT TYPE */
+
 let paymentType=
 prompt(
 "Payment Type चुनें:\n\n"+
@@ -2311,13 +2551,16 @@ prompt(
 "1"
 );
 
+
 if(paymentType===null)
 return;
+
 
 paymentType=
 String(paymentType)
 .trim()
 .toLowerCase();
+
 
 if(
 paymentType==="1" ||
@@ -2344,20 +2587,28 @@ return;
 }
 
 
+/* NEW TOTAL */
+
 const newReceived=
-alreadyReceived+payment;
+alreadyReceived+
+payment;
+
 
 const newBalance=
 Math.max(
-totalAmount-newReceived,
+totalAmount-
+newReceived,
 0
 );
 
+
 const newChange=
 Math.max(
-newReceived-totalAmount,
+newReceived-
+totalAmount,
 0
 );
+
 
 const newPaymentStatus=
 newBalance<=0
@@ -2366,22 +2617,31 @@ newBalance<=0
 :
 "Unpaid";
 
+
+/* UPDATE */
+
 const result=
 await supabaseClient
 .from("deliveries")
 .update({
 
-received_amount:newReceived,
+received_amount:
+newReceived,
 
-change_amount:newChange,
+change_amount:
+newChange,
 
-payment_status:newPaymentStatus,
+payment_status:
+newPaymentStatus,
 
-payment_type:paymentType,
+payment_type:
+paymentType,
 
-last_payment_amount:payment,
+last_payment_amount:
+payment,
 
-last_payment_type:paymentType,
+last_payment_type:
+paymentType,
 
 payment_received_at:
 new Date().toISOString()
@@ -2389,6 +2649,7 @@ new Date().toISOString()
 })
 .eq("id",id)
 .eq("firm_id",currentFirmId);
+
 
 if(result.error){
 
@@ -2400,6 +2661,7 @@ result.error.message
 return;
 
 }
+
 
 alert(
 "✅ Payment received\n\n"+
@@ -2415,14 +2677,15 @@ paymentType+
 newPaymentStatus
 );
 
+
 await loadDeliveries();
 
 }
 
 
-/* =========================================
-MARK DELIVERED
-========================================= */
+/* =====================================================
+DELIVERED
+===================================================== */
 
 async function markDelivered(id){
 
@@ -2435,21 +2698,26 @@ delivery_status:"Delivered"
 .eq("id",id)
 .eq("firm_id",currentFirmId);
 
+
 if(result.error){
 
-alert(result.error.message);
+alert(
+result.error.message
+);
+
 return;
 
 }
+
 
 await loadDeliveries();
 
 }
 
 
-/* =========================================
+/* =====================================================
 DELETE
-========================================= */
+===================================================== */
 
 async function deleteDelivery(id){
 
@@ -2458,6 +2726,7 @@ if(!confirm(
 ))
 return;
 
+
 const result=
 await supabaseClient
 .from("deliveries")
@@ -2465,45 +2734,57 @@ await supabaseClient
 .eq("id",id)
 .eq("firm_id",currentFirmId);
 
+
 if(result.error){
 
-alert(result.error.message);
+alert(
+result.error.message
+);
+
 return;
 
 }
+
 
 await loadDeliveries();
 
 }
 
 
-/* =========================================
+/* =====================================================
 CALL
-========================================= */
+===================================================== */
 
 function callCustomer(number){
 
 if(!number){
 
-alert("Mobile number नहीं है.");
+alert(
+"Mobile number नहीं है."
+);
+
 return;
 
 }
 
-location.href="tel:"+number;
+location.href=
+"tel:"+number;
 
 }
 
 
-/* =========================================
+/* =====================================================
 MAP
-========================================= */
+===================================================== */
 
 function openMap(address){
 
 if(!address){
 
-alert("Address नहीं है.");
+alert(
+"Address नहीं है."
+);
+
 return;
 
 }
@@ -2517,13 +2798,14 @@ encodeURIComponent(address),
 }
 
 
-/* =========================================
+/* =====================================================
 TODAY
-========================================= */
+===================================================== */
 
 $("todayBtn").onclick=()=>{
 
-const d=new Date();
+const d=
+new Date();
 
 $("filterDate").value=
 d.getFullYear()+"-"+
@@ -2535,15 +2817,18 @@ renderDeliveries();
 };
 
 
-/* =========================================
+/* =====================================================
 YESTERDAY
-========================================= */
+===================================================== */
 
 $("yesterdayBtn").onclick=()=>{
 
-const d=new Date();
+const d=
+new Date();
 
-d.setDate(d.getDate()-1);
+d.setDate(
+d.getDate()-1
+);
 
 $("filterDate").value=
 d.getFullYear()+"-"+
@@ -2555,16 +2840,20 @@ renderDeliveries();
 };
 
 
-/* =========================================
+/* =====================================================
 RESET FILTER
-========================================= */
+===================================================== */
 
 $("resetBtnFilter").onclick=()=>{
 
 $("filterDate").value="";
+
 $("filterPayment").value="All";
+
 $("filterType").value="All";
+
 $("filterStatus").value="All";
+
 $("search").value="";
 
 renderDeliveries();
@@ -2572,22 +2861,26 @@ renderDeliveries();
 };
 
 
-/* =========================================
+/* =====================================================
 BACKUP
-========================================= */
+===================================================== */
 
 async function createBackup(){
 
 if(!currentUser)
-throw new Error("Please login first.");
+throw new Error(
+"Please login first."
+);
 
 await loadDeliveries();
+
 
 return {
 
 backup_version:"3.0",
 
-app_name:"DELIVERY TO HOME",
+app_name:
+"DELIVERY TO HOME",
 
 backup_date:
 new Date().toISOString(),
@@ -2604,24 +2897,33 @@ currentFirmId,
 firm_name:
 $("firmNameText").textContent,
 
-deliveries:deliveries
+deliveries:
+deliveries
 
 };
 
 }
 
 
-function downloadJSON(data,filename){
+function downloadJSON(
+data,
+filename
+){
 
 const blob=
 new Blob(
 [
-JSON.stringify(data,null,2)
+JSON.stringify(
+data,
+null,
+2
+)
 ],
 {
 type:"application/json"
 }
 );
+
 
 const url=
 URL.createObjectURL(blob);
@@ -2630,6 +2932,7 @@ const a=
 document.createElement("a");
 
 a.href=url;
+
 a.download=filename;
 
 document.body.appendChild(a);
@@ -2643,9 +2946,9 @@ URL.revokeObjectURL(url);
 }
 
 
-/* =========================================
+/* =====================================================
 BACKUP NOW
-========================================= */
+===================================================== */
 
 $("backupNowBtn").onclick=
 async()=>{
@@ -2661,13 +2964,18 @@ const filename=
 "delivery-backup-"+
 new Date()
 .toISOString()
-.replace(/[:.]/g,"-")+
+.replace(
+/[:.]/g,
+"-"
+)+
 ".json";
+
 
 downloadJSON(
 backup,
 filename
 );
+
 
 message(
 "backupMessage",
@@ -2693,9 +3001,9 @@ $("backupNowBtn").disabled=false;
 };
 
 
-/* =========================================
+/* =====================================================
 DOWNLOAD BACKUP
-========================================= */
+===================================================== */
 
 $("downloadBackupBtn").onclick=
 async()=>{
@@ -2711,13 +3019,18 @@ const filename=
 "delivery-backup-"+
 new Date()
 .toISOString()
-.replace(/[:.]/g,"-")+
+.replace(
+/[:.]/g,
+"-"
+)+
 ".json";
+
 
 downloadJSON(
 backup,
 filename
 );
+
 
 message(
 "backupMessage",
@@ -2743,15 +3056,16 @@ $("downloadBackupBtn").disabled=false;
 };
 
 
-/* =========================================
+/* =====================================================
 RESTORE
-========================================= */
+===================================================== */
 
 $("restoreBackupBtn").onclick=
 async()=>{
 
 const file=
 $("restoreFile").files[0];
+
 
 if(!file){
 
@@ -2764,22 +3078,28 @@ return;
 
 }
 
+
 if(!confirm(
 "Backup restore किया जाएगा। Existing deliveries delete नहीं होंगी। Continue?"
 ))
 return;
 
+
 $("restoreBackupBtn").disabled=true;
+
 
 try{
 
-const text=await file.text();
+const text=
+await file.text();
 
 let backup;
 
+
 try{
 
-backup=JSON.parse(text);
+backup=
+JSON.parse(text);
 
 }
 catch(e){
@@ -2790,9 +3110,12 @@ throw new Error(
 
 }
 
+
 if(
 !backup ||
-!Array.isArray(backup.deliveries)
+!Array.isArray(
+backup.deliveries
+)
 ){
 
 throw new Error(
@@ -2801,14 +3124,18 @@ throw new Error(
 
 }
 
+
 const rows=
-backup.deliveries.map(d=>({
+backup.deliveries
+.map(d=>({
 
 id:d.id,
 
-firm_id:currentFirmId,
+firm_id:
+currentFirmId,
 
-user_id:currentUser.id,
+user_id:
+currentUser.id,
 
 delivery_boy_name:
 d.delivery_boy_name||null,
@@ -2823,13 +3150,19 @@ customer_address:
 d.customer_address||null,
 
 order_amount:
-Number(d.order_amount||0),
+Number(
+d.order_amount||0
+),
 
 received_amount:
-Number(d.received_amount||0),
+Number(
+d.received_amount||0
+),
 
 change_amount:
-Number(d.change_amount||0),
+Number(
+d.change_amount||0
+),
 
 payment_type:
 d.payment_type||"Cash",
@@ -2874,6 +3207,7 @@ d.payment_received_at||null
 
 }));
 
+
 if(!rows.length){
 
 throw new Error(
@@ -2881,6 +3215,7 @@ throw new Error(
 );
 
 }
+
 
 const result=
 await supabaseClient
@@ -2892,8 +3227,10 @@ onConflict:"id"
 }
 );
 
+
 if(result.error)
 throw result.error;
+
 
 message(
 "backupMessage",
@@ -2902,6 +3239,7 @@ rows.length+
 " deliveries restore हो गईं.",
 "success"
 );
+
 
 $("restoreFile").value="";
 
@@ -2912,7 +3250,8 @@ catch(e){
 
 message(
 "backupMessage",
-"Restore Error: "+e.message
+"Restore Error: "+
+e.message
 );
 
 }
@@ -2925,14 +3264,15 @@ $("restoreBackupBtn").disabled=false;
 };
 
 
-/* =========================================
+/* =====================================================
 START
-========================================= */
+===================================================== */
 
 async function start(){
 
 const result=
 await supabaseClient.auth.getSession();
+
 
 if(
 result.data &&
@@ -2958,9 +3298,10 @@ $("appPage")
 
 }
 
+
 start();
 
 </script>
 
 </body>
-</html>
+  </html>
