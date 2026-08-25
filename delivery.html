@@ -3,15 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>DELIVERY TO HOME</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{
-box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
 margin:0;
@@ -27,7 +24,7 @@ color:#222;
 
 header{
 background:#1769aa;
-color:white;
+color:#fff;
 padding:12px;
 text-align:center;
 position:sticky;
@@ -35,24 +32,24 @@ top:0;
 z-index:10;
 }
 
-.headerProfile{
+.headerBox{
 display:flex;
-align-items:center;
 justify-content:center;
-gap:10px;
+align-items:center;
+gap:12px;
 }
 
-.headerProfile img{
+.headerBox img{
 width:55px;
 height:55px;
 border-radius:50%;
 object-fit:cover;
-border:2px solid white;
+border:2px solid #fff;
 }
 
 header h1{
 margin:0;
-font-size:22px;
+font-size:21px;
 }
 
 .container{
@@ -74,9 +71,7 @@ max-width:430px;
 margin:60px auto;
 }
 
-input,
-select,
-textarea{
+input,select,textarea{
 width:100%;
 padding:12px;
 margin:5px 0 10px;
@@ -101,52 +96,21 @@ cursor:pointer;
 
 button:disabled{
 opacity:.6;
-cursor:not-allowed;
-}
-
-.primary{
-background:#1769aa;
-color:white;
-}
-
-.green{
-background:#198754;
-color:white;
-}
-
-.red{
-background:#dc3545;
-color:white;
-}
-
-.purple{
-background:#6f42c1;
-color:white;
-}
-
-.orange{
-background:#fd7e14;
-color:white;
-}
-
-.gray{
-background:#666;
-color:white;
-}
-
-.whatsapp{
-background:#25d366;
-color:white;
-}
-
-.map{
-background:#4285f4;
-color:white;
 }
 
 .full{
 width:100%;
+margin:5px 0;
 }
+
+.primary{background:#1769aa;color:#fff}
+.green{background:#198754;color:#fff}
+.red{background:#dc3545;color:#fff}
+.purple{background:#6f42c1;color:#fff}
+.orange{background:#fd7e14;color:#fff}
+.gray{background:#666;color:#fff}
+.whatsapp{background:#25d366;color:#fff}
+.map{background:#4285f4;color:#fff}
 
 .hidden{
 display:none!important;
@@ -176,8 +140,8 @@ gap:15px;
 }
 
 .profileBox img{
-width:75px;
-height:75px;
+width:78px;
+height:78px;
 border-radius:50%;
 object-fit:cover;
 border:3px solid #1769aa;
@@ -195,7 +159,7 @@ gap:10px;
 }
 
 .stat{
-background:white;
+background:#fff;
 padding:15px;
 border-radius:12px;
 text-align:center;
@@ -292,8 +256,7 @@ grid-template-columns:1fr 1fr;
 <body>
 
 <header>
-
-<div class="headerProfile">
+<div class="headerBox">
 
 <img
 id="headerPhoto"
@@ -301,17 +264,11 @@ src="https://ui-avatars.com/api/?name=Delivery&background=1769AA&color=fff"
 >
 
 <div>
-
 <h1>🚚 DELIVERY TO HOME</h1>
-
-<div id="headerFirm">
-DELIVERY TO HOME
+<div id="headerFirm">DELIVERY TO HOME</div>
 </div>
 
 </div>
-
-</div>
-
 </header>
 
 
@@ -329,7 +286,6 @@ DELIVERY TO HOME
 id="loginEmail"
 type="email"
 placeholder="Enter email"
-autocomplete="email"
 >
 
 <label>Password</label>
@@ -338,7 +294,6 @@ autocomplete="email"
 id="loginPassword"
 type="password"
 placeholder="Enter password"
-autocomplete="current-password"
 >
 
 <button
@@ -365,7 +320,6 @@ id="resetBtn"
 <div id="loginMessage"></div>
 
 </div>
-
 </div>
 
 
@@ -435,7 +389,7 @@ id="firmNameInput"
 placeholder="Enter firm name"
 >
 
-<label>📷 Profile Photo / Logo</label>
+<label>📷 Profile Image / Logo</label>
 
 <input
 id="profileFile"
@@ -514,7 +468,6 @@ id="saveProfileBtn"
 </div>
 
 </div>
-
 </div>
 
 
@@ -527,57 +480,42 @@ id="saveProfileBtn"
 <div class="grid">
 
 <div>
-
 <label>📅 Date</label>
-
-<input
-id="filterDate"
-type="date"
->
-
+<input id="filterDate" type="date">
 </div>
 
 <div>
-
 <label>💳 Payment Status</label>
 
 <select id="filterPayment">
-
 <option value="All">All</option>
 <option value="Paid">Paid</option>
 <option value="Unpaid">Unpaid</option>
-
 </select>
 
 </div>
 
 <div>
-
 <label>💰 Payment Type</label>
 
 <select id="filterType">
-
 <option value="All">All</option>
 <option value="Cash">Cash</option>
 <option value="Online">Online</option>
 <option value="Credit">Credit</option>
-
 </select>
 
 </div>
 
 <div>
-
 <label>🚚 Delivery Status</label>
 
 <select id="filterStatus">
-
 <option value="All">All</option>
 <option value="Pending">Pending</option>
 <option value="Out for Delivery">Out for Delivery</option>
 <option value="Delivered">Delivered</option>
 <option value="Cancelled">Cancelled</option>
-
 </select>
 
 </div>
@@ -586,25 +524,9 @@ type="date"
 
 <br>
 
-<button
-class="primary"
-id="todayBtn"
->
-📅 Today
-</button>
-
-<button
-id="yesterdayBtn"
->
-⬅️ Yesterday
-</button>
-
-<button
-class="gray"
-id="resetFilterBtn"
->
-🔄 Reset
-</button>
+<button class="primary" id="todayBtn">📅 Today</button>
+<button id="yesterdayBtn">⬅️ Yesterday</button>
+<button class="gray" id="resetFilterBtn">🔄 Reset</button>
 
 </div>
 
@@ -685,31 +607,25 @@ placeholder="₹ Received amount"
 <label>Payment Type</label>
 
 <select id="paymentType">
-
 <option value="Cash">💵 Cash</option>
 <option value="Online">📱 Online</option>
 <option value="Credit">📒 Credit</option>
-
 </select>
 
 <label>Payment Status</label>
 
 <select id="paymentStatus">
-
 <option value="Unpaid">Unpaid</option>
 <option value="Paid">Paid</option>
-
 </select>
 
 <label>Delivery Status</label>
 
 <select id="deliveryStatus">
-
 <option value="Pending">Pending</option>
 <option value="Out for Delivery">Out for Delivery</option>
 <option value="Delivered">Delivered</option>
 <option value="Cancelled">Cancelled</option>
-
 </select>
 
 <button
@@ -753,13 +669,13 @@ SUPABASE
 const SUPABASE_URL =
 "https://mrozcbaendyheujcmfpi.supabase.co";
 
-const SUPABASE_PUBLISHABLE_KEY =
+const SUPABASE_KEY =
 "sb_publishable_p5tiMbyZOZR9_bcTbHuYbw_5JFSFiSF";
 
 const supabaseClient =
 supabase.createClient(
 SUPABASE_URL,
-SUPABASE_PUBLISHABLE_KEY,
+SUPABASE_KEY,
 {
 auth:{
 autoRefreshToken:true,
@@ -771,15 +687,20 @@ detectSessionInUrl:true
 
 
 /* =========================================
-GLOBAL
+YOUR FIRM
 ========================================= */
 
+const DEFAULT_FIRM_ID =
+"0bd649e8-3326-4bc7-9ff8-1d7b64c49e02";
+
+
 let currentUser=null;
+let currentFirmId=DEFAULT_FIRM_ID;
 let deliveries=[];
 
 
 /* =========================================
-SHORT SELECTOR
+SELECTOR
 ========================================= */
 
 function $(id){
@@ -804,7 +725,7 @@ return String(value ?? "")
 
 
 /* =========================================
-JAVASCRIPT ESCAPE
+JS ESCAPE
 ========================================= */
 
 function jsEscape(value){
@@ -824,12 +745,12 @@ MESSAGE
 ========================================= */
 
 function showMessage(
-elementId,
+id,
 text,
 type="error"
 ){
 
-$(elementId).innerHTML=
+$(id).innerHTML=
 `<div class="message ${type}">
 ${escapeHTML(text)}
 </div>`;
@@ -843,7 +764,7 @@ LOGIN
 
 $("loginBtn").addEventListener(
 "click",
-async function(){
+async()=>{
 
 const email=
 $("loginEmail").value.trim();
@@ -875,15 +796,12 @@ return;
 
 $("loginBtn").disabled=true;
 
-$("loginBtn").textContent=
-"⏳ Login...";
-
 try{
 
 const result=
 await supabaseClient.auth.signInWithPassword({
-email:email,
-password:password
+email,
+password
 });
 
 if(result.error){
@@ -893,12 +811,6 @@ throw result.error;
 }
 
 currentUser=result.data.user;
-
-showMessage(
-"loginMessage",
-"✅ Login successful.",
-"success"
-);
 
 await showApp();
 
@@ -915,9 +827,6 @@ finally{
 
 $("loginBtn").disabled=false;
 
-$("loginBtn").textContent=
-"🔐 Login";
-
 }
 
 }
@@ -930,7 +839,7 @@ CREATE ACCOUNT
 
 $("createBtn").addEventListener(
 "click",
-async function(){
+async()=>{
 
 const email=
 $("loginEmail").value.trim();
@@ -973,15 +882,12 @@ return;
 
 $("createBtn").disabled=true;
 
-$("createBtn").textContent=
-"⏳ Creating...";
-
 try{
 
 const result=
 await supabaseClient.auth.signUp({
-email:email,
-password:password
+email,
+password
 });
 
 if(result.error){
@@ -995,19 +901,13 @@ if(result.data.session){
 currentUser=
 result.data.user;
 
-showMessage(
-"loginMessage",
-"✅ Account created.",
-"success"
-);
-
 await showApp();
 
 }else{
 
 showMessage(
 "loginMessage",
-"✅ Account created. Email में confirmation link खोलें और फिर Login करें.",
+"✅ Account created. Email confirm करके फिर Login करें.",
 "success"
 );
 
@@ -1026,9 +926,6 @@ finally{
 
 $("createBtn").disabled=false;
 
-$("createBtn").textContent=
-"➕ Create Account";
-
 }
 
 }
@@ -1036,12 +933,12 @@ $("createBtn").textContent=
 
 
 /* =========================================
-FORGOT PASSWORD
+PASSWORD RESET
 ========================================= */
 
 $("resetBtn").addEventListener(
 "click",
-async function(){
+async()=>{
 
 const email=
 $("loginEmail").value.trim();
@@ -1063,7 +960,7 @@ const result=
 await supabaseClient.auth.resetPasswordForEmail(
 email,
 {
-redirectTo:window.location.href
+redirectTo:location.href
 }
 );
 
@@ -1094,11 +991,11 @@ error.message
 
 
 /* =========================================
-AUTH STATE
+AUTH
 ========================================= */
 
 supabaseClient.auth.onAuthStateChange(
-async function(event,session){
+async(event,session)=>{
 
 if(session){
 
@@ -1110,11 +1007,9 @@ await showApp();
 
 currentUser=null;
 
-$("loginPage")
-.classList.remove("hidden");
+$("loginPage").classList.remove("hidden");
 
-$("appPage")
-.classList.add("hidden");
+$("appPage").classList.add("hidden");
 
 }
 
@@ -1134,11 +1029,9 @@ return;
 
 }
 
-$("loginPage")
-.classList.add("hidden");
+$("loginPage").classList.add("hidden");
 
-$("appPage")
-.classList.remove("hidden");
+$("appPage").classList.remove("hidden");
 
 $("userEmail").textContent=
 currentUser.email;
@@ -1153,7 +1046,7 @@ await loadDeliveries();
 
 
 /* =========================================
-ENSURE PROFILE
+PROFILE
 ========================================= */
 
 async function ensureProfile(){
@@ -1168,7 +1061,6 @@ await supabaseClient
 if(result.error){
 
 console.log(
-"Profile check:",
 result.error.message
 );
 
@@ -1181,19 +1073,19 @@ if(!result.data){
 await supabaseClient
 .from("profiles")
 .insert({
+
 id:currentUser.id,
-firm_name:"DELIVERY TO HOME",
+
+firm_name:"Plus medico",
+
 profile_image:""
+
 });
 
 }
 
 }
 
-
-/* =========================================
-LOAD PROFILE
-========================================= */
 
 async function loadProfile(){
 
@@ -1212,33 +1104,25 @@ throw result.error;
 
 }
 
-const profile=result.data;
+if(result.data){
 
-if(profile){
+const name=
+result.data.firm_name||
+"Plus medico";
 
-const firmName=
-profile.firm_name ||
-"DELIVERY TO HOME";
+$("firmNameText").textContent=name;
 
-$("firmNameText").textContent=
-firmName;
+$("headerFirm").textContent=name;
 
-$("headerFirm").textContent=
-firmName;
+$("firmNameInput").value=name;
 
-$("firmNameInput").value=
-firmName;
-
-$("userEmail").textContent=
-currentUser.email;
-
-if(profile.profile_image){
+if(result.data.profile_image){
 
 $("profilePhoto").src=
-profile.profile_image;
+result.data.profile_image;
 
 $("headerPhoto").src=
-profile.profile_image;
+result.data.profile_image;
 
 }
 
@@ -1248,7 +1132,7 @@ profile.profile_image;
 catch(error){
 
 console.log(
-"Profile load:",
+"Profile:",
 error.message
 );
 
@@ -1263,7 +1147,7 @@ EDIT PROFILE
 
 $("editProfileBtn").addEventListener(
 "click",
-function(){
+()=>{
 
 $("profileEditor")
 .classList.toggle("hidden");
@@ -1273,7 +1157,7 @@ $("profileEditor")
 
 
 /* =========================================
-PROFILE IMAGE PREVIEW
+PROFILE PREVIEW
 ========================================= */
 
 $("profileFile").addEventListener(
@@ -1284,20 +1168,18 @@ const file=this.files[0];
 
 if(!file){
 
-$("profilePreview")
-.style.display="none";
+$("profilePreview").style.display=
+"none";
 
 return;
 
 }
 
-const url=
+$("profilePreview").src=
 URL.createObjectURL(file);
 
-$("profilePreview").src=url;
-
-$("profilePreview")
-.style.display="block";
+$("profilePreview").style.display=
+"block";
 
 }
 );
@@ -1309,7 +1191,7 @@ SAVE PROFILE
 
 $("saveProfileBtn").addEventListener(
 "click",
-async function(){
+async()=>{
 
 const firmName=
 $("firmNameInput").value.trim();
@@ -1364,24 +1246,24 @@ throw upload.error;
 
 }
 
-const publicData=
+const publicUrl=
 supabaseClient
 .storage
 .from("profile-images")
 .getPublicUrl(path);
 
 imageUrl=
-publicData.data.publicUrl;
+publicUrl.data.publicUrl;
 
 }
 
-const updateData={
+const data={
 firm_name:firmName
 };
 
 if(imageUrl){
 
-updateData.profile_image=
+data.profile_image=
 imageUrl;
 
 }
@@ -1389,7 +1271,7 @@ imageUrl;
 const result=
 await supabaseClient
 .from("profiles")
-.update(updateData)
+.update(data)
 .eq("id",currentUser.id);
 
 if(result.error){
@@ -1400,7 +1282,7 @@ throw result.error;
 
 showMessage(
 "profileMessage",
-"✅ Profile successfully saved.",
+"✅ Profile saved successfully.",
 "success"
 );
 
@@ -1433,7 +1315,7 @@ LOGOUT
 
 $("logoutBtn").addEventListener(
 "click",
-async function(){
+async()=>{
 
 await supabaseClient.auth.signOut();
 
@@ -1442,7 +1324,7 @@ await supabaseClient.auth.signOut();
 
 
 /* =========================================
-MONEY CALCULATION
+MONEY
 ========================================= */
 
 function updateMoney(){
@@ -1479,10 +1361,10 @@ updateMoney
 
 
 /* =========================================
-UPLOAD DELIVERY IMAGE
+UPLOAD ORDER IMAGE
 ========================================= */
 
-async function uploadDeliveryImage(file){
+async function uploadOrderImage(file){
 
 if(!file){
 
@@ -1518,13 +1400,13 @@ throw upload.error;
 
 }
 
-const publicData=
+const publicUrl=
 supabaseClient
 .storage
 .from("delivery-images")
 .getPublicUrl(path);
 
-return publicData.data.publicUrl;
+return publicUrl.data.publicUrl;
 
 }
 
@@ -1535,7 +1417,7 @@ SAVE DELIVERY
 
 $("saveDeliveryBtn").addEventListener(
 "click",
-async function(){
+async()=>{
 
 const boy=
 $("boy").value.trim();
@@ -1595,9 +1477,6 @@ paymentStatus="Paid";
 
 $("saveDeliveryBtn").disabled=true;
 
-$("saveDeliveryBtn").textContent=
-"⏳ Saving...";
-
 try{
 
 let imageUrl="";
@@ -1608,11 +1487,19 @@ $("orderFile").files[0];
 if(file){
 
 imageUrl=
-await uploadDeliveryImage(file);
+await uploadOrderImage(file);
 
 }
 
+
+/*
+IMPORTANT:
+firm_id is mandatory in your deliveries table.
+*/
+
 const row={
+
+firm_id:currentFirmId,
 
 user_id:currentUser.id,
 
@@ -1626,8 +1513,6 @@ customer_address:address,
 
 order_amount:amount,
 
-total_amount:amount,
-
 received_amount:received,
 
 change_amount:change,
@@ -1638,11 +1523,16 @@ payment_status:paymentStatus,
 
 delivery_status:deliveryStatus,
 
+delivery_date:new Date().toISOString(),
+
+image_url:imageUrl,
+
 order_image:imageUrl,
 
-delivery_date:new Date().toISOString()
+total_amount:amount
 
 };
+
 
 const result=
 await supabaseClient
@@ -1678,9 +1568,6 @@ finally{
 
 $("saveDeliveryBtn").disabled=false;
 
-$("saveDeliveryBtn").textContent=
-"💾 Save Delivery";
-
 }
 
 }
@@ -1688,17 +1575,23 @@ $("saveDeliveryBtn").textContent=
 
 
 /* =========================================
-CLEAR DELIVERY FORM
+CLEAR FORM
 ========================================= */
 
 function clearDeliveryForm(){
 
 $("boy").value="";
+
 $("customer").value="";
+
 $("mobile").value="";
+
 $("address").value="";
+
 $("orderFile").value="";
+
 $("orderAmount").value="";
+
 $("receivedAmount").value="";
 
 updateMoney();
@@ -1712,19 +1605,13 @@ LOAD DELIVERIES
 
 async function loadDeliveries(){
 
-if(!currentUser){
-
-return;
-
-}
-
 try{
 
 const result=
 await supabaseClient
 .from("deliveries")
 .select("*")
-.eq("user_id",currentUser.id)
+.eq("firm_id",currentFirmId)
 .order(
 "delivery_date",
 {
@@ -1760,7 +1647,7 @@ ${escapeHTML(error.message)}
 
 
 /* =========================================
-FILTER EVENTS
+FILTERS
 ========================================= */
 
 [
@@ -1780,7 +1667,7 @@ renderDeliveries
 
 
 /* =========================================
-RENDER DELIVERIES
+RENDER
 ========================================= */
 
 function renderDeliveries(){
@@ -1808,7 +1695,7 @@ $("filterStatus").value;
 
 list=list.filter(d=>{
 
-const searchText=
+const text=
 (
 (d.customer_name||"")+
 " "+
@@ -1819,7 +1706,7 @@ const searchText=
 
 if(
 search &&
-!searchText.includes(search)
+!text.includes(search)
 ){
 
 return false;
@@ -1855,21 +1742,17 @@ return false;
 
 if(date){
 
-const localDate=
+const x=
 new Date(d.delivery_date);
 
-const dateString=
-localDate.getFullYear()+
+const ds=
+x.getFullYear()+
 "-"+
-String(
-localDate.getMonth()+1
-).padStart(2,"0")+
+String(x.getMonth()+1).padStart(2,"0")+
 "-"+
-String(
-localDate.getDate()
-).padStart(2,"0");
+String(x.getDate()).padStart(2,"0");
 
-if(dateString!==date){
+if(ds!==date){
 
 return false;
 
@@ -1883,7 +1766,7 @@ return true;
 
 
 /* =========================================
-STATISTICS
+STATS
 ========================================= */
 
 let total=0;
@@ -1897,16 +1780,14 @@ list.forEach(d=>{
 
 const amount=
 Number(
-d.total_amount||
-d.order_amount||
+d.total_amount ??
+d.order_amount ??
 0
 );
 
 total+=amount;
 
-if(
-d.payment_status==="Paid"
-){
+if(d.payment_status==="Paid"){
 
 paid+=amount;
 
@@ -1916,25 +1797,19 @@ unpaid+=amount;
 
 }
 
-if(
-d.payment_type==="Cash"
-){
+if(d.payment_type==="Cash"){
 
 cash+=amount;
 
 }
 
-if(
-d.payment_type==="Online"
-){
+if(d.payment_type==="Online"){
 
 online+=amount;
 
 }
 
-if(
-d.payment_type==="Credit"
-){
+if(d.payment_type==="Credit"){
 
 credit+=amount;
 
@@ -1943,31 +1818,25 @@ credit+=amount;
 });
 
 
-$("totalDeliveries")
-.textContent=list.length;
+$("totalDeliveries").textContent=
+list.length;
 
-$("totalAmount")
-.textContent=
+$("totalAmount").textContent=
 "₹"+total.toFixed(2);
 
-$("paidAmount")
-.textContent=
+$("paidAmount").textContent=
 "₹"+paid.toFixed(2);
 
-$("unpaidAmount")
-.textContent=
+$("unpaidAmount").textContent=
 "₹"+unpaid.toFixed(2);
 
-$("cashAmount")
-.textContent=
+$("cashAmount").textContent=
 "₹"+cash.toFixed(2);
 
-$("onlineAmount")
-.textContent=
+$("onlineAmount").textContent=
 "₹"+online.toFixed(2);
 
-$("creditAmount")
-.textContent=
+$("creditAmount").textContent=
 "₹"+credit.toFixed(2);
 
 
@@ -1986,7 +1855,7 @@ return;
 
 
 /* =========================================
-DELIVERY HTML
+LIST
 ========================================= */
 
 $("deliveryList").innerHTML=
@@ -1994,14 +1863,14 @@ list.map(d=>{
 
 const amount=
 Number(
-d.total_amount||
-d.order_amount||
+d.total_amount ??
+d.order_amount ??
 0
 );
 
 const received=
 Number(
-d.received_amount||
+d.received_amount ??
 0
 );
 
@@ -2011,30 +1880,27 @@ amount-received,
 0
 );
 
-const deliveryDate=
+const date=
 d.delivery_date
 ?
 new Date(
 d.delivery_date
-).toLocaleString(
-"en-IN"
-)
+).toLocaleString("en-IN")
 :"-";
 
-const customerMobile=
-jsEscape(
-d.customer_mobile||""
-);
+const id=
+jsEscape(d.id);
 
-const customerAddress=
-jsEscape(
-d.customer_address||""
-);
+const mobile=
+jsEscape(d.customer_mobile||"");
 
-const deliveryId=
-jsEscape(
-d.id||""
-);
+const address=
+jsEscape(d.customer_address||"");
+
+const image=
+d.order_image ||
+d.image_url ||
+"";
 
 return`
 
@@ -2060,28 +1926,22 @@ ${escapeHTML(d.delivery_boy_name||"-")}
 </p>
 
 <p>
-📅 ${escapeHTML(deliveryDate)}
+📅 ${escapeHTML(date)}
 </p>
 
 <p>
 💰 Order Amount:
-<b>
-₹${amount.toFixed(2)}
-</b>
+<b>₹${amount.toFixed(2)}</b>
 </p>
 
 <p>
 💵 Received:
-<b>
-₹${received.toFixed(2)}
-</b>
+<b>₹${received.toFixed(2)}</b>
 </p>
 
 <p>
 ⚠️ Balance:
-<b>
-₹${balance.toFixed(2)}
-</b>
+<b>₹${balance.toFixed(2)}</b>
 </p>
 
 <p>
@@ -2110,12 +1970,12 @@ ${escapeHTML(d.delivery_status||"-")}
 </p>
 
 ${
-d.order_image
+image
 ?
 `
 <img
 class="orderImage"
-src="${escapeHTML(d.order_image)}"
+src="${escapeHTML(image)}"
 alt="Order Image"
 >
 `
@@ -2126,14 +1986,14 @@ alt="Order Image"
 
 <button
 class="whatsapp"
-onclick="callCustomer('${customerMobile}')"
+onclick="callCustomer('${mobile}')"
 >
 📞 Call
 </button>
 
 <button
 class="map"
-onclick="openMap('${customerAddress}')"
+onclick="openMap('${address}')"
 >
 📍 Map
 </button>
@@ -2144,7 +2004,7 @@ d.payment_status!=="Paid"
 `
 <button
 class="orange"
-onclick="markPaid('${deliveryId}')"
+onclick="markPaid('${id}')"
 >
 💳 Paid
 </button>
@@ -2158,7 +2018,7 @@ d.delivery_status!=="Delivered"
 `
 <button
 class="green"
-onclick="markDelivered('${deliveryId}')"
+onclick="markDelivered('${id}')"
 >
 ✅ Delivered
 </button>
@@ -2168,7 +2028,7 @@ onclick="markDelivered('${deliveryId}')"
 
 <button
 class="red"
-onclick="deleteDelivery('${deliveryId}')"
+onclick="deleteDelivery('${id}')"
 >
 🗑 Delete
 </button>
@@ -2188,12 +2048,12 @@ MARK PAID
 
 async function markPaid(id){
 
-const record=
+const d=
 deliveries.find(
-d=>String(d.id)===String(id)
+x=>String(x.id)===String(id)
 );
 
-if(!record){
+if(!d){
 
 return;
 
@@ -2201,8 +2061,8 @@ return;
 
 const amount=
 Number(
-record.total_amount||
-record.order_amount||
+d.total_amount ??
+d.order_amount ??
 0
 );
 
@@ -2221,43 +2081,19 @@ return;
 const value=
 Number(received);
 
-if(
-isNaN(value)||
-value<0
-){
+if(isNaN(value)||value<0){
 
-alert(
-"Invalid amount"
-);
+alert("Invalid amount");
 
 return;
 
 }
 
 const balance=
-Math.max(
-amount-value,
-0
-);
+Math.max(amount-value,0);
 
 const change=
-Math.max(
-value-amount,
-0
-);
-
-let type=
-prompt(
-"Payment Type: Cash / Online / Credit",
-record.payment_type||
-"Cash"
-);
-
-if(!type){
-
-type="Cash";
-
-}
+Math.max(value-amount,0);
 
 const result=
 await supabaseClient
@@ -2271,19 +2107,15 @@ change_amount:change,
 payment_status:
 balance===0
 ?"Paid"
-:"Unpaid",
-
-payment_type:type
+:"Unpaid"
 
 })
 .eq("id",id)
-.eq("user_id",currentUser.id);
+.eq("firm_id",currentFirmId);
 
 if(result.error){
 
-alert(
-result.error.message
-);
+alert(result.error.message);
 
 return;
 
@@ -2295,7 +2127,7 @@ await loadDeliveries();
 
 
 /* =========================================
-MARK DELIVERED
+DELIVERED
 ========================================= */
 
 async function markDelivered(id){
@@ -2307,13 +2139,11 @@ await supabaseClient
 delivery_status:"Delivered"
 })
 .eq("id",id)
-.eq("user_id",currentUser.id);
+.eq("firm_id",currentFirmId);
 
 if(result.error){
 
-alert(
-result.error.message
-);
+alert(result.error.message);
 
 return;
 
@@ -2325,17 +2155,16 @@ await loadDeliveries();
 
 
 /* =========================================
-DELETE DELIVERY
+DELETE
 ========================================= */
 
 async function deleteDelivery(id){
 
-const ok=
-confirm(
+if(
+!confirm(
 "क्या आप यह delivery delete करना चाहते हैं?"
-);
-
-if(!ok){
+)
+){
 
 return;
 
@@ -2346,13 +2175,11 @@ await supabaseClient
 .from("deliveries")
 .delete()
 .eq("id",id)
-.eq("user_id",currentUser.id);
+.eq("firm_id",currentFirmId);
 
 if(result.error){
 
-alert(
-result.error.message
-);
+alert(result.error.message);
 
 return;
 
@@ -2364,7 +2191,7 @@ await loadDeliveries();
 
 
 /* =========================================
-CALL CUSTOMER
+CALL
 ========================================= */
 
 function callCustomer(number){
@@ -2379,14 +2206,14 @@ return;
 
 }
 
-window.location.href=
+location.href=
 "tel:"+number;
 
 }
 
 
 /* =========================================
-OPEN MAP
+MAP
 ========================================= */
 
 function openMap(address){
@@ -2416,21 +2243,16 @@ TODAY
 
 $("todayBtn").addEventListener(
 "click",
-function(){
+()=>{
 
-const d=
-new Date();
+const d=new Date();
 
 $("filterDate").value=
 d.getFullYear()+
 "-"+
-String(
-d.getMonth()+1
-).padStart(2,"0")+
+String(d.getMonth()+1).padStart(2,"0")+
 "-"+
-String(
-d.getDate()
-).padStart(2,"0");
+String(d.getDate()).padStart(2,"0");
 
 renderDeliveries();
 
@@ -2444,25 +2266,18 @@ YESTERDAY
 
 $("yesterdayBtn").addEventListener(
 "click",
-function(){
+()=>{
 
-const d=
-new Date();
+const d=new Date();
 
-d.setDate(
-d.getDate()-1
-);
+d.setDate(d.getDate()-1);
 
 $("filterDate").value=
 d.getFullYear()+
 "-"+
-String(
-d.getMonth()+1
-).padStart(2,"0")+
+String(d.getMonth()+1).padStart(2,"0")+
 "-"+
-String(
-d.getDate()
-).padStart(2,"0");
+String(d.getDate()).padStart(2,"0");
 
 renderDeliveries();
 
@@ -2476,18 +2291,15 @@ RESET
 
 $("resetFilterBtn").addEventListener(
 "click",
-function(){
+()=>{
 
 $("filterDate").value="";
 
-$("filterPayment").value=
-"All";
+$("filterPayment").value="All";
 
-$("filterType").value=
-"All";
+$("filterType").value="All";
 
-$("filterStatus").value=
-"All";
+$("filterStatus").value="All";
 
 $("search").value="";
 
@@ -2503,18 +2315,8 @@ START
 
 async function startApp(){
 
-try{
-
 const result=
 await supabaseClient.auth.getSession();
-
-if(result.error){
-
-console.log(
-result.error.message
-);
-
-}
 
 if(
 result.data &&
@@ -2528,21 +2330,9 @@ await showApp();
 
 }else{
 
-$("loginPage")
-.classList.remove("hidden");
+$("loginPage").classList.remove("hidden");
 
-$("appPage")
-.classList.add("hidden");
-
-}
-
-}
-catch(error){
-
-console.log(
-"Start error:",
-error.message
-);
+$("appPage").classList.add("hidden");
 
 }
 
