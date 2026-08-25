@@ -4,258 +4,264 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>DELIVERY TO HOME</title>
-
 <meta name="theme-color" content="#1769AA">
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  color:#222;
-
-  /* अपनी image का नाम background.jpg रखें */
-  background:
-    linear-gradient(rgba(255,255,255,.82),rgba(255,255,255,.82)),
-    url("./background.jpg");
-
-  background-size:cover;
-  background-position:center;
-  background-attachment:fixed;
+margin:0;
+font-family:Arial,sans-serif;
+color:#222;
+background:
+linear-gradient(rgba(255,255,255,.82),rgba(255,255,255,.82)),
+url("./delivery-staff-ride-motorcycles-shopping-concept_1150-34879.jpg");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
 }
 
 header{
-  background:rgba(23,105,170,.95);
-  color:white;
-  text-align:center;
-  padding:18px;
-  position:sticky;
-  top:0;
-  z-index:10;
-  box-shadow:0 2px 10px #777;
+background:rgba(23,105,170,.96);
+color:#fff;
+text-align:center;
+padding:18px;
+position:sticky;
+top:0;
+z-index:10;
+box-shadow:0 2px 10px #777;
 }
 
 header h1{
-  margin:0;
-  font-size:26px;
+margin:0;
+font-size:25px;
 }
 
 .container{
-  max-width:950px;
-  margin:auto;
-  padding:12px;
+max-width:950px;
+margin:auto;
+padding:12px;
 }
 
 .card{
-  background:rgba(255,255,255,.96);
-  padding:16px;
-  margin:12px 0;
-  border-radius:14px;
-  box-shadow:0 3px 12px rgba(0,0,0,.18);
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-.stat{
-  text-align:center;
-  padding:15px;
-  background:rgba(255,255,255,.97);
-  border-radius:12px;
-  box-shadow:0 2px 8px #ccc;
-}
-
-.stat b{
-  display:block;
-  font-size:21px;
-  margin-top:5px;
-}
-
-.summary{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-}
-
-.summary div{
-  background:#f1f3f5;
-  padding:12px;
-  text-align:center;
-  border-radius:8px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-label{
-  display:block;
-  font-weight:bold;
-  margin-top:10px;
-}
-
-input,select,textarea{
-  width:100%;
-  padding:12px;
-  margin-top:5px;
-  border:1px solid #ccc;
-  border-radius:8px;
-  font-size:16px;
-  background:white;
-}
-
-textarea{
-  min-height:80px;
-}
-
-button{
-  border:0;
-  border-radius:8px;
-  padding:11px 14px;
-  margin:4px;
-  cursor:pointer;
-  font-size:15px;
-}
-
-.save{
-  width:100%;
-  background:#1769aa;
-  color:white;
-  font-size:17px;
-  margin-top:15px;
-}
-
-.today{
-  background:#1769aa;
-  color:white;
-}
-
-.reset{
-  background:#666;
-  color:white;
-}
-
-.delivery{
-  border-top:1px solid #ddd;
-  padding:16px 0;
-}
-
-.delivery:first-child{
-  border-top:0;
-}
-
-.badge{
-  display:inline-block;
-  padding:5px 8px;
-  border-radius:6px;
-  background:#eee;
-}
-
-.paid{
-  background:#d1e7dd;
-  color:#075c35;
-}
-
-.unpaid{
-  background:#fff0c2;
-  color:#6b5200;
-}
-
-.call{
-  background:#25d366;
-  color:white;
-}
-
-.map{
-  background:#4285f4;
-  color:white;
-}
-
-.delete{
-  background:#dc3545;
-  color:white;
-}
-
-.done{
-  background:#198754;
-  color:white;
-}
-
-.paymentBtn{
-  background:#ff9800;
-  color:white;
-}
-
-.error{
-  background:#ffe5e5;
-  color:#a00;
-  padding:12px;
-  border-radius:8px;
-}
-
-.success{
-  background:#d1e7dd;
-  color:#075c35;
-  padding:12px;
-  border-radius:8px;
-}
-
-.actions{
-  margin-top:10px;
-}
-
-.orderImage{
-  width:100%;
-  max-width:280px;
-  max-height:280px;
-  object-fit:cover;
-  border-radius:10px;
-  margin-top:8px;
-  border:1px solid #ddd;
+background:rgba(255,255,255,.97);
+padding:16px;
+margin:12px 0;
+border-radius:14px;
+box-shadow:0 3px 12px rgba(0,0,0,.18);
 }
 
 .hidden{
-  display:none;
+display:none!important;
 }
 
 .loginBox{
-  max-width:450px;
-  margin:60px auto;
+max-width:450px;
+margin:60px auto;
+}
+
+.stats{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.stat{
+text-align:center;
+padding:15px;
+background:white;
+border-radius:12px;
+box-shadow:0 2px 8px #ccc;
+}
+
+.stat b{
+display:block;
+font-size:21px;
+margin-top:5px;
+}
+
+.summary{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px;
+}
+
+.summary div{
+background:#f1f3f5;
+padding:12px;
+text-align:center;
+border-radius:8px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+label{
+display:block;
+font-weight:bold;
+margin-top:10px;
+}
+
+input,select,textarea{
+width:100%;
+padding:12px;
+margin-top:5px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:16px;
+background:white;
+}
+
+textarea{
+min-height:80px;
+}
+
+button{
+border:0;
+border-radius:8px;
+padding:11px 14px;
+margin:4px;
+cursor:pointer;
+font-size:15px;
+}
+
+.save{
+width:100%;
+background:#1769aa;
+color:white;
+font-size:17px;
+margin-top:15px;
+}
+
+.today{
+background:#1769aa;
+color:white;
+}
+
+.reset{
+background:#666;
+color:white;
 }
 
 .logout{
-  background:#dc3545;
-  color:white;
+background:#dc3545;
+color:white;
+}
+
+.delivery{
+border-top:1px solid #ddd;
+padding:16px 0;
+}
+
+.delivery:first-child{
+border-top:0;
+}
+
+.badge{
+display:inline-block;
+padding:5px 8px;
+border-radius:6px;
+}
+
+.paid{
+background:#d1e7dd;
+color:#075c35;
+}
+
+.unpaid{
+background:#fff0c2;
+color:#6b5200;
+}
+
+.call{
+background:#25d366;
+color:white;
+}
+
+.map{
+background:#4285f4;
+color:white;
+}
+
+.delete{
+background:#dc3545;
+color:white;
+}
+
+.done{
+background:#198754;
+color:white;
+}
+
+.paymentBtn{
+background:#ff9800;
+color:white;
+}
+
+.editBtn{
+background:#6f42c1;
+color:white;
+}
+
+.error{
+background:#ffe5e5;
+color:#a00;
+padding:12px;
+border-radius:8px;
+}
+
+.success{
+background:#d1e7dd;
+color:#075c35;
+padding:12px;
+border-radius:8px;
+}
+
+.orderImage{
+width:100%;
+max-width:300px;
+max-height:300px;
+object-fit:cover;
+border-radius:10px;
+margin-top:8px;
+border:1px solid #ddd;
+}
+
+.actions{
+margin-top:10px;
 }
 
 .userInfo{
-  text-align:center;
-  font-size:14px;
-  margin-top:8px;
+font-size:13px;
+margin-top:6px;
+}
+
+.loading{
+text-align:center;
+padding:20px;
 }
 
 @media(max-width:600px){
 
-  .grid,
-  .summary{
-    grid-template-columns:1fr;
-  }
+.grid,
+.summary{
+grid-template-columns:1fr;
+}
 
-  header h1{
-    font-size:22px;
-  }
+.stats{
+grid-template-columns:1fr 1fr;
+}
 
-  .container{
-    padding:8px;
-  }
+header h1{
+font-size:21px;
+}
+
+.container{
+padding:8px;
+}
 
 }
 </style>
@@ -279,28 +285,25 @@ button{
 
 <label>Email</label>
 <input
-  type="email"
-  id="loginEmail"
-  placeholder="Enter email"
+type="email"
+id="loginEmail"
+placeholder="Enter email"
+autocomplete="email"
 >
 
 <label>Password</label>
 <input
-  type="password"
-  id="loginPassword"
-  placeholder="Enter password"
+type="password"
+id="loginPassword"
+placeholder="Enter password"
+autocomplete="current-password"
 >
 
-<button
-  class="save"
-  onclick="login()"
->
+<button class="save" onclick="login()">
 🔐 Login
 </button>
 
-<button
-  onclick="createAccount()"
->
+<button onclick="createAccount()">
 ➕ Create Account
 </button>
 
@@ -311,19 +314,18 @@ button{
 </div>
 
 
-<!-- MAIN APP -->
+<!-- APP -->
 
 <div id="appPage" class="hidden">
 
 <div class="container">
 
 <div style="text-align:right">
-<button
-  class="logout"
-  onclick="logout()"
->
+
+<button class="logout" onclick="logout()">
 🚪 Logout
 </button>
+
 </div>
 
 
@@ -391,72 +393,45 @@ button{
 <div class="grid">
 
 <div>
-
 <label>📅 Date</label>
-
-<input
-  type="date"
-  id="date"
->
-
+<input type="date" id="date">
 </div>
 
-
 <div>
-
 <label>💳 Payment Status</label>
-
 <select id="payment">
-
 <option value="All">All</option>
 <option value="Paid">Paid</option>
 <option value="Unpaid">Unpaid</option>
-
 </select>
-
 </div>
 
-
 <div>
-
 <label>💰 Payment Type</label>
-
 <select id="type">
-
 <option value="All">All</option>
 <option value="Cash">Cash</option>
 <option value="Online">Online</option>
 <option value="Credit">Credit</option>
-
 </select>
-
 </div>
 
-
 <div>
-
 <label>🚚 Delivery Status</label>
-
 <select id="status">
-
 <option value="All">All</option>
 <option value="Pending">Pending</option>
 <option value="Out for Delivery">Out for Delivery</option>
 <option value="Delivered">Delivered</option>
 <option value="Cancelled">Cancelled</option>
-
 </select>
-
 </div>
 
 </div>
 
 <br>
 
-<button
- class="today"
- onclick="setToday()"
->
+<button class="today" onclick="setToday()">
 📅 Today
 </button>
 
@@ -464,10 +439,7 @@ button{
 ⬅️ Yesterday
 </button>
 
-<button
- class="reset"
- onclick="resetFilter()"
->
+<button class="reset" onclick="resetFilter()">
 🔄 Reset
 </button>
 
@@ -480,13 +452,12 @@ button{
 
 <h2>➕ New Delivery</h2>
 
-
 <label>Delivery Boy Name</label>
 
 <input
- id="boy"
- placeholder="Delivery boy name"
- list="boyList"
+id="boy"
+placeholder="Delivery boy name"
+list="boyList"
 >
 
 <datalist id="boyList"></datalist>
@@ -495,52 +466,56 @@ button{
 <label>Customer Name</label>
 
 <input
- id="customer"
- placeholder="Customer name"
+id="customer"
+placeholder="Customer name"
 >
 
 
 <label>Customer Mobile</label>
 
 <input
- id="mobile"
- placeholder="Mobile number"
- type="tel"
+id="mobile"
+type="tel"
+placeholder="Mobile number"
 >
 
 
 <label>Customer Address</label>
 
 <textarea
- id="address"
- placeholder="Customer address"
+id="address"
+placeholder="Customer address"
 ></textarea>
 
 
 <label>📷 Order Image</label>
 
 <input
- id="orderImage"
- type="file"
- accept="image/*"
+id="orderImage"
+type="file"
+accept="image/*"
 >
 
 
 <label>Order Amount</label>
 
 <input
- id="amount"
- type="number"
- placeholder="₹ Order amount"
+id="amount"
+type="number"
+min="0"
+step="0.01"
+placeholder="₹ Order amount"
 >
 
 
 <label>Customer Se Received Amount</label>
 
 <input
- id="received"
- type="number"
- placeholder="₹ Received amount"
+id="received"
+type="number"
+min="0"
+step="0.01"
+placeholder="₹ Received amount"
 >
 
 
@@ -558,40 +533,31 @@ button{
 <label>Payment Type</label>
 
 <select id="newType">
-
 <option value="Cash">💵 Cash</option>
 <option value="Online">📱 Online</option>
 <option value="Credit">📒 Credit</option>
-
 </select>
 
 
 <label>Payment Status</label>
 
 <select id="newPayment">
-
 <option value="Unpaid">Unpaid</option>
 <option value="Paid">Paid</option>
-
 </select>
 
 
 <label>Delivery Status</label>
 
 <select id="newStatus">
-
 <option value="Pending">Pending</option>
 <option value="Out for Delivery">Out for Delivery</option>
 <option value="Delivered">Delivered</option>
 <option value="Cancelled">Cancelled</option>
-
 </select>
 
 
-<button
- class="save"
- onclick="saveDelivery()"
->
+<button class="save" onclick="saveDelivery()">
 💾 Save Delivery
 </button>
 
@@ -605,11 +571,11 @@ button{
 <h2>📦 Delivery List</h2>
 
 <input
- id="search"
- placeholder="🔎 Search customer / delivery boy / mobile"
+id="search"
+placeholder="🔎 Search customer / delivery boy / mobile"
 >
 
-<div id="list">
+<div id="list" class="loading">
 Loading...
 </div>
 
@@ -623,7 +589,7 @@ Loading...
 <script>
 
 /* ================================
-   SUPABASE
+SUPABASE
 ================================ */
 
 const SUPABASE_URL =
@@ -632,54 +598,49 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_p5tiMbyZOZR9_bcTbHuYbw_5JFSFiSF";
 
+const STORAGE_BUCKET =
+"order-images";
 
-let accessToken = null;
-let currentUser = null;
-let deliveries = [];
+
+let accessToken=null;
+let currentUser=null;
+let deliveries=[];
 
 
 /* ================================
-   API
+AUTH HEADERS
+================================ */
+
+function authHeaders(){
+
+return {
+"apikey":SUPABASE_KEY,
+"Authorization":"Bearer "+accessToken,
+"Content-Type":"application/json",
+"Prefer":"return=representation"
+};
+
+}
+
+
+/* ================================
+API
 ================================ */
 
 async function api(path,options={}){
 
-const headers = {
-
-"apikey":SUPABASE_KEY,
-"Content-Type":"application/json",
-"Prefer":"return=representation"
-
-};
-
-if(accessToken){
-
-headers["Authorization"] =
-"Bearer "+accessToken;
-
-}else{
-
-headers["Authorization"] =
-"Bearer "+SUPABASE_KEY;
-
-}
-
-const response =
-await fetch(
-SUPABASE_URL+
-"/rest/v1/"+
-path,
+const response=await fetch(
+SUPABASE_URL+"/rest/v1/"+path,
 {
 ...options,
 headers:{
-...headers,
+...authHeaders(),
 ...(options.headers||{})
 }
 }
 );
 
-const text =
-await response.text();
+const text=await response.text();
 
 if(!response.ok){
 
@@ -687,35 +648,31 @@ throw new Error(text);
 
 }
 
-return text
-?JSON.parse(text)
-:[];
+return text?JSON.parse(text):[];
 
 }
 
 
 /* ================================
-   AUTH
+LOGIN
 ================================ */
 
 async function login(){
 
-const email =
-document.getElementById("loginEmail")
-.value.trim();
+const email=
+document.getElementById("loginEmail").value.trim();
 
-const password =
-document.getElementById("loginPassword")
-.value;
+const password=
+document.getElementById("loginPassword").value;
 
-const msg =
+const message=
 document.getElementById("loginMessage");
 
 
-if(!email || !password){
+if(!email||!password){
 
-msg.innerHTML =
-"<div class='error'>Please enter email and password.</div>";
+message.innerHTML=
+"<div class='error'>Email और password भरें.</div>";
 
 return;
 
@@ -724,46 +681,39 @@ return;
 
 try{
 
-const response =
-await fetch(
+const response=await fetch(
 SUPABASE_URL+
 "/auth/v1/token?grant_type=password",
 {
 method:"POST",
-
 headers:{
 "apikey":SUPABASE_KEY,
 "Content-Type":"application/json"
 },
-
 body:JSON.stringify({
-email:email,
-password:password
+email,
+password
 })
 }
 );
 
 
-const data =
-await response.json();
+const data=await response.json();
 
 
 if(!response.ok){
 
 throw new Error(
-data.error_description ||
-data.msg ||
+data.error_description||
+data.msg||
 "Login failed"
 );
 
 }
 
 
-accessToken =
-data.access_token;
-
-currentUser =
-data.user;
+accessToken=data.access_token;
+currentUser=data.user;
 
 
 localStorage.setItem(
@@ -781,9 +731,10 @@ showApp();
 
 await load();
 
+
 }catch(error){
 
-msg.innerHTML =
+message.innerHTML=
 "<div class='error'>❌ "+
 escapeHTML(error.message)+
 "</div>";
@@ -794,26 +745,35 @@ escapeHTML(error.message)+
 
 
 /* ================================
-   CREATE ACCOUNT
+CREATE ACCOUNT
 ================================ */
 
 async function createAccount(){
 
-const email =
-document.getElementById("loginEmail")
-.value.trim();
+const email=
+document.getElementById("loginEmail").value.trim();
 
-const password =
-document.getElementById("loginPassword")
-.value;
+const password=
+document.getElementById("loginPassword").value;
+
+const message=
+document.getElementById("loginMessage");
 
 
-if(!email || !password){
+if(!email||!password){
 
-document.getElementById(
-"loginMessage"
-).innerHTML =
+message.innerHTML=
 "<div class='error'>Email और password भरें.</div>";
+
+return;
+
+}
+
+
+if(password.length<6){
+
+message.innerHTML=
+"<div class='error'>Password कम से कम 6 characters का रखें.</div>";
 
 return;
 
@@ -822,52 +782,44 @@ return;
 
 try{
 
-const response =
-await fetch(
+const response=await fetch(
 SUPABASE_URL+
 "/auth/v1/signup",
 {
 method:"POST",
-
 headers:{
 "apikey":SUPABASE_KEY,
 "Content-Type":"application/json"
 },
-
 body:JSON.stringify({
-email:email,
-password:password
+email,
+password
 })
 }
 );
 
 
-const data =
-await response.json();
+const data=await response.json();
 
 
 if(!response.ok){
 
 throw new Error(
-data.msg ||
-data.error_description ||
+data.msg||
+data.error_description||
 "Account creation failed"
 );
 
 }
 
 
-document.getElementById(
-"loginMessage"
-).innerHTML =
-"<div class='success'>✅ Account created. अगर email confirmation ON है तो पहले email confirm करें, फिर Login करें.</div>";
+message.innerHTML=
+"<div class='success'>✅ Account created. Email confirmation ON है तो email confirm करके Login करें.</div>";
 
 
 }catch(error){
 
-document.getElementById(
-"loginMessage"
-).innerHTML =
+message.innerHTML=
 "<div class='error'>❌ "+
 escapeHTML(error.message)+
 "</div>";
@@ -878,7 +830,7 @@ escapeHTML(error.message)+
 
 
 /* ================================
-   LOGOUT
+LOGOUT
 ================================ */
 
 function logout(){
@@ -893,43 +845,44 @@ localStorage.removeItem(
 
 accessToken=null;
 currentUser=null;
+deliveries=[];
 
-document.getElementById(
-"appPage"
-).classList.add("hidden");
 
-document.getElementById(
-"loginPage"
-).classList.remove("hidden");
+document
+.getElementById("appPage")
+.classList.add("hidden");
+
+document
+.getElementById("loginPage")
+.classList.remove("hidden");
 
 }
 
 
 /* ================================
-   SHOW APP
+SHOW APP
 ================================ */
 
 function showApp(){
 
-document.getElementById(
-"loginPage"
-).classList.add("hidden");
+document
+.getElementById("loginPage")
+.classList.add("hidden");
 
-document.getElementById(
-"appPage"
-).classList.remove("hidden");
+document
+.getElementById("appPage")
+.classList.remove("hidden");
 
-
-document.getElementById(
-"userInfo"
-).textContent =
-currentUser?.email || "";
+document
+.getElementById("userInfo")
+.textContent=
+currentUser?.email||"";
 
 }
 
 
 /* ================================
-   GET
+VALUE
 ================================ */
 
 function get(id){
@@ -943,21 +896,20 @@ return document
 
 
 /* ================================
-   MONEY
+MONEY
 ================================ */
 
 function updateMoney(){
 
-const amount =
-Number(get("amount")) || 0;
+const amount=
+Number(get("amount"))||0;
 
-const received =
-Number(get("received")) || 0;
+const received=
+Number(get("received"))||0;
 
 
-document.getElementById(
-"change"
-).textContent =
+document.getElementById("change")
+.textContent=
 "₹"+
 Math.max(
 received-amount,
@@ -965,9 +917,8 @@ received-amount,
 ).toFixed(2);
 
 
-document.getElementById(
-"balance"
-).textContent =
+document.getElementById("balance")
+.textContent=
 "₹"+
 Math.max(
 amount-received,
@@ -977,15 +928,13 @@ amount-received,
 }
 
 
-document
-.getElementById("amount")
+document.getElementById("amount")
 .addEventListener(
 "input",
 updateMoney
 );
 
-document
-.getElementById("received")
+document.getElementById("received")
 .addEventListener(
 "input",
 updateMoney
@@ -993,23 +942,100 @@ updateMoney
 
 
 /* ================================
-   SAVE DELIVERY
+IMAGE UPLOAD
+================================ */
+
+async function uploadImage(file){
+
+if(!file)return"";
+
+const safeName=
+file.name.replace(
+/[^a-zA-Z0-9._-]/g,
+"_"
+);
+
+const filePath=
+currentUser.id+
+"/"+
+Date.now()+
+"_"+safeName;
+
+
+const response=await fetch(
+SUPABASE_URL+
+"/storage/v1/object/"+
+STORAGE_BUCKET+
+"/"+
+filePath,
+{
+method:"POST",
+
+headers:{
+"Authorization":
+"Bearer "+accessToken,
+
+"apikey":
+SUPABASE_KEY,
+
+"Content-Type":
+file.type||"image/jpeg"
+},
+
+body:file
+}
+);
+
+
+if(!response.ok){
+
+const text=
+await response.text();
+
+throw new Error(
+"Image upload failed: "+text
+);
+
+}
+
+
+return (
+SUPABASE_URL+
+"/storage/v1/object/public/"+
+STORAGE_BUCKET+
+"/"+
+filePath
+);
+
+}
+
+
+/* ================================
+SAVE DELIVERY
 ================================ */
 
 async function saveDelivery(){
 
 try{
 
+if(!currentUser){
+
+alert("Please login first.");
+return;
+
+}
+
+
 const boy=get("boy");
 const customer=get("customer");
 const mobile=get("mobile");
 const address=get("address");
 
-const amount =
-Number(get("amount")) || 0;
+const amount=
+Number(get("amount"))||0;
 
-const received =
-Number(get("received")) || 0;
+const received=
+Number(get("received"))||0;
 
 const type=get("newType");
 const selectedPayment=get("newPayment");
@@ -1017,9 +1043,9 @@ const status=get("newStatus");
 
 
 if(
-!boy ||
-!customer ||
-!address ||
+!boy||
+!customer||
+!address||
 amount<=0
 ){
 
@@ -1032,47 +1058,38 @@ return;
 }
 
 
-const balance =
+const balance=
 Math.max(
 amount-received,
 0
 );
 
-const change =
+const change=
 Math.max(
 received-amount,
 0
 );
 
 
-const paymentStatus =
+const paymentStatus=
 balance===0
 ?"Paid"
 :selectedPayment;
 
 
-/*
-  IMPORTANT:
-  image अभी local preview के लिए है.
-  Supabase Storage जोड़ने के बाद
-  यहाँ image upload किया जा सकता है.
-*/
+const imageFile=
+document
+.getElementById("orderImage")
+.files[0];
+
 
 let imageUrl="";
 
 
-const imageFile =
-document.getElementById(
-"orderImage"
-).files[0];
-
-
 if(imageFile){
 
-imageUrl =
-URL.createObjectURL(
-imageFile
-);
+imageUrl=
+await uploadImage(imageFile);
 
 }
 
@@ -1084,29 +1101,47 @@ method:"POST",
 
 body:JSON.stringify({
 
-delivery_boy_name:boy,
-customer_name:customer,
-customer_mobile:mobile,
-customer_address:address,
+user_id:
+currentUser.id,
 
-order_amount:amount,
-total_amount:amount,
+delivery_boy_name:
+boy,
 
-received_amount:received,
-change_amount:change,
+customer_name:
+customer,
 
-payment_type:type,
-payment_status:paymentStatus,
+customer_mobile:
+mobile,
 
-delivery_status:status,
+customer_address:
+address,
 
-order_image:imageUrl,
+order_amount:
+amount,
+
+total_amount:
+amount,
+
+received_amount:
+received,
+
+change_amount:
+change,
+
+payment_type:
+type,
+
+payment_status:
+paymentStatus,
+
+delivery_status:
+status,
+
+order_image:
+imageUrl,
 
 delivery_date:
-new Date().toISOString(),
-
-user_id:
-currentUser.id
+new Date().toISOString()
 
 })
 
@@ -1114,9 +1149,7 @@ currentUser.id
 );
 
 
-alert(
-"✅ Delivery Saved Successfully"
-);
+alert("✅ Delivery Saved Successfully");
 
 
 [
@@ -1126,18 +1159,12 @@ alert(
 "address",
 "amount",
 "received"
-].forEach(
-id=>{
-document.getElementById(id)
-.value="";
-}
-);
+].forEach(id=>{
+document.getElementById(id).value="";
+});
 
 
-document.getElementById(
-"orderImage"
-).value="";
-
+document.getElementById("orderImage").value="";
 
 updateMoney();
 
@@ -1146,10 +1173,8 @@ await load();
 
 }catch(error){
 
-console.error(error);
-
 alert(
-"❌ Save Error: "+
+"❌ Save Error:\n"+
 error.message
 );
 
@@ -1159,28 +1184,34 @@ error.message
 
 
 /* ================================
-   LOAD
+LOAD
 ================================ */
 
 async function load(){
 
 try{
 
-deliveries =
+if(!currentUser)return;
+
+
+deliveries=
 await api(
-"deliveries?select=*&order=delivery_date.desc"
+"deliveries?select=*&user_id=eq."+
+encodeURIComponent(currentUser.id)+
+"&order=delivery_date.desc"
 );
 
+
+updateBoyList();
 show();
+
 
 }catch(error){
 
 console.error(error);
 
-document.getElementById(
-"list"
-).innerHTML =
-"<div class='error'>Database Error<br><br>"+
+document.getElementById("list").innerHTML=
+"<div class='error'>❌ Database Error<br><br>"+
 escapeHTML(error.message)+
 "</div>";
 
@@ -1190,12 +1221,36 @@ escapeHTML(error.message)+
 
 
 /* ================================
-   SHOW
+BOY LIST
+================================ */
+
+function updateBoyList(){
+
+const names=[
+...new Set(
+deliveries
+.map(d=>d.delivery_boy_name)
+.filter(Boolean)
+)
+];
+
+
+document.getElementById("boyList").innerHTML=
+names.map(
+name=>
+`<option value="${escapeHTML(name)}"></option>`
+).join("");
+
+}
+
+
+/* ================================
+SHOW
 ================================ */
 
 function show(){
 
-const search =
+const search=
 get("search").toLowerCase();
 
 const date=get("date");
@@ -1204,38 +1259,32 @@ const type=get("type");
 const status=get("status");
 
 
-const filtered =
+const filtered=
 deliveries.filter(d=>{
 
-const text =
+const text=
 (
-(d.customer_name||"")+" "+
-(d.delivery_boy_name||"")+" "+
+(d.customer_name||"")+
+" "+
+(d.delivery_boy_name||"")+
+" "+
 (d.customer_mobile||"")
 ).toLowerCase();
 
 
-if(
-search &&
-!text.includes(search)
-)return false;
+if(search&&!text.includes(search))
+return false;
 
 
 if(date){
 
-const x =
-new Date(
-d.delivery_date
-);
+const x=
+new Date(d.delivery_date);
 
-const localDate =
+const localDate=
 x.getFullYear()+"-"+
-String(
-x.getMonth()+1
-).padStart(2,"0")+"-"+
-String(
-x.getDate()
-).padStart(2,"0");
+String(x.getMonth()+1).padStart(2,"0")+"-"+
+String(x.getDate()).padStart(2,"0");
 
 
 if(localDate!==date)
@@ -1244,22 +1293,19 @@ return false;
 }
 
 
-if(
-payment!=="All" &&
-d.payment_status!==payment
-)return false;
+if(payment!=="All"&&
+d.payment_status!==payment)
+return false;
 
 
-if(
-type!=="All" &&
-d.payment_type!==type
-)return false;
+if(type!=="All"&&
+d.payment_type!==type)
+return false;
 
 
-if(
-status!=="All" &&
-d.delivery_status!==status
-)return false;
+if(status!=="All"&&
+d.delivery_status!==status)
+return false;
 
 
 return true;
@@ -1277,86 +1323,59 @@ let credit=0;
 
 filtered.forEach(d=>{
 
-const amount =
+const amount=
 Number(
-d.total_amount ||
-d.order_amount ||
+d.total_amount||
+d.order_amount||
 0
 );
-
 
 total+=amount;
 
 
-if(
-d.payment_status==="Paid"
-){
-
+if(d.payment_status==="Paid")
 paid+=amount;
-
-}else{
-
+else
 unpaid+=amount;
 
-}
 
+if(d.payment_type==="Cash")
+cash+=amount;
 
-if(
-d.payment_type==="Cash"
-)cash+=amount;
+if(d.payment_type==="Online")
+online+=amount;
 
-if(
-d.payment_type==="Online"
-)online+=amount;
-
-if(
-d.payment_type==="Credit"
-)credit+=amount;
+if(d.payment_type==="Credit")
+credit+=amount;
 
 });
 
 
-document.getElementById(
-"count"
-).textContent =
-filtered.length;
+document.getElementById("count")
+.textContent=filtered.length;
 
-document.getElementById(
-"total"
-).textContent =
-"₹"+total.toFixed(2);
+document.getElementById("total")
+.textContent="₹"+total.toFixed(2);
 
-document.getElementById(
-"paid"
-).textContent =
-"₹"+paid.toFixed(2);
+document.getElementById("paid")
+.textContent="₹"+paid.toFixed(2);
 
-document.getElementById(
-"unpaid"
-).textContent =
-"₹"+unpaid.toFixed(2);
+document.getElementById("unpaid")
+.textContent="₹"+unpaid.toFixed(2);
 
-document.getElementById(
-"cash"
-).textContent =
-"₹"+cash.toFixed(2);
+document.getElementById("cash")
+.textContent="₹"+cash.toFixed(2);
 
-document.getElementById(
-"online"
-).textContent =
-"₹"+online.toFixed(2);
+document.getElementById("online")
+.textContent="₹"+online.toFixed(2);
 
-document.getElementById(
-"credit"
-).textContent =
-"₹"+credit.toFixed(2);
+document.getElementById("credit")
+.textContent="₹"+credit.toFixed(2);
 
 
 if(!filtered.length){
 
-document.getElementById(
-"list"
-).innerHTML =
+document.getElementById("list").innerHTML=
 "<p style='text-align:center'>📦 No deliveries found</p>";
 
 return;
@@ -1364,39 +1383,31 @@ return;
 }
 
 
-document.getElementById(
-"list"
-).innerHTML =
-
+document.getElementById("list").innerHTML=
 filtered.map(d=>{
 
-const amount =
+const amount=
 Number(
-d.total_amount ||
-d.order_amount ||
+d.total_amount||
+d.order_amount||
 0
 );
 
-const received =
+const received=
 Number(
-d.received_amount ||
-0
+d.received_amount||0
 );
 
-const balance =
+const balance=
 Math.max(
 amount-received,
 0
 );
 
-const date =
+const date=
 d.delivery_date
-?
-new Date(
-d.delivery_date
-).toLocaleString(
-"en-IN"
-)
+?new Date(d.delivery_date)
+.toLocaleString("en-IN")
 :"-";
 
 
@@ -1405,38 +1416,23 @@ return `
 <div class="delivery">
 
 <h3>
-👤
-${escapeHTML(
-d.customer_name
-)}
+👤 ${escapeHTML(d.customer_name)}
 </h3>
-
 
 <p>
 👨‍✈️ Delivery Boy:
 <b>
-${escapeHTML(
-d.delivery_boy_name
-)}
+${escapeHTML(d.delivery_boy_name)}
 </b>
 </p>
 
-
 <p>
-📞
-${escapeHTML(
-d.customer_mobile||"-"
-)}
+📞 ${escapeHTML(d.customer_mobile||"-")}
 </p>
 
-
 <p>
-📍
-${escapeHTML(
-d.customer_address||"-"
-)}
+📍 ${escapeHTML(d.customer_address||"-")}
 </p>
-
 
 ${
 d.order_image
@@ -1444,118 +1440,70 @@ d.order_image
 `
 <img
 class="orderImage"
-src="${escapeHTML(
-d.order_image
-)}"
+src="${escapeHTML(d.order_image)}"
+alt="Order Image"
 >
 `
 :""
 }
 
-
-<p>
-📅 ${date}
-</p>
-
+<p>📅 ${date}</p>
 
 <p>
 💰 Order Amount:
-<b>
-₹${amount.toFixed(2)}
-</b>
+<b>₹${amount.toFixed(2)}</b>
 </p>
-
 
 <p>
 💵 Received:
-<b>
-₹${received.toFixed(2)}
-</b>
+<b>₹${received.toFixed(2)}</b>
 </p>
-
 
 <p>
 🔄 Change:
-<b>
-₹${Number(
-d.change_amount||0
-).toFixed(2)}
-</b>
+<b>₹${Number(d.change_amount||0).toFixed(2)}</b>
 </p>
-
 
 <p>
 ⚠️ Balance:
-<b>
-₹${balance.toFixed(2)}
-</b>
+<b>₹${balance.toFixed(2)}</b>
 </p>
-
 
 <p>
 💳 Payment Status:
-
 <span class="badge ${
 d.payment_status==="Paid"
-?"paid"
-:"unpaid"
+?"paid":"unpaid"
 }">
-
-${escapeHTML(
-d.payment_status||"Unpaid"
-)}
-
+${escapeHTML(d.payment_status||"Unpaid")}
 </span>
-
 </p>
-
 
 <p>
 💰 Payment Type:
-<b>
-${escapeHTML(
-d.payment_type||"Cash"
-)}
-</b>
+<b>${escapeHTML(d.payment_type||"Cash")}</b>
 </p>
-
 
 <p>
 🚚 Delivery Status:
-<b>
-${escapeHTML(
-d.delivery_status||"Pending"
-)}
-</b>
+<b>${escapeHTML(d.delivery_status||"Pending")}</b>
 </p>
-
 
 <div class="actions">
 
-
 <button
 class="call"
-onclick="callCustomer(
-'${escapeJS(
-d.customer_mobile||""
-)}'
-)"
+onclick="callCustomer('${escapeJS(d.customer_mobile||"")}')"
 >
 📞 Call
 </button>
 
-
 <button
 class="map"
-onclick="openMap(
-'${escapeJS(
-d.customer_address||""
-)}'
-)"
+onclick="openMap('${escapeJS(d.customer_address||"")}')"
 >
 📍 Map
 </button>
-
 
 ${
 d.payment_status!=="Paid"
@@ -1563,9 +1511,7 @@ d.payment_status!=="Paid"
 `
 <button
 class="paymentBtn"
-onclick="markPaid(
-'${escapeJS(d.id)}'
-)"
+onclick="markPaid('${escapeJS(d.id)}')"
 >
 💳 Paid
 </button>
@@ -1573,6 +1519,19 @@ onclick="markPaid(
 :""
 }
 
+${
+d.payment_status==="Paid"
+?
+`
+<button
+class="editBtn"
+onclick="changePayment('${escapeJS(d.id)}')"
+>
+✏️ Change Payment
+</button>
+`
+:""
+}
 
 ${
 d.delivery_status!=="Delivered"
@@ -1580,9 +1539,7 @@ d.delivery_status!=="Delivered"
 `
 <button
 class="done"
-onclick="markDelivered(
-'${escapeJS(d.id)}'
-)"
+onclick="markDelivered('${escapeJS(d.id)}')"
 >
 ✅ Delivered
 </button>
@@ -1590,16 +1547,12 @@ onclick="markDelivered(
 :""
 }
 
-
 <button
 class="delete"
-onclick="deleteDelivery(
-'${escapeJS(d.id)}'
-)"
+onclick="deleteDelivery('${escapeJS(d.id)}')"
 >
 🗑 Delete
 </button>
-
 
 </div>
 
@@ -1613,22 +1566,21 @@ onclick="deleteDelivery(
 
 
 /* ================================
-   MARK PAID
+PAID
 ================================ */
 
 async function markPaid(id){
 
-const type =
+const type=
 prompt(
-"Payment Type लिखें: Cash / Online / Credit",
+"Payment Type लिखें:\nCash / Online / Credit",
 "Cash"
 );
-
 
 if(!type)return;
 
 
-const cleanType =
+const cleanType=
 type.trim();
 
 
@@ -1646,6 +1598,146 @@ return;
 }
 
 
+const receivedInput=
+prompt(
+"Customer से कितने रुपये मिले?",
+"0"
+);
+
+if(receivedInput===null)return;
+
+
+const received=
+Number(receivedInput);
+
+
+if(
+isNaN(received)||
+received<0
+){
+
+alert("Valid amount डालें.");
+return;
+
+}
+
+
+try{
+
+const record=
+deliveries.find(
+d=>String(d.id)===String(id)
+);
+
+
+if(!record){
+
+alert("Delivery नहीं मिली.");
+return;
+
+}
+
+
+const amount=
+Number(
+record.total_amount||
+record.order_amount||
+0
+);
+
+
+const balance=
+Math.max(
+amount-received,
+0
+);
+
+const change=
+Math.max(
+received-amount,
+0
+);
+
+
+await api(
+"deliveries?id=eq."+
+encodeURIComponent(id),
+{
+method:"PATCH",
+
+body:JSON.stringify({
+
+received_amount:
+received,
+
+change_amount:
+change,
+
+payment_status:
+balance===0
+?"Paid"
+:"Unpaid",
+
+payment_type:
+cleanType
+
+})
+}
+);
+
+
+alert(
+balance===0
+?"✅ Payment Paid"
+:"⚠️ Partial Payment Saved"
+);
+
+
+await load();
+
+
+}catch(error){
+
+alert("❌ "+error.message);
+
+}
+
+}
+
+
+/* ================================
+CHANGE PAYMENT
+================================ */
+
+async function changePayment(id){
+
+const type=
+prompt(
+"New Payment Type:\nCash / Online / Credit",
+"Cash"
+);
+
+if(!type)return;
+
+
+const cleanType=
+type.trim();
+
+
+if(
+!["Cash","Online","Credit"]
+.includes(cleanType)
+){
+
+alert(
+"केवल Cash, Online या Credit."
+);
+
+return;
+
+}
+
+
 try{
 
 await api(
@@ -1656,30 +1748,23 @@ method:"PATCH",
 
 body:JSON.stringify({
 
-payment_status:"Paid",
-
 payment_type:
-cleanType
+cleanType,
+
+payment_status:
+"Paid"
 
 })
-
 }
 );
 
-
-alert(
-"✅ Payment Paid Marked"
-);
 
 await load();
 
 
 }catch(error){
 
-alert(
-"❌ "+
-error.message
-);
+alert("❌ "+error.message);
 
 }
 
@@ -1687,7 +1772,7 @@ error.message
 
 
 /* ================================
-   MARK DELIVERED
+DELIVERED
 ================================ */
 
 async function markDelivered(id){
@@ -1701,12 +1786,8 @@ encodeURIComponent(id),
 method:"PATCH",
 
 body:JSON.stringify({
-
-delivery_status:
-"Delivered"
-
+delivery_status:"Delivered"
 })
-
 }
 );
 
@@ -1716,10 +1797,7 @@ await load();
 
 }catch(error){
 
-alert(
-"❌ "+
-error.message
-);
+alert("❌ "+error.message);
 
 }
 
@@ -1727,7 +1805,7 @@ error.message
 
 
 /* ================================
-   DELETE
+DELETE
 ================================ */
 
 async function deleteDelivery(id){
@@ -1736,11 +1814,7 @@ if(
 !confirm(
 "क्या आप यह delivery delete करना चाहते हैं?"
 )
-){
-
-return;
-
-}
+)return;
 
 
 try{
@@ -1760,7 +1834,7 @@ await load();
 }catch(error){
 
 alert(
-"❌ Delete Error: "+
+"❌ Delete Error:\n"+
 error.message
 );
 
@@ -1770,14 +1844,14 @@ error.message
 
 
 /* ================================
-   CALL
+CALL
 ================================ */
 
 function callCustomer(number){
 
 if(number){
 
-window.location.href =
+window.location.href=
 "tel:"+number;
 
 }
@@ -1786,7 +1860,7 @@ window.location.href =
 
 
 /* ================================
-   MAP
+MAP
 ================================ */
 
 function openMap(address){
@@ -1801,28 +1875,26 @@ encodeURIComponent(address),
 
 
 /* ================================
-   FILTER
+TODAY
 ================================ */
 
 function setToday(){
 
 const d=new Date();
 
-document.getElementById(
-"date"
-).value =
+document.getElementById("date").value=
 d.getFullYear()+"-"+
-String(
-d.getMonth()+1
-).padStart(2,"0")+"-"+
-String(
-d.getDate()
-).padStart(2,"0");
+String(d.getMonth()+1).padStart(2,"0")+"-"+
+String(d.getDate()).padStart(2,"0");
 
 show();
 
 }
 
+
+/* ================================
+YESTERDAY
+================================ */
 
 function setYesterday(){
 
@@ -1832,43 +1904,10 @@ d.setDate(
 d.getDate()-1
 );
 
-document.getElementById(
-"date"
-).value =
+document.getElementById("date").value=
 d.getFullYear()+"-"+
-String(
-d.getMonth()+1
-).padStart(2,"0")+"-"+
-String(
-d.getDate()
-).padStart(2,"0");
-
-show();
-
-}
-
-
-function resetFilter(){
-
-document.getElementById(
-"date"
-).value="";
-
-document.getElementById(
-"payment"
-).value="All";
-
-document.getElementById(
-"type"
-).value="All";
-
-document.getElementById(
-"status"
-).value="All";
-
-document.getElementById(
-"search"
-).value="";
+String(d.getMonth()+1).padStart(2,"0")+"-"+
+String(d.getDate()).padStart(2,"0");
 
 show();
 
@@ -1876,7 +1915,24 @@ show();
 
 
 /* ================================
-   AUTO FILTER
+RESET
+================================ */
+
+function resetFilter(){
+
+document.getElementById("date").value="";
+document.getElementById("payment").value="All";
+document.getElementById("type").value="All";
+document.getElementById("status").value="All";
+document.getElementById("search").value="";
+
+show();
+
+}
+
+
+/* ================================
+FILTER EVENTS
 ================================ */
 
 [
@@ -1887,9 +1943,8 @@ show();
 "search"
 ].forEach(id=>{
 
-document.getElementById(
-id
-).addEventListener(
+document.getElementById(id)
+.addEventListener(
 "input",
 show
 );
@@ -1898,7 +1953,7 @@ show
 
 
 /* ================================
-   ESCAPE
+ESCAPE
 ================================ */
 
 function escapeHTML(value){
@@ -1924,35 +1979,44 @@ return String(value||"")
 
 
 /* ================================
-   AUTO LOGIN
+AUTO LOGIN
 ================================ */
 
 async function autoLogin(){
 
-const token =
+const token=
 localStorage.getItem(
 "delivery_access_token"
 );
 
-const user =
+const user=
 localStorage.getItem(
 "delivery_user"
 );
 
 
-if(
-token &&
-user
-){
+if(!token||!user){
+
+return;
+
+}
+
+
+try{
 
 accessToken=token;
-
-currentUser =
-JSON.parse(user);
+currentUser=JSON.parse(user);
 
 showApp();
 
 await load();
+
+
+}catch(error){
+
+console.log(error);
+
+logout();
 
 }
 
