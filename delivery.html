@@ -13,32 +13,33 @@
 body{
 margin:0;
 font-family:Arial,sans-serif;
-background:linear-gradient(rgba(255,255,255,.88),rgba(255,255,255,.88));
+background:#f2f6fa;
 color:#222;
 }
 
 header{
 background:#1769aa;
-color:white;
+color:#fff;
 padding:12px;
 position:sticky;
 top:0;
-z-index:20;
+z-index:50;
+box-shadow:0 2px 8px #999;
 }
 
 .head{
 display:flex;
-justify-content:center;
 align-items:center;
+justify-content:center;
 gap:12px;
 }
 
 .head img{
-width:55px;
-height:55px;
+width:52px;
+height:52px;
 border-radius:50%;
 object-fit:cover;
-border:2px solid white;
+border:2px solid #fff;
 }
 
 .head h1{
@@ -53,11 +54,11 @@ padding:10px;
 }
 
 .card{
-background:white;
+background:#fff;
 border-radius:14px;
 padding:16px;
 margin:12px 0;
-box-shadow:0 3px 12px rgba(0,0,0,.15);
+box-shadow:0 2px 10px rgba(0,0,0,.12);
 }
 
 .login{
@@ -72,9 +73,12 @@ margin:5px 0 10px;
 border:1px solid #ccc;
 border-radius:8px;
 font-size:16px;
+background:#fff;
 }
 
-textarea{min-height:80px}
+textarea{
+min-height:80px;
+}
 
 button{
 border:0;
@@ -87,7 +91,6 @@ cursor:pointer;
 
 button:disabled{
 opacity:.6;
-cursor:not-allowed;
 }
 
 .full{
@@ -95,16 +98,17 @@ width:100%;
 margin:5px 0;
 }
 
-.blue{background:#1769aa;color:white}
-.green{background:#198754;color:white}
-.red{background:#dc3545;color:white}
-.orange{background:#fd7e14;color:white}
-.purple{background:#6f42c1;color:white}
-.gray{background:#666;color:white}
-.dark{background:#222;color:white}
-.whatsapp{background:#25D366;color:white}
+.blue{background:#1769aa;color:#fff}
+.green{background:#198754;color:#fff}
+.red{background:#dc3545;color:#fff}
+.orange{background:#fd7e14;color:#fff}
+.purple{background:#6f42c1;color:#fff}
+.gray{background:#666;color:#fff}
+.dark{background:#222;color:#fff}
 
-.hidden{display:none!important}
+.hidden{
+display:none!important;
+}
 
 .message{
 padding:10px;
@@ -114,7 +118,7 @@ word-break:break-word;
 }
 
 .error{
-background:#ffe4e4;
+background:#ffe5e5;
 color:#900;
 }
 
@@ -130,8 +134,8 @@ gap:15px;
 }
 
 .profile img{
-width:80px;
-height:80px;
+width:75px;
+height:75px;
 border-radius:50%;
 object-fit:cover;
 border:3px solid #1769aa;
@@ -144,7 +148,7 @@ gap:10px;
 }
 
 .stat{
-background:white;
+background:#fff;
 padding:15px;
 border-radius:12px;
 text-align:center;
@@ -190,20 +194,6 @@ border-radius:10px;
 margin-top:8px;
 }
 
-.preview{
-width:100px;
-height:100px;
-border-radius:50%;
-object-fit:cover;
-display:none;
-border:3px solid #1769aa;
-}
-
-.backupBox{
-border:2px dashed #1769aa;
-background:#eef7ff;
-}
-
 .badge{
 padding:5px 8px;
 border-radius:6px;
@@ -225,6 +215,38 @@ background:#ffe5b4;
 color:#8a4b00;
 }
 
+.suggestionBox{
+border:1px solid #ccc;
+border-radius:8px;
+background:#fff;
+max-height:220px;
+overflow:auto;
+margin-top:-7px;
+margin-bottom:10px;
+}
+
+.suggestion{
+padding:11px;
+border-bottom:1px solid #eee;
+cursor:pointer;
+}
+
+.suggestion:hover{
+background:#eef7ff;
+}
+
+.suggestion:last-child{
+border-bottom:0;
+}
+
+.selectedBox{
+background:#eaf5ff;
+border:1px solid #1769aa;
+padding:10px;
+border-radius:8px;
+margin-bottom:10px;
+}
+
 .paymentHistory{
 background:#f8f9fa;
 border-radius:10px;
@@ -241,42 +263,34 @@ padding:8px 0;
 border-bottom:0;
 }
 
-.savedBox{
-background:#f8f9fa;
-padding:10px;
-border-radius:10px;
-margin-bottom:10px;
+.preview{
+width:100px;
+height:100px;
+border-radius:50%;
+object-fit:cover;
+display:none;
+border:3px solid #1769aa;
 }
 
-.savedItem{
-background:white;
-border:1px solid #ddd;
-border-radius:8px;
-padding:10px;
-margin:6px 0;
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:5px;
-}
-
-.savedItem button{
-margin:2px;
-padding:7px 10px;
-}
-
-.small{
-font-size:13px;
-color:#666;
+.backupBox{
+border:2px dashed #1769aa;
+background:#eef7ff;
 }
 
 @media(max-width:600px){
-.grid{grid-template-columns:1fr}
-.summary{grid-template-columns:1fr}
-.savedItem{
-flex-direction:column;
-align-items:stretch;
+
+.grid{
+grid-template-columns:1fr;
 }
+
+.summary{
+grid-template-columns:1fr;
+}
+
+.stats{
+grid-template-columns:1fr 1fr;
+}
+
 }
 </style>
 </head>
@@ -308,10 +322,18 @@ src="https://ui-avatars.com/api/?name=Delivery&background=1769AA&color=fff">
 <h2>🔐 Login</h2>
 
 <label>Email</label>
-<input id="loginEmail" type="email" placeholder="Enter email">
+
+<input
+id="loginEmail"
+type="email"
+placeholder="Enter email">
 
 <label>Password</label>
-<input id="loginPassword" type="password" placeholder="Enter password">
+
+<input
+id="loginPassword"
+type="password"
+placeholder="Enter password">
 
 <button id="loginBtn" class="blue full">
 🔐 Login
@@ -335,6 +357,7 @@ src="https://ui-avatars.com/api/?name=Delivery&background=1769AA&color=fff">
 
 <div id="appPage" class="container hidden">
 
+
 <!-- PROFILE -->
 
 <div class="card">
@@ -346,8 +369,13 @@ id="profilePhoto"
 src="https://ui-avatars.com/api/?name=Delivery&background=1769AA&color=fff">
 
 <div>
-<h2 id="firmNameText">DELIVERY TO HOME</h2>
+
+<h2 id="firmNameText">
+DELIVERY TO HOME
+</h2>
+
 <div id="userEmail"></div>
+
 </div>
 
 </div>
@@ -372,86 +400,29 @@ src="https://ui-avatars.com/api/?name=Delivery&background=1769AA&color=fff">
 <h2>👤 Firm Profile</h2>
 
 <label>🏢 Firm Name</label>
+
 <input id="firmNameInput">
 
 <label>📷 Profile Image</label>
-<input id="profileFile" type="file" accept="image/*">
 
-<img id="profilePreview" class="preview">
+<input
+id="profileFile"
+type="file"
+accept="image/*">
 
-<button id="saveProfileBtn" class="blue full">
+<img
+id="profilePreview"
+class="preview">
+
+<button
+id="saveProfileBtn"
+class="blue full">
+
 💾 Save Profile
+
 </button>
 
 <div id="profileMessage"></div>
-
-</div>
-
-
-<!-- SAVED CUSTOMERS -->
-
-<div class="card">
-
-<h2>👥 Saved Customers</h2>
-
-<input
-id="customerSearch"
-placeholder="🔎 Customer name / mobile search">
-
-<div id="savedCustomers">
-No saved customers yet.
-</div>
-
-</div>
-
-
-<!-- SAVED DELIVERY BOYS -->
-
-<div class="card">
-
-<h2>👨‍✈️ Saved Delivery Boys</h2>
-
-<input
-id="boySearch"
-placeholder="🔎 Delivery boy search">
-
-<div id="savedBoys">
-No saved delivery boys yet.
-</div>
-
-</div>
-
-
-<!-- BACKUP -->
-
-<div class="card backupBox">
-
-<h2>☁️ Backup & Restore</h2>
-
-<p>
-आपकी delivery history Supabase Cloud में सुरक्षित रहती है।
-</p>
-
-<button id="backupNowBtn" class="blue">
-☁️ Backup Now
-</button>
-
-<button id="downloadBackupBtn" class="green">
-📥 Download Backup
-</button>
-
-<label>📤 Restore Backup File</label>
-
-<input
-id="restoreFile"
-type="file"
-accept=".json,application/json">
-
-<button id="restoreBackupBtn" class="purple full">
-📤 Restore Backup
-</button>
-
-<div id="backupMessage"></div>
 
 </div>
 
@@ -471,12 +442,12 @@ accept=".json,application/json">
 </div>
 
 <div class="stat">
-✅ Paid
+✅ Received
 <b id="paidAmount">₹0.00</b>
 </div>
 
 <div class="stat">
-⚠️ Unpaid
+⚠️ Pending
 <b id="unpaidAmount">₹0.00</b>
 </div>
 
@@ -514,85 +485,44 @@ accept=".json,application/json">
 </div>
 
 
-<!-- FILTER -->
-
-<div class="card">
-
-<h2>🔎 Delivery Filter</h2>
-
-<div class="grid">
-
-<div>
-<label>📅 Date</label>
-<input id="filterDate" type="date">
-</div>
-
-<div>
-<label>💳 Payment Status</label>
-<select id="filterPayment">
-<option>All</option>
-<option>Paid</option>
-<option>Unpaid</option>
-</select>
-</div>
-
-<div>
-<label>💰 Payment Type</label>
-<select id="filterType">
-<option>All</option>
-<option>Cash</option>
-<option>Online</option>
-<option>Credit</option>
-</select>
-</div>
-
-<div>
-<label>🚚 Delivery Status</label>
-<select id="filterStatus">
-<option>All</option>
-<option>Pending</option>
-<option>Out for Delivery</option>
-<option>Delivered</option>
-<option>Cancelled</option>
-</select>
-</div>
-
-</div>
-
-<button id="todayBtn" class="blue">📅 Today</button>
-<button id="yesterdayBtn">⬅️ Yesterday</button>
-<button id="resetBtnFilter" class="gray">🔄 Reset</button>
-
-</div>
-
-
 <!-- NEW DELIVERY -->
 
 <div class="card">
 
 <h2>➕ New Delivery</h2>
 
-<label>Delivery Boy Name</label>
+
+<!-- DELIVERY BOY -->
+
+<label>👨‍✈️ Delivery Boy Name</label>
 
 <input
 id="boy"
-placeholder="Delivery boy name"
-list="boyOptions">
+autocomplete="off"
+placeholder="Delivery boy name">
 
-<datalist id="boyOptions"></datalist>
+<div
+id="boySuggestions"
+class="suggestionBox hidden">
+</div>
 
 
-<label>Customer Name</label>
+<!-- CUSTOMER -->
+
+<label>👤 Customer Name</label>
 
 <input
 id="customer"
-placeholder="Customer name"
-list="customerOptions">
+autocomplete="off"
+placeholder="Customer name">
 
-<datalist id="customerOptions"></datalist>
+<div
+id="customerSuggestions"
+class="suggestionBox hidden">
+</div>
 
 
-<label>Customer Mobile</label>
+<label>📞 Customer Mobile</label>
 
 <input
 id="mobile"
@@ -600,11 +530,17 @@ type="tel"
 placeholder="Mobile number">
 
 
-<label>Customer Address</label>
+<label>📍 Customer Address</label>
 
 <textarea
 id="address"
 placeholder="Customer address"></textarea>
+
+
+<div
+id="selectedCustomer"
+class="selectedBox hidden">
+</div>
 
 
 <label>📷 Order Image</label>
@@ -615,7 +551,7 @@ type="file"
 accept="image/*">
 
 
-<label>Order Amount</label>
+<label>💰 Order Amount</label>
 
 <input
 id="orderAmount"
@@ -625,7 +561,7 @@ step="0.01"
 placeholder="₹ Order amount">
 
 
-<label>Customer Se Received Amount</label>
+<label>💵 Received Amount</label>
 
 <input
 id="receivedAmount"
@@ -636,45 +572,69 @@ placeholder="₹ Received amount">
 
 
 <p>
-🔄 Change to Give:
+🔄 Change:
 <b id="changeAmount">₹0.00</b>
 </p>
 
 <p>
-⚠️ Balance / Unpaid:
+⚠️ Pending:
 <b id="balanceAmount">₹0.00</b>
 </p>
 
 
-<label>Payment Type</label>
+<label>💳 Payment Type</label>
 
 <select id="paymentType">
 
-<option value="Cash">💵 Cash</option>
-<option value="Online">📱 Online</option>
-<option value="Credit">📒 Credit</option>
+<option value="Cash">
+💵 Cash
+</option>
+
+<option value="Online">
+📱 Online
+</option>
+
+<option value="Credit">
+📒 Credit
+</option>
 
 </select>
 
 
-<label>Payment Status</label>
+<label>💳 Payment Status</label>
 
 <select id="paymentStatus">
 
-<option value="Unpaid">Unpaid</option>
-<option value="Paid">Paid</option>
+<option value="Unpaid">
+Unpaid
+</option>
+
+<option value="Paid">
+Paid
+</option>
 
 </select>
 
 
-<label>Delivery Status</label>
+<label>🚚 Delivery Status</label>
 
 <select id="deliveryStatus">
 
-<option value="Pending">Pending</option>
-<option value="Out for Delivery">Out for Delivery</option>
-<option value="Delivered">Delivered</option>
-<option value="Cancelled">Cancelled</option>
+<option value="Pending">
+Pending
+</option>
+
+<option value="Out for Delivery">
+Out for Delivery
+</option>
+
+<option value="Delivered">
+Delivered
+</option>
+
+<option value="Cancelled">
+Cancelled
+</option>
 
 </select>
 
@@ -688,6 +648,102 @@ class="blue full">
 </button>
 
 <div id="deliveryMessage"></div>
+
+</div>
+
+
+<!-- SAVED CUSTOMERS -->
+
+<div class="card">
+
+<h2>👥 Saved Customers</h2>
+
+<input
+id="savedCustomerSearch"
+placeholder="🔎 Search saved customer">
+
+<div id="savedCustomerList">
+</div>
+
+</div>
+
+
+<!-- FILTER -->
+
+<div class="card">
+
+<h2>🔎 Delivery Filter</h2>
+
+<div class="grid">
+
+<div>
+
+<label>📅 Date</label>
+
+<input
+id="filterDate"
+type="date">
+
+</div>
+
+<div>
+
+<label>💳 Payment</label>
+
+<select id="filterPayment">
+
+<option>All</option>
+<option>Paid</option>
+<option>Unpaid</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>💰 Type</label>
+
+<select id="filterType">
+
+<option>All</option>
+<option>Cash</option>
+<option>Online</option>
+<option>Credit</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>🚚 Status</label>
+
+<select id="filterStatus">
+
+<option>All</option>
+<option>Pending</option>
+<option>Out for Delivery</option>
+<option>Delivered</option>
+<option>Cancelled</option>
+
+</select>
+
+</div>
+
+</div>
+
+<button id="todayBtn" class="blue">
+📅 Today
+</button>
+
+<button id="yesterdayBtn">
+⬅️ Yesterday
+</button>
+
+<button id="resetBtnFilter" class="gray">
+🔄 Reset
+</button>
 
 </div>
 
@@ -708,6 +764,41 @@ Loading...
 
 </div>
 
+
+<!-- BACKUP -->
+
+<div class="card backupBox">
+
+<h2>☁️ Backup & Restore</h2>
+
+<p>
+Delivery history का backup डाउनलोड करके सुरक्षित रख सकते हैं।
+</p>
+
+<button
+id="backupNowBtn"
+class="blue">
+
+☁️ Backup
+</button>
+
+<button
+id="restoreBackupBtn"
+class="purple">
+
+📤 Restore
+</button>
+
+<input
+id="restoreFile"
+type="file"
+accept=".json,application/json">
+
+<div id="backupMessage"></div>
+
+</div>
+
+
 </div>
 
 
@@ -726,19 +817,12 @@ const SUPABASE_KEY =
 const supabaseClient =
 supabase.createClient(
 SUPABASE_URL,
-SUPABASE_KEY,
-{
-auth:{
-autoRefreshToken:true,
-persistSession:true,
-detectSessionInUrl:true
-}
-}
+SUPABASE_KEY
 );
 
 
 /* =========================================
-FIRM
+SETTINGS
 ========================================= */
 
 const DEFAULT_FIRM_ID =
@@ -748,6 +832,7 @@ let currentFirmId =
 DEFAULT_FIRM_ID;
 
 let currentUser=null;
+
 let deliveries=[];
 
 
@@ -757,6 +842,10 @@ HELPERS
 
 function $(id){
 return document.getElementById(id);
+}
+
+function money(value){
+return "₹"+Number(value||0).toFixed(2);
 }
 
 function escapeHTML(value){
@@ -781,11 +870,7 @@ return String(value ?? "")
 
 }
 
-function money(value){
-return "₹"+Number(value||0).toFixed(2);
-}
-
-function message(id,text,type="error"){
+function showMessage(id,text,type="error"){
 
 $(id).innerHTML=
 `<div class="message ${type}">
@@ -799,45 +884,53 @@ ${escapeHTML(text)}
 LOGIN
 ========================================= */
 
-$("loginBtn").onclick=async()=>{
+$("loginBtn").onclick=async function(){
 
-const email=$("loginEmail").value.trim();
-const password=$("loginPassword").value;
+const email=
+$("loginEmail").value.trim();
+
+const password=
+$("loginPassword").value;
 
 if(!email||!password){
 
-message(
+showMessage(
 "loginMessage",
-"Email और Password दोनों डालें."
+"Email और password डालें."
 );
 
 return;
+
 }
 
-$("loginBtn").disabled=true;
+this.disabled=true;
 
 try{
 
-const result=
+const {data,error}=
 await supabaseClient.auth.signInWithPassword({
-email,
-password
+email:email,
+password:password
 });
 
-if(result.error)
-throw result.error;
+if(error) throw error;
 
-currentUser=result.data.user;
+currentUser=data.user;
 
 await showApp();
 
-}catch(e){
+}
+catch(error){
 
-message("loginMessage",e.message);
+showMessage(
+"loginMessage",
+error.message
+);
 
-}finally{
+}
+finally{
 
-$("loginBtn").disabled=false;
+this.disabled=false;
 
 }
 
@@ -848,66 +941,76 @@ $("loginBtn").disabled=false;
 CREATE ACCOUNT
 ========================================= */
 
-$("createBtn").onclick=async()=>{
+$("createBtn").onclick=async function(){
 
-const email=$("loginEmail").value.trim();
-const password=$("loginPassword").value;
+const email=
+$("loginEmail").value.trim();
+
+const password=
+$("loginPassword").value;
 
 if(!email||!password){
 
-message(
+showMessage(
 "loginMessage",
-"Email और Password डालें."
+"Email और password डालें."
 );
 
 return;
+
 }
 
 if(password.length<6){
 
-message(
+showMessage(
 "loginMessage",
 "Password कम से कम 6 characters होना चाहिए."
 );
 
 return;
+
 }
 
-$("createBtn").disabled=true;
+this.disabled=true;
 
 try{
 
-const result=
+const {data,error}=
 await supabaseClient.auth.signUp({
-email,
-password
+email:email,
+password:password
 });
 
-if(result.error)
-throw result.error;
+if(error) throw error;
 
-if(result.data.session){
+if(data.session){
 
-currentUser=result.data.user;
+currentUser=data.user;
+
 await showApp();
 
 }else{
 
-message(
+showMessage(
 "loginMessage",
-"Account बन गया है। Email confirm करके Login करें.",
+"Account बन गया। Email confirm करके Login करें.",
 "success"
 );
 
 }
 
-}catch(e){
+}
+catch(error){
 
-message("loginMessage",e.message);
+showMessage(
+"loginMessage",
+error.message
+);
 
-}finally{
+}
+finally{
 
-$("createBtn").disabled=false;
+this.disabled=false;
 
 }
 
@@ -915,26 +1018,28 @@ $("createBtn").disabled=false;
 
 
 /* =========================================
-RESET PASSWORD
+RESET
 ========================================= */
 
-$("resetBtn").onclick=async()=>{
+$("resetBtn").onclick=async function(){
 
-const email=$("loginEmail").value.trim();
+const email=
+$("loginEmail").value.trim();
 
 if(!email){
 
-message(
+showMessage(
 "loginMessage",
 "पहले email डालें."
 );
 
 return;
+
 }
 
 try{
 
-const result=
+const {error}=
 await supabaseClient.auth.resetPasswordForEmail(
 email,
 {
@@ -942,18 +1047,21 @@ redirectTo:location.href
 }
 );
 
-if(result.error)
-throw result.error;
+if(error) throw error;
 
-message(
+showMessage(
 "loginMessage",
-"Password reset email भेज दिया गया है.",
+"Password reset email भेज दिया गया.",
 "success"
 );
 
-}catch(e){
+}
+catch(error){
 
-message("loginMessage",e.message);
+showMessage(
+"loginMessage",
+error.message
+);
 
 }
 
@@ -978,6 +1086,7 @@ await showApp();
 currentUser=null;
 
 $("loginPage").classList.remove("hidden");
+
 $("appPage").classList.add("hidden");
 
 }
@@ -992,14 +1101,22 @@ SHOW APP
 
 async function showApp(){
 
+if(!currentUser) return;
+
 $("loginPage").classList.add("hidden");
+
 $("appPage").classList.remove("hidden");
 
-$("userEmail").textContent=currentUser.email;
+$("userEmail").textContent=
+currentUser.email||"";
 
 await ensureProfile();
+
 await loadProfile();
+
 await loadDeliveries();
+
+renderSavedCustomers();
 
 }
 
@@ -1010,20 +1127,19 @@ PROFILE
 
 async function ensureProfile(){
 
-const result=
-await supabaseClient
+const {data}=await supabaseClient
 .from("profiles")
 .select("id")
 .eq("id",currentUser.id)
 .maybeSingle();
 
-if(!result.data){
+if(!data){
 
 await supabaseClient
 .from("profiles")
 .insert({
 id:currentUser.id,
-firm_name:"Plus medico",
+firm_name:"DELIVERY TO HOME",
 profile_image:""
 });
 
@@ -1034,35 +1150,30 @@ profile_image:""
 
 async function loadProfile(){
 
-const result=
+const {data,error}=
 await supabaseClient
 .from("profiles")
 .select("*")
 .eq("id",currentUser.id)
 .maybeSingle();
 
-if(result.error)
-return;
-
-if(result.data){
+if(error||!data) return;
 
 const name=
-result.data.firm_name||
+data.firm_name||
 "DELIVERY TO HOME";
 
 $("firmNameText").textContent=name;
+
 $("headerFirm").textContent=name;
+
 $("firmNameInput").value=name;
 
-if(result.data.profile_image){
+if(data.profile_image){
 
-$("profilePhoto").src=
-result.data.profile_image;
+$("profilePhoto").src=data.profile_image;
 
-$("headerPhoto").src=
-result.data.profile_image;
-
-}
+$("headerPhoto").src=data.profile_image;
 
 }
 
@@ -1079,6 +1190,7 @@ $("profileEditor").classList.toggle("hidden");
 
 };
 
+
 $("profileFile").onchange=function(){
 
 const file=this.files[0];
@@ -1086,6 +1198,7 @@ const file=this.files[0];
 if(!file){
 
 $("profilePreview").style.display="none";
+
 return;
 
 }
@@ -1098,7 +1211,7 @@ $("profilePreview").style.display="block";
 };
 
 
-$("saveProfileBtn").onclick=async()=>{
+$("saveProfileBtn").onclick=async function(){
 
 try{
 
@@ -1107,25 +1220,27 @@ $("firmNameInput").value.trim();
 
 if(!firmName){
 
-message(
+showMessage(
 "profileMessage",
 "Firm name डालें."
 );
 
 return;
+
 }
 
 let imageUrl=null;
 
-const file=$("profileFile").files[0];
+const file=
+$("profileFile").files[0];
 
 if(file){
 
-const ext=file.name.split(".").pop();
-
 const path=
 currentUser.id+
-"/profile_"+Date.now()+"."+ext;
+"/profile_"+
+Date.now()+
+".jpg";
 
 const upload=
 await supabaseClient
@@ -1152,35 +1267,35 @@ supabaseClient
 
 }
 
-const data={
+const updateData={
 firm_name:firmName
 };
 
 if(imageUrl)
-data.profile_image=imageUrl;
+updateData.profile_image=imageUrl;
 
-const result=
+const {error}=
 await supabaseClient
 .from("profiles")
-.update(data)
+.update(updateData)
 .eq("id",currentUser.id);
 
-if(result.error)
-throw result.error;
+if(error) throw error;
 
-message(
+showMessage(
 "profileMessage",
-"Profile successfully saved.",
+"Profile saved.",
 "success"
 );
 
 await loadProfile();
 
-}catch(e){
+}
+catch(error){
 
-message(
+showMessage(
 "profileMessage",
-e.message
+error.message
 );
 
 }
@@ -1193,7 +1308,9 @@ LOGOUT
 ========================================= */
 
 $("logoutBtn").onclick=async()=>{
+
 await supabaseClient.auth.signOut();
+
 };
 
 
@@ -1222,14 +1339,256 @@ $("changeAmount").textContent=
 money(change);
 
 $("paymentStatus").value=
-amount>0&&balance===0
+balance===0&&amount>0
 ?"Paid"
 :"Unpaid";
 
 }
 
 $("orderAmount").oninput=updateMoney;
+
 $("receivedAmount").oninput=updateMoney;
+
+
+/* =========================================
+CUSTOMER SEARCH
+========================================= */
+
+function getUniqueCustomers(){
+
+const map=new Map();
+
+deliveries.forEach(d=>{
+
+const name=
+(d.customer_name||"").trim();
+
+if(!name) return;
+
+const key=
+(
+name+"|"+
+(d.customer_mobile||"")+"|"+
+(d.customer_address||"")
+).toLowerCase();
+
+if(!map.has(key)){
+
+map.set(key,{
+name:name,
+mobile:d.customer_mobile||"",
+address:d.customer_address||""
+});
+
+}
+
+});
+
+return Array.from(map.values());
+
+}
+
+
+function getUniqueBoys(){
+
+const set=new Set();
+
+deliveries.forEach(d=>{
+
+const name=
+(d.delivery_boy_name||"").trim();
+
+if(name)
+set.add(name);
+
+});
+
+return Array.from(set);
+
+}
+
+
+/* =========================================
+BOY SEARCH
+========================================= */
+
+$("boy").oninput=function(){
+
+const q=
+this.value.trim().toLowerCase();
+
+const box=$("boySuggestions");
+
+if(!q){
+
+box.classList.add("hidden");
+
+return;
+
+}
+
+const names=
+getUniqueBoys()
+.filter(x=>
+x.toLowerCase().includes(q)
+);
+
+if(!names.length){
+
+box.classList.add("hidden");
+
+return;
+
+}
+
+box.innerHTML=
+names.map(name=>`
+
+<div
+class="suggestion"
+onclick="selectBoy('${jsEscape(name)}')">
+
+👨‍✈️ ${escapeHTML(name)}
+
+</div>
+
+`).join("");
+
+box.classList.remove("hidden");
+
+};
+
+
+function selectBoy(name){
+
+$("boy").value=name;
+
+$("boySuggestions").classList.add("hidden");
+
+}
+
+
+/* =========================================
+CUSTOMER SEARCH
+========================================= */
+
+$("customer").oninput=function(){
+
+const q=
+this.value.trim().toLowerCase();
+
+const box=$("customerSuggestions");
+
+if(!q){
+
+box.classList.add("hidden");
+
+return;
+
+}
+
+const customers=
+getUniqueCustomers()
+.filter(c=>
+(
+c.name+" "+
+c.mobile+" "+
+c.address
+)
+.toLowerCase()
+.includes(q)
+);
+
+if(!customers.length){
+
+box.classList.add("hidden");
+
+return;
+
+}
+
+box.innerHTML=
+customers.map(c=>`
+
+<div
+class="suggestion"
+onclick="selectCustomer(
+'${jsEscape(c.name)}',
+'${jsEscape(c.mobile)}',
+'${jsEscape(c.address)}'
+)">
+
+<b>👤 ${escapeHTML(c.name)}</b>
+<br>
+📞 ${escapeHTML(c.mobile)}
+<br>
+📍 ${escapeHTML(c.address)}
+
+</div>
+
+`).join("");
+
+box.classList.remove("hidden");
+
+};
+
+
+function selectCustomer(
+name,
+mobile,
+address
+){
+
+$("customer").value=name;
+
+$("mobile").value=mobile;
+
+$("address").value=address;
+
+$("customerSuggestions")
+.classList.add("hidden");
+
+$("selectedCustomer").innerHTML=
+`
+<b>✅ Customer Selected</b><br>
+👤 ${escapeHTML(name)}<br>
+📞 ${escapeHTML(mobile)}<br>
+📍 ${escapeHTML(address)}
+`;
+
+$("selectedCustomer")
+.classList.remove("hidden");
+
+}
+
+
+/* =========================================
+HIDE SUGGESTIONS
+========================================= */
+
+document.addEventListener("click",function(e){
+
+if(
+!e.target.closest("#customer") &&
+!e.target.closest("#customerSuggestions")
+){
+
+$("customerSuggestions")
+.classList.add("hidden");
+
+}
+
+if(
+!e.target.closest("#boy") &&
+!e.target.closest("#boySuggestions")
+){
+
+$("boySuggestions")
+.classList.add("hidden");
+
+}
+
+});
 
 
 /* =========================================
@@ -1238,14 +1597,16 @@ ORDER IMAGE
 
 async function uploadOrderImage(file){
 
-if(!file)
-return "";
+if(!file) return "";
 
-const ext=file.name.split(".").pop();
+const ext=
+file.name.split(".").pop();
 
 const path=
 currentUser.id+
-"/order_"+Date.now()+"."+ext;
+"/order_"+
+Date.now()+
+"."+ext;
 
 const result=
 await supabaseClient
@@ -1276,12 +1637,19 @@ return supabaseClient
 SAVE DELIVERY
 ========================================= */
 
-$("saveDeliveryBtn").onclick=async()=>{
+$("saveDeliveryBtn").onclick=async function(){
 
-const boy=$("boy").value.trim();
-const customer=$("customer").value.trim();
-const mobile=$("mobile").value.trim();
-const address=$("address").value.trim();
+const boy=
+$("boy").value.trim();
+
+const customer=
+$("customer").value.trim();
+
+const mobile=
+$("mobile").value.trim();
+
+const address=
+$("address").value.trim();
 
 const amount=
 Number($("orderAmount").value)||0;
@@ -1289,9 +1657,11 @@ Number($("orderAmount").value)||0;
 const received=
 Number($("receivedAmount").value)||0;
 
-const paymentType=$("paymentType").value;
-let paymentStatus=$("paymentStatus").value;
-const deliveryStatus=$("deliveryStatus").value;
+const paymentType=
+$("paymentType").value;
+
+const deliveryStatus=
+$("deliveryStatus").value;
 
 if(
 !boy||
@@ -1301,136 +1671,166 @@ if(
 amount<=0
 ){
 
-message(
+showMessage(
 "deliveryMessage",
-"सभी जरूरी details भरें."
+"Delivery boy, customer, mobile, address और amount भरें."
 );
 
 return;
+
 }
 
-if(received>amount){
+if(received<0||received>amount){
 
-message(
+showMessage(
 "deliveryMessage",
 "Received amount order amount से ज्यादा नहीं हो सकता."
 );
 
 return;
+
 }
 
-const balance=
-Math.max(amount-received,0);
-
-const change=
-Math.max(received-amount,0);
-
-paymentStatus=
-balance===0
-?"Paid"
-:"Unpaid";
-
-$("saveDeliveryBtn").disabled=true;
+this.disabled=true;
 
 try{
 
 let imageUrl="";
 
-const file=$("orderFile").files[0];
+const file=
+$("orderFile").files[0];
 
-if(file)
-imageUrl=await uploadOrderImage(file);
+if(file){
 
-const now=new Date().toISOString();
+imageUrl=
+await uploadOrderImage(file);
+
+}
+
+const balance=
+Math.max(amount-received,0);
+
+const paymentStatus=
+balance===0
+?"Paid"
+:"Unpaid";
+
+const now=
+new Date().toISOString();
 
 const row={
 
 firm_id:currentFirmId,
+
 user_id:currentUser.id,
 
 delivery_boy_name:boy,
+
 customer_name:customer,
+
 customer_mobile:mobile,
+
 customer_address:address,
 
 order_amount:amount,
+
 received_amount:received,
-change_amount:change,
+
+change_amount:0,
 
 payment_type:paymentType,
+
 payment_status:paymentStatus,
 
 delivery_status:deliveryStatus,
 
 delivery_date:now,
+
 created_at:now,
 
 image_url:imageUrl,
+
 order_image:imageUrl,
 
 total_amount:amount,
 
 last_payment_amount:received,
-last_payment_type:paymentType,
+
+last_payment_type:
+received>0?paymentType:null,
+
 payment_received_at:
 received>0?now:null
 
 };
 
-const result=
+const {error}=
 await supabaseClient
 .from("deliveries")
 .insert(row);
 
-if(result.error)
-throw result.error;
+if(error) throw error;
 
-message(
+showMessage(
 "deliveryMessage",
-"Delivery saved successfully.",
+"✅ Delivery successfully saved.",
 "success"
 );
 
-
-/* SAVE LOCAL CONTACT */
-
-saveCustomerLocal(
-customer,
-mobile,
-address
-);
-
-saveBoyLocal(boy);
-
-
-/* CLEAR */
-
-$("boy").value="";
-$("customer").value="";
-$("mobile").value="";
-$("address").value="";
-$("orderAmount").value="";
-$("receivedAmount").value="";
-$("orderFile").value="";
-
-updateMoney();
+clearDeliveryForm();
 
 await loadDeliveries();
 
-}catch(e){
+}
+catch(error){
 
-message(
+showMessage(
 "deliveryMessage",
-e.message
+error.message
 );
 
-}finally{
+}
+finally{
 
-$("saveDeliveryBtn").disabled=false;
+this.disabled=false;
 
 }
 
 };
+
+
+/* =========================================
+CLEAR FORM
+========================================= */
+
+function clearDeliveryForm(){
+
+$("boy").value="";
+
+$("customer").value="";
+
+$("mobile").value="";
+
+$("address").value="";
+
+$("orderAmount").value="";
+
+$("receivedAmount").value="";
+
+$("orderFile").value="";
+
+$("selectedCustomer")
+.classList.add("hidden");
+
+$("paymentType").value="Cash";
+
+$("paymentStatus").value="Unpaid";
+
+$("deliveryStatus").value="Pending";
+
+updateMoney();
+
+}
 
 
 /* =========================================
@@ -1439,23 +1839,25 @@ LOAD DELIVERIES
 
 async function loadDeliveries(){
 
-const result=
+const {data,error}=
 await supabaseClient
 .from("deliveries")
 .select("*")
 .eq("firm_id",currentFirmId)
 .order(
 "delivery_date",
-{ascending:false}
+{
+ascending:false
+}
 );
 
-if(result.error){
+if(error){
 
 $("deliveryList").innerHTML=
 `
 <div class="message error">
 Database Error:<br>
-${escapeHTML(result.error.message)}
+${escapeHTML(error.message)}
 </div>
 `;
 
@@ -1463,463 +1865,115 @@ return;
 
 }
 
-deliveries=result.data||[];
+deliveries=data||[];
 
-saveAllContactsFromDeliveries();
-
-renderSavedCustomers();
-renderSavedBoys();
 renderDeliveries();
 
-}
-
-
-/* =========================================
-LOCAL SAVED CUSTOMERS
-========================================= */
-
-function customerKey(){
-return "delivery_customers_"+currentUser.id;
-}
-
-function boyKey(){
-return "delivery_boys_"+currentUser.id;
-}
-
-function getCustomers(){
-
-try{
-
-return JSON.parse(
-localStorage.getItem(customerKey())||"[]"
-);
-
-}catch(e){
-
-return [];
-
-}
-
-}
-
-function getBoys(){
-
-try{
-
-return JSON.parse(
-localStorage.getItem(boyKey())||"[]"
-);
-
-}catch(e){
-
-return [];
-
-}
-
-}
-
-function saveCustomerLocal(name,mobile,address){
-
-let list=getCustomers();
-
-const index=
-list.findIndex(
-x=>x.mobile===mobile
-);
-
-const item={
-name,
-mobile,
-address
-};
-
-if(index>=0)
-list[index]=item;
-else
-list.unshift(item);
-
-localStorage.setItem(
-customerKey(),
-JSON.stringify(list)
-);
-
-}
-
-function saveBoyLocal(name){
-
-if(!name)
-return;
-
-let list=getBoys();
-
-if(!list.includes(name))
-list.unshift(name);
-
-list=list.slice(0,100);
-
-localStorage.setItem(
-boyKey(),
-JSON.stringify(list)
-);
-
-}
-
-function saveAllContactsFromDeliveries(){
-
-deliveries.forEach(d=>{
-
-if(
-d.customer_name &&
-d.customer_mobile
-){
-
-saveCustomerLocal(
-d.customer_name,
-d.customer_mobile,
-d.customer_address||""
-);
-
-}
-
-if(d.delivery_boy_name)
-saveBoyLocal(d.delivery_boy_name);
-
-});
-
-}
-
-
-/* =========================================
-CUSTOMER SELECT
-========================================= */
-
-function selectCustomer(index){
-
-const list=getCustomers();
-const c=list[index];
-
-if(!c)
-return;
-
-$("customer").value=c.name||"";
-$("mobile").value=c.mobile||"";
-$("address").value=c.address||"";
-
-window.scrollTo({
-top:$("customer").getBoundingClientRect().top+
-window.scrollY-100,
-behavior:"smooth"
-});
-
-}
-
-function editCustomer(index){
-
-const list=getCustomers();
-const c=list[index];
-
-if(!c)
-return;
-
-const name=prompt(
-"Customer Name:",
-c.name||""
-);
-
-if(name===null)
-return;
-
-const mobile=prompt(
-"Mobile:",
-c.mobile||""
-);
-
-if(mobile===null)
-return;
-
-const address=prompt(
-"Address:",
-c.address||""
-);
-
-if(address===null)
-return;
-
-list[index]={
-name:name.trim(),
-mobile:mobile.trim(),
-address:address.trim()
-};
-
-localStorage.setItem(
-customerKey(),
-JSON.stringify(list)
-);
-
-renderSavedCustomers();
-
-}
-
-
-function deleteCustomer(index){
-
-const list=getCustomers();
-
-if(!list[index])
-return;
-
-if(!confirm(
-"क्या इस saved customer को delete करना है?"
-))
-return;
-
-list.splice(index,1);
-
-localStorage.setItem(
-customerKey(),
-JSON.stringify(list)
-);
-
 renderSavedCustomers();
 
 }
 
 
 /* =========================================
-BOY SELECT EDIT DELETE
+SAVED CUSTOMERS
 ========================================= */
 
-function selectBoy(index){
+$("savedCustomerSearch").oninput=
+renderSavedCustomers;
 
-const list=getBoys();
-
-if(!list[index])
-return;
-
-$("boy").value=list[index];
-
-window.scrollTo({
-top:$("boy").getBoundingClientRect().top+
-window.scrollY-100,
-behavior:"smooth"
-});
-
-}
-
-function editBoy(index){
-
-const list=getBoys();
-
-if(!list[index])
-return;
-
-const name=prompt(
-"Delivery Boy Name:",
-list[index]
-);
-
-if(name===null)
-return;
-
-const newName=name.trim();
-
-if(!newName)
-return;
-
-list[index]=newName;
-
-localStorage.setItem(
-boyKey(),
-JSON.stringify(list)
-);
-
-renderSavedBoys();
-
-}
-
-function deleteBoy(index){
-
-const list=getBoys();
-
-if(!list[index])
-return;
-
-if(!confirm(
-"क्या इस saved delivery boy को delete करना है?"
-))
-return;
-
-list.splice(index,1);
-
-localStorage.setItem(
-boyKey(),
-JSON.stringify(list)
-);
-
-renderSavedBoys();
-
-}
-
-
-/* =========================================
-RENDER SAVED CUSTOMERS
-========================================= */
 
 function renderSavedCustomers(){
 
-const search=
-$("customerSearch").value
+const box=
+$("savedCustomerList");
+
+if(!deliveries.length){
+
+box.innerHTML=
+"<p>अभी कोई saved customer नहीं है.</p>";
+
+return;
+
+}
+
+const q=
+$("savedCustomerSearch").value
 .trim()
 .toLowerCase();
 
-const list=
-getCustomers().filter(c=>
+const customers=
+getUniqueCustomers()
+.filter(c=>
 (
-(c.name||"")+" "+
-(c.mobile||"")
+c.name+" "+
+c.mobile+" "+
+c.address
 )
 .toLowerCase()
-.includes(search)
+.includes(q)
 );
 
-if(!list.length){
+if(!customers.length){
 
-$("savedCustomers").innerHTML=
-"<p class='small'>No saved customers found.</p>";
+box.innerHTML=
+"<p>Customer नहीं मिला.</p>";
 
 return;
 
 }
 
-const original=getCustomers();
+box.innerHTML=
+customers.map(c=>`
 
-$("savedCustomers").innerHTML=
-list.map(c=>{
+<div class="suggestion">
 
-const index=
-original.findIndex(
-x=>
-x.name===c.name &&
-x.mobile===c.mobile
-);
-
-return `
-<div class="savedItem">
-
-<div>
 <b>👤 ${escapeHTML(c.name)}</b>
-<br>
-<span class="small">
-📞 ${escapeHTML(c.mobile)}
-</span>
-<br>
-<span class="small">
-📍 ${escapeHTML(c.address)}
-</span>
-</div>
 
-<div>
+<br>
+📞 ${escapeHTML(c.mobile)}
+
+<br>
+📍 ${escapeHTML(c.address)}
+
+<br>
 
 <button
 class="blue"
-onclick="selectCustomer(${index})">
-Select
-</button>
+onclick="useSavedCustomer(
+'${jsEscape(c.name)}',
+'${jsEscape(c.mobile)}',
+'${jsEscape(c.address)}'
+)">
 
-<button
-class="purple"
-onclick="editCustomer(${index})">
-✏️
-</button>
+➕ Use Customer
 
-<button
-class="red"
-onclick="deleteCustomer(${index})">
-🗑️
 </button>
 
 </div>
 
-</div>
-`;
-
-}).join("");
+`).join("");
 
 }
 
 
-/* =========================================
-RENDER SAVED BOYS
-========================================= */
+function useSavedCustomer(
+name,
+mobile,
+address
+){
 
-function renderSavedBoys(){
-
-const search=
-$("boySearch").value
-.trim()
-.toLowerCase();
-
-const original=getBoys();
-
-const list=
-original.filter(x=>
-x.toLowerCase().includes(search)
+selectCustomer(
+name,
+mobile,
+address
 );
 
-if(!list.length){
-
-$("savedBoys").innerHTML=
-"<p class='small'>No saved delivery boys found.</p>";
-
-return;
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
 
 }
-
-$("savedBoys").innerHTML=
-list.map(name=>{
-
-const index=
-original.indexOf(name);
-
-return `
-<div class="savedItem">
-
-<b>👨‍✈️ ${escapeHTML(name)}</b>
-
-<div>
-
-<button
-class="blue"
-onclick="selectBoy(${index})">
-Select
-</button>
-
-<button
-class="purple"
-onclick="editBoy(${index})">
-✏️
-</button>
-
-<button
-class="red"
-onclick="deleteBoy(${index})">
-🗑️
-</button>
-
-</div>
-
-</div>
-`;
-
-}).join("");
-
-}
-
-$("customerSearch").oninput=
-renderSavedCustomers;
-
-$("boySearch").oninput=
-renderSavedBoys;
 
 
 /* =========================================
@@ -1934,26 +1988,37 @@ FILTER
 "search"
 ].forEach(id=>{
 
-$(id).oninput=renderDeliveries;
+$(id).oninput=
+renderDeliveries;
 
 });
 
 
 /* =========================================
-RENDER DELIVERY
+RENDER
 ========================================= */
 
 function renderDeliveries(){
 
-let list=[...deliveries];
+let list=
+[...deliveries];
 
 const search=
-$("search").value.trim().toLowerCase();
+$("search").value
+.trim()
+.toLowerCase();
 
-const date=$("filterDate").value;
-const payment=$("filterPayment").value;
-const type=$("filterType").value;
-const status=$("filterStatus").value;
+const date=
+$("filterDate").value;
+
+const payment=
+$("filterPayment").value;
+
+const type=
+$("filterType").value;
+
+const status=
+$("filterStatus").value;
 
 list=list.filter(d=>{
 
@@ -1961,27 +2026,35 @@ const text=
 (
 (d.customer_name||"")+" "+
 (d.delivery_boy_name||"")+" "+
-(d.customer_mobile||"")
+(d.customer_mobile||"")+" "+
+(d.customer_address||"")
 ).toLowerCase();
 
 if(search&&!text.includes(search))
 return false;
 
-if(payment!=="All"&&
-d.payment_status!==payment)
+if(
+payment!=="All" &&
+d.payment_status!==payment
+)
 return false;
 
-if(type!=="All"&&
-d.payment_type!==type)
+if(
+type!=="All" &&
+d.payment_type!==type
+)
 return false;
 
-if(status!=="All"&&
-d.delivery_status!==status)
+if(
+status!=="All" &&
+d.delivery_status!==status
+)
 return false;
 
 if(date){
 
-const x=new Date(d.delivery_date);
+const x=
+new Date(d.delivery_date);
 
 const ds=
 x.getFullYear()+"-"+
@@ -1999,8 +2072,8 @@ return true;
 
 
 let total=0;
-let paid=0;
-let unpaid=0;
+let receivedTotal=0;
+let pendingTotal=0;
 let cash=0;
 let online=0;
 let credit=0;
@@ -2015,16 +2088,18 @@ d.order_amount ??
 );
 
 const received=
-Number(d.received_amount||0);
+Number(
+d.received_amount||0
+);
+
+const pending=
+Math.max(amount-received,0);
 
 total+=amount;
 
-paid+=received;
+receivedTotal+=received;
 
-unpaid+=Math.max(
-amount-received,
-0
-);
+pendingTotal+=pending;
 
 if(d.payment_type==="Cash")
 cash+=received;
@@ -2037,12 +2112,19 @@ credit+=received;
 
 });
 
+
 $("totalDeliveries").textContent=list.length;
+
 $("totalAmount").textContent=money(total);
-$("paidAmount").textContent=money(paid);
-$("unpaidAmount").textContent=money(unpaid);
+
+$("paidAmount").textContent=money(receivedTotal);
+
+$("unpaidAmount").textContent=money(pendingTotal);
+
 $("cashAmount").textContent=money(cash);
+
 $("onlineAmount").textContent=money(online);
+
 $("creditAmount").textContent=money(credit);
 
 
@@ -2067,13 +2149,12 @@ d.order_amount ??
 );
 
 const received=
-Number(d.received_amount||0);
-
-const balance=
-Math.max(
-amount-received,
-0
+Number(
+d.received_amount||0
 );
+
+const pending=
+Math.max(amount-received,0);
 
 const date=
 d.delivery_date
@@ -2082,32 +2163,29 @@ new Date(d.delivery_date)
 .toLocaleString("en-IN")
 :"-";
 
-const id=jsEscape(d.id);
+const id=
+jsEscape(d.id);
 
-const mobile=jsEscape(
-d.customer_mobile||""
-);
+const mobile=
+jsEscape(d.customer_mobile||"");
 
-const address=jsEscape(
-d.customer_address||""
-);
+const address=
+jsEscape(d.customer_address||"");
 
-const customer=jsEscape(
-d.customer_name||""
-);
+const customer=
+jsEscape(d.customer_name||"");
+
+let paymentClass="unpaid";
+
+if(d.payment_status==="Paid")
+paymentClass="paid";
+else if(received>0)
+paymentClass="partial";
 
 const image=
 d.order_image||
 d.image_url||
 "";
-
-let statusClass="unpaid";
-
-if(d.payment_status==="Paid")
-statusClass="paid";
-else if(received>0)
-statusClass="partial";
-
 
 return `
 
@@ -2119,7 +2197,9 @@ return `
 
 <p>
 👨‍✈️ Delivery Boy:
-<b>${escapeHTML(d.delivery_boy_name||"-")}</b>
+<b>
+${escapeHTML(d.delivery_boy_name||"-")}
+</b>
 </p>
 
 <p>
@@ -2135,34 +2215,34 @@ return `
 </p>
 
 <p>
-💰 Order:
+💰 Order Amount:
 <b>${money(amount)}</b>
 </p>
 
 <p>
-💵 Total Received:
+💵 Received:
 <b>${money(received)}</b>
 </p>
 
 <p>
-⚠️ Remaining:
-<b>${money(balance)}</b>
+⚠️ Pending:
+<b>${money(pending)}</b>
 </p>
 
 <p>
 💳 Payment:
-<span class="badge ${statusClass}">
+<span class="badge ${paymentClass}">
 ${escapeHTML(d.payment_status||"Unpaid")}
 </span>
 </p>
 
 <p>
-💰 Payment Type:
+💰 Type:
 <b>${escapeHTML(d.payment_type||"-")}</b>
 </p>
 
 <p>
-🚚 Status:
+🚚 Delivery:
 <b>${escapeHTML(d.delivery_status||"-")}</b>
 </p>
 
@@ -2172,20 +2252,18 @@ image
 `
 <img
 class="orderImage"
-src="${escapeHTML(image)}"
-alt="Order Image">
+src="${escapeHTML(image)}">
 `
 :""
 }
 
+${
+received>0
+?
+`
 <div class="paymentHistory">
 
 <b>💳 Payment Information</b>
-
-<div class="paymentRow">
-Total Amount:
-<strong>${money(amount)}</strong>
-</div>
 
 <div class="paymentRow">
 Received:
@@ -2194,43 +2272,62 @@ Received:
 
 <div class="paymentRow">
 Pending:
-<strong>${money(balance)}</strong>
+<strong>${money(pending)}</strong>
 </div>
 
 </div>
+`
+:""
+}
 
 <br>
+
 
 <button
 class="green"
 onclick="callCustomer('${mobile}')">
+
 📞 Call
+
 </button>
+
 
 <button
 class="blue"
 onclick="openMap('${address}')">
+
 📍 Map
+
 </button>
 
+
 ${
-balance>0
+pending>0
 ?
 `
 <button
 class="orange"
 onclick="markPaid('${id}')">
+
 💳 Receive Payment
+
 </button>
 
 <button
-class="whatsapp"
-onclick="sendPendingWhatsApp('${id}')">
-📲 WhatsApp Pending
+class="green"
+onclick="whatsappPending(
+'${customer}',
+'${mobile}',
+${pending}
+)">
+
+📱 WhatsApp Pending
+
 </button>
 `
 :""
 }
+
 
 ${
 d.delivery_status!=="Delivered"
@@ -2239,111 +2336,38 @@ d.delivery_status!=="Delivered"
 <button
 class="green"
 onclick="markDelivered('${id}')">
+
 ✅ Delivered
+
 </button>
 `
 :""
 }
 
+
+<button
+class="purple"
+onclick="editDelivery('${id}')">
+
+✏️ Edit
+
+</button>
+
+
 <button
 class="red"
 onclick="deleteDelivery('${id}')">
-🗑 Delete
+
+🗑️ Delete
+
 </button>
+
 
 </div>
 
 `;
 
 }).join("");
-
-}
-
-
-/* =========================================
-WHATSAPP PENDING AMOUNT
-========================================= */
-
-function sendPendingWhatsApp(id){
-
-const d=
-deliveries.find(x=>x.id===id);
-
-if(!d){
-
-alert("Delivery नहीं मिली.");
-return;
-
-}
-
-const total=
-Number(
-d.total_amount ??
-d.order_amount ??
-0
-);
-
-const received=
-Number(d.received_amount||0);
-
-const pending=
-Math.max(
-total-received,
-0
-);
-
-if(pending<=0){
-
-alert("इस customer का कोई pending amount नहीं है.");
-return;
-
-}
-
-let mobile=
-String(
-d.customer_mobile||""
-).replace(/\D/g,"");
-
-if(mobile.length===10){
-
-mobile="91"+mobile;
-
-}
-
-if(!mobile){
-
-alert("Customer mobile number नहीं है.");
-return;
-
-}
-
-const customer=
-d.customer_name||
-"Customer";
-
-const message=
-`Hello ${customer},
-
-आपके Delivery To Home order का payment pending है.
-
-Total Amount: ₹${total.toFixed(2)}
-Already Paid: ₹${received.toFixed(2)}
-Pending Amount: ₹${pending.toFixed(2)}
-
-कृपया pending amount का payment कर दें.
-
-Thank you.`;
-
-const url=
-"https://wa.me/"+
-mobile+
-"?text="+
-encodeURIComponent(message);
-
-window.open(
-url,
-"_blank"
-);
 
 }
 
@@ -2360,6 +2384,7 @@ deliveries.find(x=>x.id===id);
 if(!d){
 
 alert("Delivery नहीं मिली.");
+
 return;
 
 }
@@ -2372,17 +2397,17 @@ d.order_amount ??
 );
 
 const already=
-Number(d.received_amount||0);
+Number(
+d.received_amount||0
+);
 
 const remaining=
-Math.max(
-total-already,
-0
-);
+Math.max(total-already,0);
 
 if(remaining<=0){
 
-alert("यह order पहले ही Paid है.");
+alert("यह order पूरी तरह Paid है.");
+
 return;
 
 }
@@ -2391,21 +2416,20 @@ const input=
 prompt(
 "Pending Amount: ₹"+
 remaining.toFixed(2)+
-"\n\nअभी कितना payment मिला?\n\nकम amount भी डाल सकते हैं.",
-remaining.toFixed(2)
+"\n\nअभी कितना payment मिला?",
+""
 );
 
 if(input===null)
 return;
 
-const payment=Number(input);
+const payment=
+Number(input);
 
-if(
-isNaN(payment)||
-payment<=0
-){
+if(!Number.isFinite(payment)||payment<=0){
 
 alert("सही payment amount डालें.");
+
 return;
 
 }
@@ -2422,7 +2446,7 @@ return;
 
 }
 
-let type=
+const typeInput=
 prompt(
 "Payment Type:\n\n"+
 "1 = Cash\n"+
@@ -2430,19 +2454,29 @@ prompt(
 "1"
 );
 
-if(type===null)
+if(typeInput===null)
 return;
 
-type=
-String(type).trim().toLowerCase();
+let paymentType="";
 
-if(type==="1"||type==="cash")
-type="Cash";
-else if(type==="2"||type==="online")
-type="Online";
-else{
+if(
+typeInput==="1"||
+typeInput.toLowerCase()==="cash"
+){
 
-alert("1 = Cash या 2 = Online डालें.");
+paymentType="Cash";
+
+}else if(
+typeInput==="2"||
+typeInput.toLowerCase()==="online"
+){
+
+paymentType="Online";
+
+}else{
+
+alert("1 = Cash या 2 = Online चुनें.");
+
 return;
 
 }
@@ -2450,38 +2484,31 @@ return;
 const newReceived=
 already+payment;
 
-const newBalance=
-Math.max(
-total-newReceived,
-0
-);
+const newPending=
+Math.max(total-newReceived,0);
 
 const now=
 new Date().toISOString();
 
-const result=
+const {error}=
 await supabaseClient
 .from("deliveries")
 .update({
 
 received_amount:newReceived,
 
-change_amount:
-Math.max(
-newReceived-total,
-0
-),
+change_amount:0,
 
 payment_status:
-newBalance===0
+newPending===0
 ?"Paid"
 :"Unpaid",
 
-payment_type:type,
+payment_type:paymentType,
 
 last_payment_amount:payment,
 
-last_payment_type:type,
+last_payment_type:paymentType,
 
 payment_received_at:now
 
@@ -2489,11 +2516,11 @@ payment_received_at:now
 .eq("id",id)
 .eq("firm_id",currentFirmId);
 
-if(result.error){
+if(error){
 
 alert(
 "Payment update error:\n"+
-result.error.message
+error.message
 );
 
 return;
@@ -2501,15 +2528,152 @@ return;
 }
 
 alert(
-"✅ Payment received\n\n"+
-"Now: ₹"+
-payment.toFixed(2)+
-"\nTotal Received: ₹"+
-newReceived.toFixed(2)+
-"\nPending: ₹"+
-newBalance.toFixed(2)+
-"\nType: "+type
+"✅ Payment updated\n\n"+
+"अभी मिला: "+money(payment)+
+"\nTotal Received: "+money(newReceived)+
+"\nPending: "+money(newPending)+
+"\nType: "+paymentType
 );
+
+await loadDeliveries();
+
+}
+
+
+/* =========================================
+WHATSAPP
+========================================= */
+
+function whatsappPending(
+customer,
+mobile,
+pending
+){
+
+let number=
+String(mobile||"")
+.replace(/\D/g,"");
+
+if(!number){
+
+alert("Customer mobile number नहीं है.");
+
+return;
+
+}
+
+/*
+India number को automatically +91
+*/
+
+if(number.length===10){
+
+number="91"+number;
+
+}
+
+const message=
+"नमस्ते "+customer+
+",%0A%0A"+
+"आपके order का ₹"+
+Number(pending).toFixed(2)+
+" payment pending है.%0A%0A"+
+"कृपया pending amount का payment कर दें.%0A%0A"+
+"धन्यवाद।";
+
+window.open(
+"https://wa.me/"+
+number+
+"?text="+
+message,
+"_blank"
+);
+
+}
+
+
+/* =========================================
+EDIT DELIVERY
+========================================= */
+
+async function editDelivery(id){
+
+const d=
+deliveries.find(x=>x.id===id);
+
+if(!d){
+
+alert("Delivery नहीं मिली.");
+
+return;
+
+}
+
+const customer=
+prompt(
+"Customer Name:",
+d.customer_name||""
+);
+
+if(customer===null)
+return;
+
+const mobile=
+prompt(
+"Customer Mobile:",
+d.customer_mobile||""
+);
+
+if(mobile===null)
+return;
+
+const address=
+prompt(
+"Customer Address:",
+d.customer_address||""
+);
+
+if(address===null)
+return;
+
+const boy=
+prompt(
+"Delivery Boy Name:",
+d.delivery_boy_name||""
+);
+
+if(boy===null)
+return;
+
+const {error}=
+await supabaseClient
+.from("deliveries")
+.update({
+
+customer_name:customer.trim(),
+
+customer_mobile:mobile.trim(),
+
+customer_address:address.trim(),
+
+delivery_boy_name:boy.trim()
+
+})
+.eq("id",id)
+.eq("firm_id",currentFirmId);
+
+if(error){
+
+alert(
+"Edit error:\n"+
+error.message
+);
+
+return;
+
+}
+
+alert("✅ Delivery details updated.");
 
 await loadDeliveries();
 
@@ -2522,7 +2686,7 @@ DELIVERED
 
 async function markDelivered(id){
 
-const result=
+const {error}=
 await supabaseClient
 .from("deliveries")
 .update({
@@ -2531,9 +2695,10 @@ delivery_status:"Delivered"
 .eq("id",id)
 .eq("firm_id",currentFirmId);
 
-if(result.error){
+if(error){
 
-alert(result.error.message);
+alert(error.message);
+
 return;
 
 }
@@ -2544,26 +2709,30 @@ await loadDeliveries();
 
 
 /* =========================================
-DELETE DELIVERY
+DELETE
 ========================================= */
 
 async function deleteDelivery(id){
 
 if(!confirm(
-"क्या आप यह delivery delete करना चाहते हैं?"
+"क्या आप यह पूरी delivery delete करना चाहते हैं?"
 ))
 return;
 
-const result=
+const {error}=
 await supabaseClient
 .from("deliveries")
 .delete()
 .eq("id",id)
 .eq("firm_id",currentFirmId);
 
-if(result.error){
+if(error){
 
-alert(result.error.message);
+alert(
+"Delete error:\n"+
+error.message
+);
+
 return;
 
 }
@@ -2582,11 +2751,13 @@ function callCustomer(number){
 if(!number){
 
 alert("Mobile number नहीं है.");
+
 return;
 
 }
 
-location.href="tel:"+number;
+location.href=
+"tel:"+number;
 
 }
 
@@ -2600,6 +2771,7 @@ function openMap(address){
 if(!address){
 
 alert("Address नहीं है.");
+
 return;
 
 }
@@ -2614,7 +2786,7 @@ encodeURIComponent(address),
 
 
 /* =========================================
-DATE FILTER
+TODAY
 ========================================= */
 
 $("todayBtn").onclick=()=>{
@@ -2630,6 +2802,10 @@ renderDeliveries();
 
 };
 
+
+/* =========================================
+YESTERDAY
+========================================= */
 
 $("yesterdayBtn").onclick=()=>{
 
@@ -2647,12 +2823,20 @@ renderDeliveries();
 };
 
 
+/* =========================================
+RESET
+========================================= */
+
 $("resetBtnFilter").onclick=()=>{
 
 $("filterDate").value="";
+
 $("filterPayment").value="All";
+
 $("filterType").value="All";
+
 $("filterStatus").value="All";
+
 $("search").value="";
 
 renderDeliveries();
@@ -2664,43 +2848,33 @@ renderDeliveries();
 BACKUP
 ========================================= */
 
-async function createBackup(){
+$("backupNowBtn").onclick=async function(){
 
-await loadDeliveries();
+try{
 
-return {
-
-backup_version:"3.0",
+const backup={
 
 app_name:"DELIVERY TO HOME",
 
-backup_date:new Date().toISOString(),
-
-user_id:currentUser.id,
-
-email:currentUser.email,
+backup_date:
+new Date().toISOString(),
 
 firm_id:currentFirmId,
 
-firm_name:$("firmNameText").textContent,
+user_id:currentUser.id,
 
-deliveries:deliveries,
-
-saved_customers:getCustomers(),
-
-saved_delivery_boys:getBoys()
+deliveries:deliveries
 
 };
-
-}
-
-
-function downloadJSON(data,filename){
 
 const blob=
 new Blob(
 [
-JSON.stringify(data,null,2)
+JSON.stringify(
+backup,
+null,
+2
+)
 ],
 {
 type:"application/json"
@@ -2714,67 +2888,49 @@ const a=
 document.createElement("a");
 
 a.href=url;
-a.download=filename;
 
-document.body.appendChild(a);
+a.download=
+"delivery-backup-"+
+Date.now()+
+".json";
+
 a.click();
-a.remove();
 
 URL.revokeObjectURL(url);
 
-}
-
-
-$("backupNowBtn").onclick=async()=>{
-
-$("backupNowBtn").disabled=true;
-
-try{
-
-const backup=await createBackup();
-
-downloadJSON(
-backup,
-"delivery-backup-"+Date.now()+".json"
-);
-
-message(
+showMessage(
 "backupMessage",
 "✅ Backup download हो गया.",
 "success"
 );
 
-}catch(e){
+}
+catch(error){
 
-message("backupMessage",e.message);
-
-}finally{
-
-$("backupNowBtn").disabled=false;
+showMessage(
+"backupMessage",
+error.message
+);
 
 }
 
 };
 
 
-$("downloadBackupBtn").onclick=
-$("backupNowBtn").onclick;
-
-
 /* =========================================
 RESTORE
 ========================================= */
 
-$("restoreBackupBtn").onclick=async()=>{
+$("restoreBackupBtn").onclick=async function(){
 
 const file=
 $("restoreFile").files[0];
 
 if(!file){
 
-message(
+showMessage(
 "backupMessage",
-"पहले backup JSON file चुनें."
+"पहले JSON backup file चुनें."
 );
 
 return;
@@ -2786,16 +2942,16 @@ if(!confirm(
 ))
 return;
 
-$("restoreBackupBtn").disabled=true;
-
 try{
 
-const text=await file.text();
+const text=
+await file.text();
 
-const backup=JSON.parse(text);
+const backup=
+JSON.parse(text);
 
 if(
-!backup||
+!backup.deliveries||
 !Array.isArray(backup.deliveries)
 ){
 
@@ -2818,7 +2974,7 @@ delivery_boy_name:
 d.delivery_boy_name||null,
 
 customer_name:
-d.customer_name,
+d.customer_name||null,
 
 customer_mobile:
 d.customer_mobile||null,
@@ -2860,8 +3016,8 @@ d.order_image||null,
 
 total_amount:
 Number(
-d.total_amount ??
-d.order_amount ??
+d.total_amount||
+d.order_amount||
 0
 ),
 
@@ -2876,72 +3032,36 @@ d.payment_received_at||null
 
 }));
 
-const result=
+const {error}=
 await supabaseClient
 .from("deliveries")
 .upsert(
 rows,
-{onConflict:"id"}
-);
-
-if(result.error)
-throw result.error;
-
-
-/* RESTORE SAVED CONTACTS */
-
-if(
-Array.isArray(
-backup.saved_customers
-)
-){
-
-localStorage.setItem(
-customerKey(),
-JSON.stringify(
-backup.saved_customers
-)
-);
-
+{
+onConflict:"id"
 }
-
-if(
-Array.isArray(
-backup.saved_delivery_boys
-)
-){
-
-localStorage.setItem(
-boyKey(),
-JSON.stringify(
-backup.saved_delivery_boys
-)
 );
 
-}
+if(error) throw error;
 
-message(
+showMessage(
 "backupMessage",
-"✅ Restore complete! "+
+"✅ Restore complete: "+
 rows.length+
-" deliveries restore हो गईं.",
+" deliveries.",
 "success"
 );
 
-$("restoreFile").value="";
-
 await loadDeliveries();
 
-}catch(e){
+}
+catch(error){
 
-message(
+showMessage(
 "backupMessage",
-"Restore Error: "+e.message
+"Restore Error: "+
+error.message
 );
-
-}finally{
-
-$("restoreBackupBtn").disabled=false;
 
 }
 
@@ -2954,26 +3074,40 @@ START
 
 async function start(){
 
-const result=
+try{
+
+const {data,error}=
 await supabaseClient.auth.getSession();
 
-if(
-result.data &&
-result.data.session
-){
+if(error){
 
-currentUser=
-result.data.session.user;
+console.error(error);
+
+return;
+
+}
+
+if(data.session){
+
+currentUser=data.session.user;
 
 await showApp();
 
 }else{
 
-$("loginPage")
-.classList.remove("hidden");
+$("loginPage").classList.remove("hidden");
 
-$("appPage")
-.classList.add("hidden");
+$("appPage").classList.add("hidden");
+
+}
+
+}
+catch(error){
+
+console.error(
+"START ERROR:",
+error
+);
 
 }
 
