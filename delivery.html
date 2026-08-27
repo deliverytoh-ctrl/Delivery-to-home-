@@ -1,1286 +1,1105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PLUS MEDICO - Delivery</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PLUS MEDICO Delivery</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f7f9;
-      color: #17202a;
-    }
-
-    header {
-      background: #00897b;
-      color: white;
-      padding: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    header h2 {
-      margin: 0;
-      font-size: 20px;
-    }
-
-    button {
-      border: 0;
-      border-radius: 8px;
-      padding: 10px 14px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    .logout {
-      background: white;
-      color: #00897b;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 15px;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-
-    .stat {
-      background: white;
-      border-radius: 12px;
-      padding: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.07);
-    }
-
-    .stat small {
-      color: #666;
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 24px;
-      margin-top: 5px;
-      color: #00897b;
-    }
-
-    .card {
-      background: white;
-      padding: 18px;
-      border-radius: 12px;
-      margin-bottom: 18px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.07);
-    }
-
-    h3 {
-      margin-top: 0;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    label {
-      display: block;
-      font-size: 13px;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    input,
-    textarea,
-    select {
-      width: 100%;
-      padding: 11px;
-      border: 1px solid #ccd4d8;
-      border-radius: 8px;
-      font-size: 15px;
-      background: white;
-    }
-
-    textarea {
-      min-height: 75px;
-      resize: vertical;
-    }
-
-    .full {
-      grid-column: 1 / -1;
-    }
-
-    .primary {
-      background: #00897b;
-      color: white;
-      width: 100%;
-      font-size: 16px;
-      padding: 13px;
-    }
-
-    .secondary {
-      background: #e8f5f3;
-      color: #00796b;
-    }
-
-    .danger {
-      background: #ffebee;
-      color: #c62828;
-    }
-
-    .whatsapp {
-      background: #25D366;
-      color: white;
-    }
-
-    .search {
-      margin-bottom: 12px;
-    }
-
-    .suggestions {
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      overflow: hidden;
-      display: none;
-      background: white;
-      position: relative;
-      z-index: 5;
-    }
-
-    .suggestion {
-      padding: 11px;
-      border-bottom: 1px solid #eee;
-      cursor: pointer;
-    }
-
-    .suggestion:hover {
-      background: #f2f2f2;
-    }
-
-    .delivery {
-      border: 1px solid #e1e5e8;
-      border-radius: 10px;
-      padding: 14px;
-      margin-bottom: 12px;
-    }
-
-    .delivery-title {
-      font-weight: bold;
-      color: #00897b;
-      margin-bottom: 8px;
-    }
-
-    .delivery-row {
-      margin: 5px 0;
-      font-size: 14px;
-    }
-
-    .actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-
-    .actions button {
-      flex: 1;
-      min-width: 120px;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    .login {
-      max-width: 400px;
-      margin: 80px auto;
-      padding: 20px;
-    }
-
-    .login h1 {
-      text-align: center;
-      color: #00897b;
-    }
-
-    .message {
-      padding: 10px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      display: none;
-    }
-
-    .success {
-      background: #e8f5e9;
-      color: #2e7d32;
-    }
-
-    .error {
-      background: #ffebee;
-      color: #c62828;
-    }
-
-    @media(max-width:700px) {
-      .stats {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .full {
-        grid-column: auto;
-      }
-    }
-  </style>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#f4f7f8;
+ color:#222
+}
+header{
+ background:#00897b;
+ color:#fff;
+ padding:14px 16px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center
+}
+header h2{margin:0;font-size:19px}
+.container{max-width:1100px;margin:auto;padding:15px}
+.card{
+ background:#fff;
+ padding:18px;
+ border-radius:12px;
+ margin-bottom:15px;
+ box-shadow:0 2px 8px rgba(0,0,0,.08)
+}
+.login{
+ max-width:400px;
+ margin:80px auto
+}
+h3{color:#00897b;margin-top:0}
+label{
+ display:block;
+ font-size:13px;
+ font-weight:bold;
+ margin:8px 0 5px
+}
+input,textarea,select{
+ width:100%;
+ padding:11px;
+ border:1px solid #ccd4d8;
+ border-radius:8px;
+ font-size:15px
+}
+textarea{min-height:75px}
+.grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px
+}
+.full{grid-column:1/-1}
+button{
+ border:0;
+ border-radius:8px;
+ padding:11px 14px;
+ font-weight:bold;
+ cursor:pointer
+}
+.primary{
+ background:#00897b;
+ color:#fff;
+ width:100%;
+ padding:13px
+}
+.logout{
+ background:#fff;
+ color:#00897b
+}
+.whatsapp{background:#25D366;color:#fff}
+.edit{background:#e3f2fd;color:#1565c0}
+.delete{background:#ffebee;color:#c62828}
+.stats{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:12px;
+ margin-bottom:15px
+}
+.stat{
+ background:#fff;
+ padding:15px;
+ border-radius:12px;
+ box-shadow:0 2px 8px rgba(0,0,0,.07)
+}
+.stat small{color:#666}
+.stat strong{
+ display:block;
+ font-size:22px;
+ color:#00897b;
+ margin-top:5px
+}
+.hidden{display:none!important}
+.message{
+ display:none;
+ padding:10px;
+ border-radius:8px;
+ margin-bottom:12px
+}
+.success{background:#e8f5e9;color:#2e7d32}
+.error{background:#ffebee;color:#c62828}
+.input-wrap{position:relative}
+.suggestions{
+ display:none;
+ position:absolute;
+ left:0;
+ right:0;
+ top:100%;
+ background:#fff;
+ border:1px solid #ddd;
+ border-radius:8px;
+ z-index:100;
+ max-height:220px;
+ overflow:auto
+}
+.suggestion{
+ padding:11px;
+ border-bottom:1px solid #eee;
+ cursor:pointer
+}
+.suggestion:hover{background:#f2f2f2}
+.delivery{
+ border:1px solid #ddd;
+ border-radius:10px;
+ padding:14px;
+ margin-bottom:12px
+}
+.delivery-title{
+ font-size:17px;
+ font-weight:bold;
+ color:#00897b
+}
+.row{font-size:14px;margin:5px 0}
+.actions{
+ display:flex;
+ gap:8px;
+ flex-wrap:wrap;
+ margin-top:10px
+}
+@media(max-width:700px){
+ .grid{grid-template-columns:1fr}
+ .full{grid-column:auto}
+ .stats{grid-template-columns:1fr 1fr}
+}
+</style>
 </head>
 
 <body>
 
 <!-- LOGIN -->
 <div id="loginPage" class="login card">
-  <h1>PLUS MEDICO</h1>
-  <h3>Delivery Login</h3>
 
-  <div id="loginMessage" class="message"></div>
+<h2 style="text-align:center;color:#00897b">
+PLUS MEDICO
+</h2>
 
-  <label>Email</label>
-  <input id="loginEmail" type="email" placeholder="Email">
+<h3>Delivery Login</h3>
 
-  <br><br>
+<div id="loginMessage" class="message"></div>
 
-  <label>Password</label>
-  <input id="loginPassword" type="password" placeholder="Password">
+<label>Email</label>
+<input id="email" type="email" placeholder="Enter email">
 
-  <br><br>
+<label>Password</label>
+<input id="password" type="password" placeholder="Enter password">
 
-  <button class="primary" onclick="login()">Login</button>
+<br>
+
+<button class="primary" onclick="login()">
+Login
+</button>
+
 </div>
 
 
 <!-- APP -->
 <div id="app" class="hidden">
 
-  <header>
-    <h2>PLUS MEDICO Delivery</h2>
-    <button class="logout" onclick="logout()">Logout</button>
-  </header>
+<header>
+<h2>PLUS MEDICO Delivery</h2>
+<button class="logout" onclick="logout()">Logout</button>
+</header>
 
-  <div class="container">
+<div class="container">
 
-    <!-- STATS -->
-    <div class="stats">
+<!-- STATS -->
+<div class="stats">
 
-      <div class="stat">
-        <small>Today's Deliveries</small>
-        <strong id="todayCount">0</strong>
-      </div>
+<div class="stat">
+<small>Today's Delivery</small>
+<strong id="todayCount">0</strong>
+</div>
 
-      <div class="stat">
-        <small>Total Deliveries</small>
-        <strong id="totalCount">0</strong>
-      </div>
+<div class="stat">
+<small>Total Delivery</small>
+<strong id="totalCount">0</strong>
+</div>
 
-      <div class="stat">
-        <small>Paid Amount</small>
-        <strong id="paidAmount">₹0</strong>
-      </div>
+<div class="stat">
+<small>Paid</small>
+<strong id="paidAmount">₹0</strong>
+</div>
 
-      <div class="stat">
-        <small>Pending Amount</small>
-        <strong id="pendingAmount">₹0</strong>
-      </div>
+<div class="stat">
+<small>Pending</small>
+<strong id="pendingAmount">₹0</strong>
+</div>
 
-    </div>
-
-
-    <!-- NEW DELIVERY -->
-    <div class="card">
-
-      <h3>➕ Add Delivery</h3>
-
-      <div id="formMessage" class="message"></div>
-
-      <div class="grid">
-
-        <!-- DELIVERY BOY -->
-        <div>
-          <label>Delivery Boy Name</label>
-
-          <input
-            id="deliveryBoy"
-            type="text"
-            placeholder="Search / enter delivery boy"
-            autocomplete="off"
-            oninput="searchDeliveryBoys()"
-          >
-
-          <div id="boySuggestions" class="suggestions"></div>
-        </div>
+</div>
 
 
-        <!-- CUSTOMER -->
-        <div>
-          <label>Customer Name</label>
+<!-- DELIVERY FORM -->
+<div class="card">
 
-          <input
-            id="customerName"
-            type="text"
-            placeholder="Search / enter customer"
-            autocomplete="off"
-            oninput="searchCustomers()"
-          >
+<h3>➕ Add Delivery</h3>
 
-          <div id="customerSuggestions" class="suggestions"></div>
-        </div>
+<div id="formMessage" class="message"></div>
 
+<div class="grid">
 
-        <div>
-          <label>Mobile Number</label>
-          <input id="customerMobile" type="tel" placeholder="Customer mobile">
-        </div>
+<!-- DELIVERY BOY -->
+<div>
+<label>Delivery Boy Name</label>
 
+<div class="input-wrap">
 
-        <div>
-          <label>Order Amount</label>
-          <input id="orderAmount" type="number" step="0.01" value="0"
-                 oninput="calculatePayment()">
-        </div>
+<input
+id="deliveryBoy"
+placeholder="Search / enter delivery boy"
+autocomplete="off"
+oninput="searchBoys()">
+
+<div id="boySuggestions" class="suggestions"></div>
+
+</div>
+</div>
 
 
-        <div class="full">
-          <label>Customer Address</label>
-          <textarea id="customerAddress"
-                    placeholder="Customer address"></textarea>
-        </div>
+<!-- CUSTOMER -->
+<div>
+<label>Customer Name</label>
+
+<div class="input-wrap">
+
+<input
+id="customerName"
+placeholder="Search / enter customer"
+autocomplete="off"
+oninput="searchCustomers()">
+
+<div id="customerSuggestions" class="suggestions"></div>
+
+</div>
+</div>
 
 
-        <div>
-          <label>Received Amount</label>
-          <input id="receivedAmount" type="number" step="0.01" value="0"
-                 oninput="calculatePayment()">
-        </div>
+<div>
+<label>Customer Mobile</label>
+
+<input
+id="customerMobile"
+type="tel"
+placeholder="10 digit mobile">
+</div>
 
 
-        <div>
-          <label>Balance / Pending</label>
-          <input id="balanceAmount" type="number" value="0" readonly>
-        </div>
+<div>
+<label>Order Amount</label>
+
+<input
+id="orderAmount"
+type="number"
+step="0.01"
+value="0"
+oninput="calculate()">
+</div>
 
 
-        <div>
-          <label>Payment Type</label>
+<div class="full">
+<label>Customer Address</label>
 
-          <select id="paymentType">
-            <option value="Cash">Cash</option>
-            <option value="UPI">UPI</option>
-            <option value="Card">Card</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
+<textarea
+id="customerAddress"
+placeholder="Customer address"></textarea>
+</div>
 
 
-        <div>
-          <label>Delivery Status</label>
+<div>
+<label>Received Amount</label>
 
-          <select id="deliveryStatus">
-            <option value="Pending">Pending</option>
-            <option value="Out for Delivery">Out for Delivery</option>
-            <option value="Delivered">Delivered</option>
-            <option value="Cancelled">Cancelled</option>
-          </select>
-        </div>
-
-
-        <div class="full">
-          <button class="primary" onclick="saveDelivery()">
-            💾 Save Delivery
-          </button>
-        </div>
-
-      </div>
-
-    </div>
+<input
+id="receivedAmount"
+type="number"
+step="0.01"
+value="0"
+oninput="calculate()">
+</div>
 
 
-    <!-- SEARCH -->
-    <div class="card">
+<div>
+<label>Pending Amount</label>
 
-      <h3>🔎 Search Deliveries</h3>
-
-      <input
-        id="deliverySearch"
-        class="search"
-        placeholder="Search customer, mobile, address or delivery boy..."
-        oninput="renderDeliveries()"
-      >
-
-      <select id="statusFilter" onchange="renderDeliveries()">
-        <option value="">All Status</option>
-        <option value="Pending">Pending</option>
-        <option value="Out for Delivery">Out for Delivery</option>
-        <option value="Delivered">Delivered</option>
-        <option value="Cancelled">Cancelled</option>
-      </select>
-
-    </div>
+<input
+id="pendingInput"
+type="number"
+readonly
+value="0">
+</div>
 
 
-    <!-- DELIVERY LIST -->
-    <div class="card">
+<div>
+<label>Payment Type</label>
 
-      <h3>📦 Delivery List</h3>
+<select id="paymentType">
+<option>Cash</option>
+<option>UPI</option>
+<option>Card</option>
+<option>Other</option>
+</select>
+</div>
 
-      <div id="deliveryList">
-        Loading...
-      </div>
 
-    </div>
+<div>
+<label>Delivery Status</label>
 
-  </div>
+<select id="deliveryStatus">
+<option>Pending</option>
+<option>Out for Delivery</option>
+<option>Delivered</option>
+<option>Cancelled</option>
+</select>
+</div>
+
+
+<div class="full">
+
+<button
+id="saveBtn"
+class="primary"
+onclick="saveDelivery()">
+
+💾 Save Delivery
+
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- SEARCH -->
+<div class="card">
+
+<h3>🔎 Search Delivery</h3>
+
+<input
+id="searchBox"
+placeholder="Search customer / mobile / address / delivery boy"
+oninput="renderDeliveries()">
+
+<br><br>
+
+<select
+id="statusFilter"
+onchange="renderDeliveries()">
+
+<option value="">All Status</option>
+<option>Pending</option>
+<option>Out for Delivery</option>
+<option>Delivered</option>
+<option>Cancelled</option>
+
+</select>
+
+</div>
+
+
+<!-- LIST -->
+<div class="card">
+
+<h3>📦 Delivery List</h3>
+
+<div id="deliveryList">
+Loading...
+</div>
+
+</div>
+
+</div>
 </div>
 
 
 <script>
 
 /* =====================================================
-   SUPABASE CONFIG
-   ===================================================== */
+ SUPABASE
+===================================================== */
 
-const SUPABASE_URL = "YOUR_SUPABASE_URL";
-const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+const SUPABASE_URL =
+"https://mrozcbaendyheujcmfpi.supabase.co";
+
+/*
+ IMPORTANT:
+ Apna Supabase Publishable/Anon key yaha paste karo.
+ Secret / Service Role key mat lagana.
+*/
+
+const SUPABASE_KEY =
+"PASTE_YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY_HERE";
+
 
 const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
-  );
-
-
-/* =====================================================
-   GLOBAL VARIABLES
-   ===================================================== */
-
-let currentUser = null;
-let deliveries = [];
-
-let customers = [];
-let deliveryBoys = [];
-
-
-/* =====================================================
-   START
-   ===================================================== */
-
-document.addEventListener("DOMContentLoaded", async () => {
-
-  const {
-    data: { session }
-  } = await supabaseClient.auth.getSession();
-
-  if (session) {
-    currentUser = session.user;
-    showApp();
-  } else {
-    showLogin();
-  }
-
-});
-
-
-supabaseClient.auth.onAuthStateChange(
-  async (event, session) => {
-
-    if (session) {
-      currentUser = session.user;
-      showApp();
-    } else {
-      showLogin();
-    }
-
-  }
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
 );
 
 
 /* =====================================================
-   LOGIN
-   ===================================================== */
+ VARIABLES
+===================================================== */
 
-async function login() {
-
-  const email =
-    document.getElementById("loginEmail").value.trim();
-
-  const password =
-    document.getElementById("loginPassword").value;
-
-  if (!email || !password) {
-    showMessage(
-      "loginMessage",
-      "Email और password डालें।",
-      "error"
-    );
-    return;
-  }
-
-  const { data, error } =
-    await supabaseClient.auth.signInWithPassword({
-      email,
-      password
-    });
-
-  if (error) {
-
-    showMessage(
-      "loginMessage",
-      error.message,
-      "error"
-    );
-
-    return;
-  }
-
-  currentUser = data.user;
-
-  showApp();
-}
+let currentUser=null;
+let deliveries=[];
+let customers=[];
+let boys=[];
+let editingId=null;
 
 
 /* =====================================================
-   LOGOUT
-   ===================================================== */
+ START
+===================================================== */
 
-async function logout() {
+window.addEventListener("load",async()=>{
 
-  await supabaseClient.auth.signOut();
+const {data,error} =
+await supabaseClient.auth.getSession();
 
-  showLogin();
+if(error){
+ console.error(error);
+ showLogin();
+ return;
 }
+
+if(data.session){
+
+currentUser=data.session.user;
+showApp();
+
+}else{
+
+showLogin();
+
+}
+
+});
 
 
 /* =====================================================
-   SHOW LOGIN
-   ===================================================== */
+ LOGIN
+===================================================== */
 
-function showLogin() {
+async function login(){
 
-  document
-    .getElementById("loginPage")
-    .classList.remove("hidden");
+const email=
+document.getElementById("email").value.trim();
 
-  document
-    .getElementById("app")
-    .classList.add("hidden");
-}
+const password=
+document.getElementById("password").value;
 
 
-/* =====================================================
-   SHOW APP
-   ===================================================== */
+if(!email || !password){
 
-async function showApp() {
+showMessage(
+"loginMessage",
+"Email aur password enter karein.",
+"error"
+);
 
-  document
-    .getElementById("loginPage")
-    .classList.add("hidden");
-
-  document
-    .getElementById("app")
-    .classList.remove("hidden");
-
-  await loadDeliveries();
+return;
 
 }
 
 
-/* =====================================================
-   LOAD DELIVERIES
-   ===================================================== */
+const {data,error} =
+await supabaseClient.auth.signInWithPassword({
+email:email,
+password:password
+});
 
-async function loadDeliveries() {
 
-  const {
-    data,
-    error
-  } = await supabaseClient
-    .from("deliveries")
-    .select("*")
-    .order("created_at", {
-      ascending: false
-    });
+if(error){
 
-  if (error) {
+showMessage(
+"loginMessage",
+"Login failed: "+error.message,
+"error"
+);
 
-    console.error(error);
+console.error(error);
 
-    showMessage(
-      "formMessage",
-      "Deliveries load नहीं हो पाईं: " + error.message,
-      "error"
-    );
+return;
 
-    return;
-  }
-
-  deliveries = data || [];
-
-  buildSavedLists();
-
-  updateStats();
-
-  renderDeliveries();
 }
 
+currentUser=data.user;
 
-/* =====================================================
-   BUILD CUSTOMER + DELIVERY BOY LIST
-   ===================================================== */
-
-function buildSavedLists() {
-
-  const customerMap = new Map();
-  const boyMap = new Map();
-
-  deliveries.forEach(row => {
-
-    if (row.customer_name) {
-
-      const key =
-        row.customer_mobile ||
-        row.customer_name.toLowerCase();
-
-      customerMap.set(key, {
-        name: row.customer_name,
-        mobile: row.customer_mobile || "",
-        address: row.customer_address || ""
-      });
-
-    }
-
-
-    if (row.delivery_boy_name) {
-
-      const key =
-        row.delivery_boy_name.toLowerCase();
-
-      boyMap.set(key, {
-        name: row.delivery_boy_name
-      });
-
-    }
-
-  });
-
-  customers =
-    Array.from(customerMap.values());
-
-  deliveryBoys =
-    Array.from(boyMap.values());
+showApp();
 
 }
 
 
 /* =====================================================
-   CUSTOMER SEARCH
-   ===================================================== */
+ LOGOUT
+===================================================== */
 
-function searchCustomers() {
+async function logout(){
 
-  const value =
-    document.getElementById("customerName")
-      .value
-      .toLowerCase()
-      .trim();
+await supabaseClient.auth.signOut();
 
-  const box =
-    document.getElementById("customerSuggestions");
+currentUser=null;
 
-  if (!value) {
-
-    box.style.display = "none";
-    return;
-
-  }
-
-  const results =
-    customers.filter(c =>
-      c.name.toLowerCase().includes(value) ||
-      c.mobile.includes(value)
-    ).slice(0, 10);
-
-  if (!results.length) {
-
-    box.style.display = "none";
-    return;
-
-  }
-
-  box.innerHTML = results.map(c => `
-    <div class="suggestion"
-         onclick='selectCustomer(${JSON.stringify(c)})'>
-      <strong>${escapeHTML(c.name)}</strong><br>
-      <small>${escapeHTML(c.mobile)}</small>
-    </div>
-  `).join("");
-
-  box.style.display = "block";
-}
-
-
-/* =====================================================
-   SELECT CUSTOMER
-   ===================================================== */
-
-function selectCustomer(customer) {
-
-  document.getElementById("customerName").value =
-    customer.name;
-
-  document.getElementById("customerMobile").value =
-    customer.mobile;
-
-  document.getElementById("customerAddress").value =
-    customer.address;
-
-  document
-    .getElementById("customerSuggestions")
-    .style.display = "none";
-}
-
-
-/* =====================================================
-   DELIVERY BOY SEARCH
-   ===================================================== */
-
-function searchDeliveryBoys() {
-
-  const value =
-    document.getElementById("deliveryBoy")
-      .value
-      .toLowerCase()
-      .trim();
-
-  const box =
-    document.getElementById("boySuggestions");
-
-  if (!value) {
-
-    box.style.display = "none";
-    return;
-
-  }
-
-  const results =
-    deliveryBoys
-      .filter(b =>
-        b.name.toLowerCase().includes(value)
-      )
-      .slice(0, 10);
-
-  if (!results.length) {
-
-    box.style.display = "none";
-    return;
-
-  }
-
-  box.innerHTML = results.map(b => `
-    <div class="suggestion"
-         onclick="selectDeliveryBoy('${escapeAttribute(b.name)}')">
-      ${escapeHTML(b.name)}
-    </div>
-  `).join("");
-
-  box.style.display = "block";
-}
-
-
-/* =====================================================
-   SELECT DELIVERY BOY
-   ===================================================== */
-
-function selectDeliveryBoy(name) {
-
-  document.getElementById("deliveryBoy").value =
-    name;
-
-  document
-    .getElementById("boySuggestions")
-    .style.display = "none";
-}
-
-
-/* =====================================================
-   PAYMENT CALCULATION
-   ===================================================== */
-
-function calculatePayment() {
-
-  const order =
-    parseFloat(
-      document.getElementById("orderAmount").value
-    ) || 0;
-
-  const received =
-    parseFloat(
-      document.getElementById("receivedAmount").value
-    ) || 0;
-
-  const balance =
-    Math.max(order - received, 0);
-
-  document.getElementById("balanceAmount").value =
-    balance.toFixed(2);
+showLogin();
 
 }
 
 
 /* =====================================================
-   SAVE DELIVERY
-   ===================================================== */
+ SHOW LOGIN
+===================================================== */
 
-async function saveDelivery() {
+function showLogin(){
 
-  if (!currentUser) {
+document
+.getElementById("loginPage")
+.classList.remove("hidden");
 
-    showMessage(
-      "formMessage",
-      "पहले login करें।",
-      "error"
-    );
-
-    return;
-  }
-
-
-  const deliveryBoy =
-    document.getElementById("deliveryBoy")
-      .value.trim();
-
-  const customerName =
-    document.getElementById("customerName")
-      .value.trim();
-
-  const customerMobile =
-    document.getElementById("customerMobile")
-      .value.trim();
-
-  const customerAddress =
-    document.getElementById("customerAddress")
-      .value.trim();
-
-  const orderAmount =
-    parseFloat(
-      document.getElementById("orderAmount").value
-    ) || 0;
-
-  const receivedAmount =
-    parseFloat(
-      document.getElementById("receivedAmount").value
-    ) || 0;
-
-  const paymentType =
-    document.getElementById("paymentType").value;
-
-  const deliveryStatus =
-    document.getElementById("deliveryStatus").value;
-
-
-  if (!deliveryBoy) {
-
-    showMessage(
-      "formMessage",
-      "Delivery boy name डालें।",
-      "error"
-    );
-
-    return;
-  }
-
-
-  if (!customerName) {
-
-    showMessage(
-      "formMessage",
-      "Customer name डालें।",
-      "error"
-    );
-
-    return;
-  }
-
-
-  if (!customerMobile) {
-
-    showMessage(
-      "formMessage",
-      "Customer mobile number डालें।",
-      "error"
-    );
-
-    return;
-  }
-
-
-  const balance =
-    Math.max(orderAmount - receivedAmount, 0);
-
-  let paymentStatus =
-    balance > 0 ? "Unpaid" : "Paid";
-
-
-  const row = {
-
-    user_id: currentUser.id,
-
-    delivery_boy_name: deliveryBoy,
-
-    customer_name: customerName,
-
-    customer_mobile: customerMobile,
-
-    customer_address: customerAddress,
-
-    order_amount: orderAmount,
-
-    received_amount: receivedAmount,
-
-    change_amount:
-      Math.max(receivedAmount - orderAmount, 0),
-
-    payment_type: paymentType,
-
-    payment_status: paymentStatus,
-
-    delivery_status: deliveryStatus,
-
-    delivery_date: new Date().toISOString(),
-
-    total_amount: orderAmount,
-
-    last_payment_amount:
-      receivedAmount,
-
-    last_payment_type:
-      paymentType,
-
-    payment_received_at:
-      receivedAmount > 0
-        ? new Date().toISOString()
-        : null
-
-  };
-
-
-  const {
-    data,
-    error
-  } = await supabaseClient
-    .from("deliveries")
-    .insert(row)
-    .select()
-    .single();
-
-
-  if (error) {
-
-    console.error(error);
-
-    showMessage(
-      "formMessage",
-      "Save नहीं हुआ: " + error.message,
-      "error"
-    );
-
-    return;
-  }
-
-
-  showMessage(
-    "formMessage",
-    "✅ Delivery successfully save हो गई।",
-    "success"
-  );
-
-
-  /* WhatsApp */
-
-  if (customerMobile) {
-
-    const message =
-      createDeliveryMessage({
-        customerName,
-        orderAmount,
-        receivedAmount,
-        balance,
-        deliveryStatus
-      });
-
-    const openWhatsApp =
-      confirm(
-        "Delivery save हो गई।\n\nक्या customer को WhatsApp message भेजना है?"
-      );
-
-    if (openWhatsApp) {
-
-      openWhatsAppMessage(
-        customerMobile,
-        message
-      );
-
-    }
-
-  }
-
-
-  clearForm();
-
-  await loadDeliveries();
+document
+.getElementById("app")
+.classList.add("hidden");
 
 }
 
 
 /* =====================================================
-   WHATSAPP MESSAGE
-   ===================================================== */
+ SHOW APP
+===================================================== */
 
-function createDeliveryMessage(data) {
+async function showApp(){
 
-  let message =
-`Namaste ${data.customerName} ji,
+document
+.getElementById("loginPage")
+.classList.add("hidden");
 
-PLUS MEDICO se aapki delivery aa rahi hai.
+document
+.getElementById("app")
+.classList.remove("hidden");
 
-Order Amount: ₹${data.orderAmount.toFixed(2)}
-Already Paid: ₹${data.receivedAmount.toFixed(2)}
-Pending Amount: ₹${data.balance.toFixed(2)}
+await loadDeliveries();
 
-Delivery Status: ${data.deliveryStatus}
+}
 
-Kripya delivery ke samay pending amount ready rakhein.
+
+/* =====================================================
+ LOAD DELIVERIES
+===================================================== */
+
+async function loadDeliveries(){
+
+const {data,error} =
+await supabaseClient
+.from("deliveries")
+.select("*")
+.order("created_at",{ascending:false});
+
+
+if(error){
+
+console.error(error);
+
+showMessage(
+"formMessage",
+"Delivery load error: "+error.message,
+"error"
+);
+
+return;
+
+}
+
+deliveries=data || [];
+
+buildLists();
+updateStats();
+renderDeliveries();
+
+}
+
+
+/* =====================================================
+ BUILD SAVED CUSTOMER / BOY LIST
+===================================================== */
+
+function buildLists(){
+
+const customerMap=new Map();
+const boyMap=new Map();
+
+
+deliveries.forEach(row=>{
+
+if(row.customer_name){
+
+const key=
+row.customer_mobile ||
+row.customer_name.toLowerCase();
+
+customerMap.set(key,{
+name:row.customer_name,
+mobile:row.customer_mobile || "",
+address:row.customer_address || ""
+});
+
+}
+
+
+if(row.delivery_boy_name){
+
+boyMap.set(
+row.delivery_boy_name.toLowerCase(),
+row.delivery_boy_name
+);
+
+}
+
+});
+
+
+customers=
+Array.from(customerMap.values());
+
+boys=
+Array.from(boyMap.values());
+
+}
+
+
+/* =====================================================
+ CUSTOMER SEARCH
+===================================================== */
+
+function searchCustomers(){
+
+const value=
+document.getElementById("customerName")
+.value
+.toLowerCase()
+.trim();
+
+const box=
+document.getElementById("customerSuggestions");
+
+
+if(!value){
+
+box.style.display="none";
+return;
+
+}
+
+
+const result=
+customers.filter(c=>
+c.name.toLowerCase().includes(value) ||
+c.mobile.includes(value)
+).slice(0,10);
+
+
+if(!result.length){
+
+box.style.display="none";
+return;
+
+}
+
+
+box.innerHTML=
+result.map(c=>`
+
+<div
+class="suggestion"
+onclick='selectCustomer(${JSON.stringify(c)})'>
+
+<strong>${esc(c.name)}</strong>
+<br>
+<small>${esc(c.mobile)}</small>
+
+</div>
+
+`).join("");
+
+
+box.style.display="block";
+
+}
+
+
+/* =====================================================
+ SELECT CUSTOMER
+===================================================== */
+
+function selectCustomer(c){
+
+document.getElementById("customerName").value=
+c.name;
+
+document.getElementById("customerMobile").value=
+c.mobile;
+
+document.getElementById("customerAddress").value=
+c.address;
+
+document.getElementById("customerSuggestions")
+.style.display="none";
+
+}
+
+
+/* =====================================================
+ BOY SEARCH
+===================================================== */
+
+function searchBoys(){
+
+const value=
+document.getElementById("deliveryBoy")
+.value
+.toLowerCase()
+.trim();
+
+const box=
+document.getElementById("boySuggestions");
+
+
+if(!value){
+
+box.style.display="none";
+return;
+
+}
+
+
+const result=
+boys.filter(name=>
+name.toLowerCase().includes(value)
+).slice(0,10);
+
+
+if(!result.length){
+
+box.style.display="none";
+return;
+
+}
+
+
+box.innerHTML=
+result.map(name=>`
+
+<div
+class="suggestion"
+onclick='selectBoy(${JSON.stringify(name)})'>
+
+${esc(name)}
+
+</div>
+
+`).join("");
+
+
+box.style.display="block";
+
+}
+
+
+/* =====================================================
+ SELECT BOY
+===================================================== */
+
+function selectBoy(name){
+
+document.getElementById("deliveryBoy").value=
+name;
+
+document.getElementById("boySuggestions")
+.style.display="none";
+
+}
+
+
+/* =====================================================
+ CALCULATE
+===================================================== */
+
+function calculate(){
+
+const order=
+Number(
+document.getElementById("orderAmount").value
+)||0;
+
+const received=
+Number(
+document.getElementById("receivedAmount").value
+)||0;
+
+const pending=
+Math.max(order-received,0);
+
+document.getElementById("pendingInput")
+.value=pending.toFixed(2);
+
+}
+
+
+/* =====================================================
+ SAVE / UPDATE
+===================================================== */
+
+async function saveDelivery(){
+
+if(!currentUser){
+
+alert("Please login first.");
+return;
+
+}
+
+
+const deliveryBoy=
+document.getElementById("deliveryBoy")
+.value.trim();
+
+const customerName=
+document.getElementById("customerName")
+.value.trim();
+
+const mobile=
+document.getElementById("customerMobile")
+.value.trim();
+
+const address=
+document.getElementById("customerAddress")
+.value.trim();
+
+const order=
+Number(
+document.getElementById("orderAmount").value
+)||0;
+
+const received=
+Number(
+document.getElementById("receivedAmount").value
+)||0;
+
+const paymentType=
+document.getElementById("paymentType").value;
+
+const deliveryStatus=
+document.getElementById("deliveryStatus").value;
+
+
+if(!deliveryBoy){
+alert("Delivery Boy Name required.");
+return;
+}
+
+if(!customerName){
+alert("Customer Name required.");
+return;
+}
+
+if(!mobile){
+alert("Customer Mobile required.");
+return;
+}
+
+
+const pending=
+Math.max(order-received,0);
+
+const now=
+new Date().toISOString();
+
+
+const record={
+
+user_id:currentUser.id,
+
+delivery_boy_name:deliveryBoy,
+
+customer_name:customerName,
+
+customer_mobile:mobile,
+
+customer_address:address,
+
+order_amount:order,
+
+received_amount:received,
+
+change_amount:
+Math.max(received-order,0),
+
+payment_type:paymentType,
+
+payment_status:
+pending>0 ? "Unpaid":"Paid",
+
+delivery_status:deliveryStatus,
+
+delivery_date:now,
+
+total_amount:order,
+
+last_payment_amount:received,
+
+last_payment_type:paymentType,
+
+payment_received_at:
+received>0 ? now : null
+
+};
+
+
+let result;
+
+
+if(editingId){
+
+result=
+await supabaseClient
+.from("deliveries")
+.update(record)
+.eq("id",editingId)
+.select()
+.single();
+
+}else{
+
+result=
+await supabaseClient
+.from("deliveries")
+.insert(record)
+.select()
+.single();
+
+}
+
+
+if(result.error){
+
+console.error(result.error);
+
+showMessage(
+"formMessage",
+"Save error: "+result.error.message,
+"error"
+);
+
+return;
+
+}
+
+
+showMessage(
+"formMessage",
+editingId
+?"✅ Delivery updated successfully."
+:"✅ Delivery added successfully.",
+"success"
+);
+
+
+/* WhatsApp option */
+
+if(mobile){
+
+const send=
+confirm(
+"Delivery save ho gayi.\nCustomer ko WhatsApp message bhejna hai?"
+);
+
+if(send){
+
+const message=
+deliveryMessage(
+customerName,
+order,
+received,
+pending,
+deliveryStatus
+);
+
+openWhatsApp(mobile,message);
+
+}
+
+}
+
+
+clearForm();
+
+await loadDeliveries();
+
+}
+
+
+/* =====================================================
+ DELIVERY WHATSAPP MESSAGE
+===================================================== */
+
+function deliveryMessage(
+name,
+order,
+received,
+pending,
+status
+){
+
+return `Namaste ${name} ji,
+
+PLUS MEDICO se aapki medicine delivery aa rahi hai.
+
+Order Amount: ₹${order.toFixed(2)}
+Paid Amount: ₹${received.toFixed(2)}
+Pending Amount: ₹${pending.toFixed(2)}
+
+Delivery Status: ${status}
+
+Kripya pending amount delivery ke samay ready rakhein.
 
 Thank you
 PLUS MEDICO`;
 
-  return message;
 }
 
 
 /* =====================================================
-   OPEN WHATSAPP
-   ===================================================== */
+ WHATSAPP
+===================================================== */
 
-function openWhatsAppMessage(
-  mobile,
-  message
-) {
+function openWhatsApp(mobile,message){
 
-  let number =
-    mobile.replace(/\D/g, "");
+let number=
+String(mobile)
+.replace(/\D/g,"");
 
-  /*
-    India number ke liye 91 add
-  */
 
-  if (number.length === 10) {
-    number = "91" + number;
-  }
-
-  const url =
-    "https://wa.me/" +
-    number +
-    "?text=" +
-    encodeURIComponent(message);
-
-  window.open(
-    url,
-    "_blank"
-  );
+if(number.length===10){
+number="91"+number;
 }
 
 
-/* =====================================================
-   DELIVERY LIST
-   ===================================================== */
-
-function renderDeliveries() {
-
-  const search =
-    document.getElementById("deliverySearch")
-      .value
-      .toLowerCase()
-      .trim();
-
-  const status =
-    document.getElementById("statusFilter")
-      .value;
-
-
-  let list =
-    deliveries.filter(row => {
-
-      const text = `
-        ${row.customer_name || ""}
-        ${row.customer_mobile || ""}
-        ${row.customer_address || ""}
-        ${row.delivery_boy_name || ""}
-      `.toLowerCase();
-
-      const searchMatch =
-        !search ||
-        text.includes(search);
-
-      const statusMatch =
-        !status ||
-        row.delivery_status === status;
-
-      return searchMatch && statusMatch;
-
-    });
-
-
-  const box =
-    document.getElementById("deliveryList");
-
-
-  if (!list.length) {
-
-    box.innerHTML =
-      "<p>No deliveries found.</p>";
-
-    return;
-
-  }
-
-
-  box.innerHTML =
-    list.map(row => {
-
-      const order =
-        Number(row.order_amount || 0);
-
-      const received =
-        Number(row.received_amount || 0);
-
-      const pending =
-        Math.max(order - received, 0);
-
-
-      return `
-        <div class="delivery">
-
-          <div class="delivery-title">
-            ${escapeHTML(row.customer_name || "Customer")}
-          </div>
-
-          <div class="delivery-row">
-            👤 Delivery Boy:
-            <strong>
-              ${escapeHTML(row.delivery_boy_name || "-")}
-            </strong>
-          </div>
-
-          <div class="delivery-row">
-            📱 Mobile:
-            ${escapeHTML(row.customer_mobile || "-")}
-          </div>
-
-          <div class="delivery-row">
-            📍 Address:
-            ${escapeHTML(row.customer_address || "-")}
-          </div>
-
-          <div class="delivery-row">
-            💰 Order:
-            ₹${order.toFixed(2)}
-          </div>
-
-          <div class="delivery-row">
-            ✅ Received:
-            ₹${received.toFixed(2)}
-          </div>
-
-          <div class="delivery-row">
-            🔴 Pending:
-            <strong>₹${pending.toFixed(2)}</strong>
-          </div>
-
-          <div class="delivery-row">
-            📦 Status:
-            <strong>${escapeHTML(row.delivery_status || "-")}</strong>
-          </div>
-
-          <div class="actions">
-
-            ${
-              pending > 0
-              ? `
-                <button
-                  class="whatsapp"
-                  onclick='sendPendingWhatsApp(${JSON.stringify(row)})'>
-                  WhatsApp Pending
-                </button>
-              `
-              : ""
-            }
-
-            <button
-              class="secondary"
-              onclick='editDelivery(${JSON.stringify(row)})'>
-              Edit
-            </button>
-
-            <button
-              class="danger"
-              onclick="deleteDelivery('${row.id}')">
-              Delete
-            </button>
-
-          </div>
-
-        </div>
-      `;
-
-    }).join("");
+window.open(
+"https://wa.me/"+
+number+
+"?text="+
+encodeURIComponent(message),
+"_blank"
+);
 
 }
 
 
 /* =====================================================
-   PENDING WHATSAPP
-   ===================================================== */
+ PENDING WHATSAPP
+===================================================== */
 
-function sendPendingWhatsApp(row) {
+function pendingWhatsApp(row){
 
-  const order =
-    Number(row.order_amount || 0);
+const order=
+Number(row.order_amount||0);
 
-  const received =
-    Number(row.received_amount || 0);
+const received=
+Number(row.received_amount||0);
 
-  const pending =
-    Math.max(order - received, 0);
+const pending=
+Math.max(order-received,0);
 
 
-  const message =
-`Namaste ${row.customer_name || ""} ji,
+const message=
+`Namaste ${row.customer_name||""} ji,
 
-PLUS MEDICO delivery ke sambandh mein reminder:
+PLUS MEDICO payment reminder.
 
 Order Amount: ₹${order.toFixed(2)}
 Paid Amount: ₹${received.toFixed(2)}
@@ -1292,341 +1111,390 @@ Thank you
 PLUS MEDICO`;
 
 
-  openWhatsAppMessage(
-    row.customer_mobile,
-    message
-  );
-}
-
-
-/* =====================================================
-   EDIT DELIVERY
-   ===================================================== */
-
-function editDelivery(row) {
-
-  document.getElementById("deliveryBoy").value =
-    row.delivery_boy_name || "";
-
-  document.getElementById("customerName").value =
-    row.customer_name || "";
-
-  document.getElementById("customerMobile").value =
-    row.customer_mobile || "";
-
-  document.getElementById("customerAddress").value =
-    row.customer_address || "";
-
-  document.getElementById("orderAmount").value =
-    row.order_amount || 0;
-
-  document.getElementById("receivedAmount").value =
-    row.received_amount || 0;
-
-  document.getElementById("paymentType").value =
-    row.payment_type || "Cash";
-
-  document.getElementById("deliveryStatus").value =
-    row.delivery_status || "Pending";
-
-
-  calculatePayment();
-
-
-  /*
-    Existing delivery ko edit karne ke liye
-    temporary ID store
-  */
-
-  window.editingDeliveryId =
-    row.id;
-
-
-  const button =
-    document.querySelector(
-      "#app .primary"
-    );
-
-  /*
-    Save button text change
-  */
-
-  const buttons =
-    document.querySelectorAll("button");
-
-  buttons.forEach(btn => {
-
-    if (
-      btn.textContent.includes("Save Delivery") ||
-      btn.textContent.includes("Update Delivery")
-    ) {
-
-      btn.textContent =
-        "💾 Update Delivery";
-
-    }
-
-  });
-
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-
-}
-
-
-/* =====================================================
-   UPDATE EXISTING DELIVERY
-   ===================================================== */
-
-/*
-  saveDelivery ko update mode mein handle karne ke liye
-*/
-
-const originalSaveDelivery =
-  saveDelivery;
-
-
-/* =====================================================
-   DELETE
-   ===================================================== */
-
-async function deleteDelivery(id) {
-
-  if (
-    !confirm(
-      "Kya aap is delivery ko delete karna chahte hain?"
-    )
-  ) {
-    return;
-  }
-
-
-  const {
-    error
-  } = await supabaseClient
-    .from("deliveries")
-    .delete()
-    .eq("id", id);
-
-
-  if (error) {
-
-    alert(
-      "Delete नहीं हुआ: " +
-      error.message
-    );
-
-    return;
-
-  }
-
-
-  await loadDeliveries();
-
-}
-
-
-/* =====================================================
-   STATS
-   ===================================================== */
-
-function updateStats() {
-
-  const today =
-    new Date().toLocaleDateString(
-      "en-CA",
-      {
-        timeZone: "Asia/Kolkata"
-      }
-    );
-
-
-  const todayDeliveries =
-    deliveries.filter(row => {
-
-      if (!row.delivery_date) {
-        return false;
-      }
-
-      const date =
-        new Date(row.delivery_date)
-          .toLocaleDateString(
-            "en-CA",
-            {
-              timeZone: "Asia/Kolkata"
-            }
-          );
-
-      return date === today;
-
-    });
-
-
-  let paid = 0;
-  let pending = 0;
-
-
-  deliveries.forEach(row => {
-
-    const order =
-      Number(row.order_amount || 0);
-
-    const received =
-      Number(row.received_amount || 0);
-
-    paid += received;
-
-    pending +=
-      Math.max(order - received, 0);
-
-  });
-
-
-  document.getElementById("todayCount")
-    .textContent =
-    todayDeliveries.length;
-
-
-  document.getElementById("totalCount")
-    .textContent =
-    deliveries.length;
-
-
-  document.getElementById("paidAmount")
-    .textContent =
-    "₹" + paid.toFixed(2);
-
-
-  document.getElementById("pendingAmount")
-    .textContent =
-    "₹" + pending.toFixed(2);
-
-}
-
-
-/* =====================================================
-   CLEAR FORM
-   ===================================================== */
-
-function clearForm() {
-
-  document.getElementById("deliveryBoy").value = "";
-
-  document.getElementById("customerName").value = "";
-
-  document.getElementById("customerMobile").value = "";
-
-  document.getElementById("customerAddress").value = "";
-
-  document.getElementById("orderAmount").value = "0";
-
-  document.getElementById("receivedAmount").value = "0";
-
-  document.getElementById("balanceAmount").value = "0";
-
-  document.getElementById("paymentType").value = "Cash";
-
-  document.getElementById("deliveryStatus").value = "Pending";
-
-  window.editingDeliveryId = null;
-
-}
-
-
-/* =====================================================
-   MESSAGE
-   ===================================================== */
-
-function showMessage(
-  id,
-  text,
-  type
-) {
-
-  const el =
-    document.getElementById(id);
-
-  el.textContent = text;
-
-  el.className =
-    "message " +
-    type;
-
-  el.style.display = "block";
-
-  setTimeout(() => {
-
-    el.style.display = "none";
-
-  }, 5000);
-
-}
-
-
-/* =====================================================
-   HTML SECURITY
-   ===================================================== */
-
-function escapeHTML(value) {
-
-  return String(value || "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-
-}
-
-
-function escapeAttribute(value) {
-
-  return String(value || "")
-    .replace(/\\/g, "\\\\")
-    .replace(/'/g, "\\'");
-}
-
-
-/* =====================================================
-   CLOSE SUGGESTIONS
-   ===================================================== */
-
-document.addEventListener(
-  "click",
-  function(event) {
-
-    if (
-      !event.target.closest(
-        "#customerName, #customerSuggestions"
-      )
-    ) {
-
-      document.getElementById(
-        "customerSuggestions"
-      ).style.display = "none";
-
-    }
-
-
-    if (
-      !event.target.closest(
-        "#deliveryBoy, #boySuggestions"
-      )
-    ) {
-
-      document.getElementById(
-        "boySuggestions"
-      ).style.display = "none";
-
-    }
-
-  }
+openWhatsApp(
+row.customer_mobile,
+message
 );
+
+}
+
+
+/* =====================================================
+ EDIT DELIVERY
+===================================================== */
+
+function editDelivery(row){
+
+editingId=row.id;
+
+
+document.getElementById("deliveryBoy")
+.value=row.delivery_boy_name || "";
+
+document.getElementById("customerName")
+.value=row.customer_name || "";
+
+document.getElementById("customerMobile")
+.value=row.customer_mobile || "";
+
+document.getElementById("customerAddress")
+.value=row.customer_address || "";
+
+document.getElementById("orderAmount")
+.value=row.order_amount || 0;
+
+document.getElementById("receivedAmount")
+.value=row.received_amount || 0;
+
+document.getElementById("paymentType")
+.value=row.payment_type || "Cash";
+
+document.getElementById("deliveryStatus")
+.value=row.delivery_status || "Pending";
+
+
+calculate();
+
+
+document.getElementById("saveBtn")
+.textContent="💾 Update Delivery";
+
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+/* =====================================================
+ DELETE
+===================================================== */
+
+async function deleteDelivery(id){
+
+if(!confirm(
+"Ye delivery permanently delete karni hai?"
+))return;
+
+
+const {error}=
+await supabaseClient
+.from("deliveries")
+.delete()
+.eq("id",id);
+
+
+if(error){
+
+alert(
+"Delete error: "+error.message
+);
+
+return;
+
+}
+
+
+await loadDeliveries();
+
+}
+
+
+/* =====================================================
+ CLEAR FORM
+===================================================== */
+
+function clearForm(){
+
+editingId=null;
+
+document.getElementById("deliveryBoy").value="";
+document.getElementById("customerName").value="";
+document.getElementById("customerMobile").value="";
+document.getElementById("customerAddress").value="";
+document.getElementById("orderAmount").value="0";
+document.getElementById("receivedAmount").value="0";
+document.getElementById("pendingInput").value="0";
+document.getElementById("paymentType").value="Cash";
+document.getElementById("deliveryStatus").value="Pending";
+
+document.getElementById("saveBtn")
+.textContent="💾 Save Delivery";
+
+}
+
+
+/* =====================================================
+ RENDER
+===================================================== */
+
+function renderDeliveries(){
+
+const search=
+document.getElementById("searchBox")
+.value
+.toLowerCase()
+.trim();
+
+const filter=
+document.getElementById("statusFilter")
+.value;
+
+
+const list=
+deliveries.filter(row=>{
+
+const text=`
+${row.customer_name||""}
+${row.customer_mobile||""}
+${row.customer_address||""}
+${row.delivery_boy_name||""}
+`.toLowerCase();
+
+
+return
+(!search || text.includes(search)) &&
+(!filter || row.delivery_status===filter);
+
+});
+
+
+const box=
+document.getElementById("deliveryList");
+
+
+if(!list.length){
+
+box.innerHTML="<p>No delivery found.</p>";
+return;
+
+}
+
+
+box.innerHTML=
+list.map(row=>{
+
+const order=
+Number(row.order_amount||0);
+
+const received=
+Number(row.received_amount||0);
+
+const pending=
+Math.max(order-received,0);
+
+
+return `
+
+<div class="delivery">
+
+<div class="delivery-title">
+${esc(row.customer_name||"Customer")}
+</div>
+
+<div class="row">
+👤 Delivery Boy:
+<strong>
+${esc(row.delivery_boy_name||"-")}
+</strong>
+</div>
+
+<div class="row">
+📱 ${esc(row.customer_mobile||"-")}
+</div>
+
+<div class="row">
+📍 ${esc(row.customer_address||"-")}
+</div>
+
+<div class="row">
+💰 Order: ₹${order.toFixed(2)}
+</div>
+
+<div class="row">
+✅ Paid: ₹${received.toFixed(2)}
+</div>
+
+<div class="row">
+🔴 Pending:
+<strong>₹${pending.toFixed(2)}</strong>
+</div>
+
+<div class="row">
+📦 Status:
+<strong>${esc(row.delivery_status||"-")}</strong>
+</div>
+
+<div class="actions">
+
+${
+pending>0
+?
+`
+<button
+class="whatsapp"
+onclick='pendingWhatsApp(${JSON.stringify(row)})'>
+📲 WhatsApp Pending
+</button>
+`
+:""
+}
+
+<button
+class="edit"
+onclick='editDelivery(${JSON.stringify(row)})'>
+✏️ Edit
+</button>
+
+<button
+class="delete"
+onclick="deleteDelivery('${row.id}')">
+🗑 Delete
+</button>
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+/* =====================================================
+ STATS
+===================================================== */
+
+function updateStats(){
+
+const today=
+new Date().toLocaleDateString(
+"en-CA",
+{timeZone:"Asia/Kolkata"}
+);
+
+let todayCount=0;
+let paid=0;
+let pending=0;
+
+
+deliveries.forEach(row=>{
+
+if(row.delivery_date){
+
+const deliveryDay=
+new Date(row.delivery_date)
+.toLocaleDateString(
+"en-CA",
+{timeZone:"Asia/Kolkata"}
+);
+
+if(deliveryDay===today){
+todayCount++;
+}
+
+}
+
+
+const order=
+Number(row.order_amount||0);
+
+const received=
+Number(row.received_amount||0);
+
+paid+=received;
+
+pending+=
+Math.max(order-received,0);
+
+});
+
+
+document.getElementById("todayCount")
+.textContent=todayCount;
+
+document.getElementById("totalCount")
+.textContent=deliveries.length;
+
+document.getElementById("paidAmount")
+.textContent=
+"₹"+paid.toFixed(2);
+
+document.getElementById("pendingAmount")
+.textContent=
+"₹"+pending.toFixed(2);
+
+}
+
+
+/* =====================================================
+ MESSAGE
+===================================================== */
+
+function showMessage(id,text,type){
+
+const el=
+document.getElementById(id);
+
+el.textContent=text;
+el.className="message "+type;
+el.style.display="block";
+
+}
+
+
+/* =====================================================
+ ESCAPE HTML
+===================================================== */
+
+function esc(value){
+
+return String(value||"")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+ CLOSE SEARCH SUGGESTIONS
+===================================================== */
+
+document.addEventListener("click",(e)=>{
+
+if(!e.target.closest(
+"#customerName,#customerSuggestions"
+)){
+
+document.getElementById(
+"customerSuggestions"
+).style.display="none";
+
+}
+
+
+if(!e.target.closest(
+"#deliveryBoy,#boySuggestions"
+)){
+
+document.getElementById(
+"boySuggestions"
+).style.display="none";
+
+}
+
+});
 
 </script>
 
 </body>
 </html>
+const SUPABASE_KEY =
+"PASTE_YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY_HERE";
