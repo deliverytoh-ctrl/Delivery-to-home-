@@ -1,231 +1,220 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="hi">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>DELIVERY TO HOME</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#eef4f8;color:#222}
-header{background:#1769aa;color:#fff;padding:14px;position:sticky;top:0;z-index:5}.head{display:flex;justify-content:center;align-items:center;gap:12px}.head h1{font-size:20px;margin:0}
+header{background:#1769aa;color:#fff;padding:14px;position:sticky;top:0;z-index:10}.head{text-align:center}.head h1{margin:0;font-size:20px}
 .container{max-width:950px;margin:auto;padding:10px}.card{background:#fff;border-radius:14px;padding:16px;margin:12px 0;box-shadow:0 3px 12px #0002}
 .login{max-width:430px;margin:60px auto}input,select,textarea{width:100%;padding:12px;margin:5px 0 10px;border:1px solid #ccc;border-radius:8px;font-size:16px}textarea{min-height:80px}
-button{border:0;border-radius:8px;padding:11px 14px;margin:4px;font-size:15px;cursor:pointer}.full{width:100%;margin:5px 0}.blue{background:#1769aa;color:#fff}.green{background:#198754;color:#fff}.red{background:#dc3545;color:#fff}.orange{background:#fd7e14;color:#fff}.purple{background:#6f42c1;color:#fff}.gray{background:#666;color:#fff}
+button{border:0;border-radius:8px;padding:11px 14px;margin:4px;font-size:15px;cursor:pointer}.full{width:100%;margin:5px 0}.blue{background:#1769aa;color:#fff}.green{background:#198754;color:#fff}.red{background:#dc3545;color:#fff}.orange{background:#fd7e14;color:#fff}.gray{background:#666;color:#fff}
 .hidden{display:none!important}.message{padding:10px;border-radius:8px;margin-top:10px;word-break:break-word}.error{background:#ffe4e4;color:#900}.success{background:#dff5e5;color:#075c35}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stats,.summary{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.summary{grid-template-columns:repeat(3,1fr)}.stat,.summary div{background:#f6f8fa;padding:14px;border-radius:10px;text-align:center}.stat b{display:block;font-size:22px;margin-top:5px}.delivery{border-top:1px solid #ddd;padding:15px 0}.badge{padding:5px 8px;border-radius:6px;display:inline-block}.paid{background:#d1e7dd;color:#075c35}.unpaid{background:#fff0c2;color:#6b5200}.partial{background:#ffe5b4;color:#8a4b00}.customerBox{background:#eef7ff;border:1px solid #b7dcff;padding:10px;border-radius:10px;margin-bottom:10px}.customerItem{background:#fff;border:1px solid #ddd;padding:10px;border-radius:8px;margin:6px 0;cursor:pointer}.small{font-size:13px;color:#666}.block{background:#ffe4e4;border:2px solid #dc3545;color:#8b0000;padding:15px;border-radius:10px;margin-bottom:12px}.dailyBig{font-size:30px!important}
-@media(max-width:600px){.grid,.summary,.stats{grid-template-columns:1fr}}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stats,.summary{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.summary{grid-template-columns:repeat(3,1fr)}
+.stat,.summary div{background:#f6f8fa;padding:14px;border-radius:10px;text-align:center}.stat b{display:block;font-size:22px;margin-top:5px}
+.delivery{border-top:1px solid #ddd;padding:15px 0}.customerBox{background:#eef7ff;border:1px solid #b7dcff;padding:10px;border-radius:10px}.customerItem{background:#fff;border:1px solid #ddd;padding:10px;border-radius:8px;margin:6px 0;cursor:pointer}
+.block{background:#ffe4e4;border:2px solid #dc3545;color:#850000;padding:15px;border-radius:10px}.small{font-size:13px;color:#666}
+@media(max-width:600px){.grid,.stats,.summary{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<header><div class="head"><div><h1>🚚 DELIVERY TO HOME</h1><div id="headerFirm">DELIVERY TO HOME</div></div></div></header>
+<header><div class="head"><h1>🚚 DELIVERY TO HOME</h1><div id="headerFirm">DELIVERY TO HOME</div></div></header>
 
 <div id="loginPage" class="container">
 <div class="card login">
 <h2>🔐 Login</h2>
-<label>Email</label><input id="loginEmail" type="email" placeholder="Enter email">
-<label>Password</label><input id="loginPassword" type="password" placeholder="Enter password">
-<button id="loginBtn" class="blue full">🔐 Login</button>
-<button id="createBtn" class="gray full">➕ Create Account</button>
-<button id="resetBtn" class="orange full">🔑 Forgot Password</button>
-<div id="loginMessage"></div>
+<label>Email</label><input id="email" type="email" autocomplete="email" placeholder="Email">
+<label>Password</label><input id="password" type="password" autocomplete="current-password" placeholder="Password">
+<button id="login" class="blue full">🔐 Login</button>
+<button id="signup" class="gray full">➕ Create Account</button>
+<button id="forgot" class="orange full">🔑 Forgot Password</button>
+<div id="loginMsg"></div>
 </div></div>
 
-<div id="appPage" class="container hidden">
-<div class="card">
-<h2 id="firmNameText">DELIVERY TO HOME</h2>
-<div id="userEmail"></div>
-<button id="logoutBtn" class="red">🚪 Logout</button>
-</div>
+<div id="app" class="container hidden">
+<div class="card"><h2 id="firm">DELIVERY TO HOME</h2><div id="userEmail"></div><button id="logout" class="red">🚪 Logout</button></div>
 
-<div id="blockBox" class="block hidden">
-<h3>🚫 Delivery Entry Blocked</h3>
-<div id="blockText"></div>
-</div>
+<div id="block" class="block hidden"><h3>🚫 नई Delivery Blocked</h3><div id="blockMsg"></div></div>
 
 <div class="card">
 <h2>📅 Daily Delivery Count</h2>
-<div class="grid">
-<div><label>Select Date</label><input id="dailyDate" type="date"></div>
-<div class="stat">📦 Selected Day<b id="dailyCount" class="dailyBig">0</b></div>
-</div>
-<div class="summary">
-<div>📦 Total<br><b id="dailyTotal">0</b></div>
-<div>✅ Delivered<br><b id="dailyDelivered">0</b></div>
-<div>⏳ Pending<br><b id="dailyPending">0</b></div>
-</div>
-<div class="summary">
-<div>💰 Order<br><b id="dailyOrder">₹0.00</b></div>
-<div>💵 Received<br><b id="dailyReceived">₹0.00</b></div>
-<div>⚠️ Pending<br><b id="dailyBalance">₹0.00</b></div>
-</div>
-<button id="dailyToday" class="blue">📅 Today</button>
-<button id="dailyYesterday">⬅️ Yesterday</button>
+<div class="grid"><div><label>Date</label><input id="day" type="date"></div><div class="stat">📦 Count<b id="dayCount">0</b></div></div>
+<div class="summary"><div>Total<br><b id="dayTotal">0</b></div><div>Delivered<br><b id="dayDelivered">0</b></div><div>Pending<br><b id="dayPending">0</b></div></div>
+<div class="summary"><div>Order<br><b id="dayOrder">₹0.00</b></div><div>Received<br><b id="dayReceived">₹0.00</b></div><div>Balance<br><b id="dayBalance">₹0.00</b></div></div>
+<button id="today" class="blue">📅 Today</button><button id="yesterday">⬅️ Yesterday</button>
 </div>
 
 <div class="stats">
-<div class="stat">📦 Total Deliveries<b id="total">0</b></div>
-<div class="stat">💰 Total Amount<b id="amount">₹0.00</b></div>
-<div class="stat">✅ Paid<b id="paid">₹0.00</b></div>
-<div class="stat">⚠️ Unpaid<b id="unpaid">₹0.00</b></div>
+<div class="stat">📦 Total Deliveries<b id="allCount">0</b></div>
+<div class="stat">💰 Total Amount<b id="allAmount">₹0.00</b></div>
+<div class="stat">💵 Received<b id="allReceived">₹0.00</b></div>
+<div class="stat">⚠️ Pending<b id="allPending">₹0.00</b></div>
 </div>
 
 <div class="card">
 <h2>➕ New Delivery</h2>
-<label>👨‍✈️ Delivery Boy</label>
-<input id="boy" list="boyList" placeholder="Delivery boy name">
-<datalist id="boyList"></datalist>
-
-<label>🔎 Saved Customer Search</label>
-<input id="customerSearch" placeholder="Search saved customer">
-<div id="suggestions" class="customerBox hidden"></div>
-
-<label>👤 Customer Name</label><input id="customer" placeholder="Customer name">
-<label>📞 Customer Mobile</label><input id="mobile" type="tel" placeholder="Mobile number">
-<label>📍 Address</label><textarea id="address" placeholder="Customer address"></textarea>
-<label>💰 Order Amount</label><input id="orderAmount" type="number" min="0" step="0.01">
-<label>💵 Received Amount</label><input id="receivedAmount" type="number" min="0" step="0.01">
-
-<p>⚠️ Balance: <b id="balance">₹0.00</b></p>
-<label>Payment Type</label>
-<select id="paymentType"><option>Cash</option><option>Online</option><option>Credit</option></select>
-<label>Delivery Status</label>
-<select id="deliveryStatus"><option>Pending</option><option>Out for Delivery</option><option>Delivered</option></select>
-<button id="saveBtn" class="blue full">💾 Save Delivery</button>
-<div id="deliveryMessage"></div>
+<label>👨‍✈️ Delivery Boy</label><input id="boy" list="boys" placeholder="Delivery boy name"><datalist id="boys"></datalist>
+<label>🔎 Search Saved Customer</label><input id="customerSearch" placeholder="Customer name / mobile"><div id="suggestions" class="customerBox hidden"></div>
+<label>👤 Customer Name</label><input id="customer">
+<label>📞 Customer Mobile</label><input id="mobile" type="tel">
+<label>📍 Address</label><textarea id="address"></textarea>
+<label>💰 Order Amount</label><input id="order" type="number" min="0" step=".01">
+<label>💵 Received Amount</label><input id="received" type="number" min="0" step=".01">
+<p>⚠️ Balance: <b id="newBalance">₹0.00</b></p>
+<label>Payment Type</label><select id="ptype"><option>Cash</option><option>Online</option><option>Credit</option></select>
+<label>Delivery Status</label><select id="dstatus"><option>Pending</option><option>Out for Delivery</option><option>Delivered</option></select>
+<button id="save" class="blue full">💾 Save Delivery</button>
+<div id="saveMsg"></div>
 </div>
 
-<div class="card">
-<h2>📦 Delivery List</h2>
-<input id="search" placeholder="Search customer / mobile / delivery boy">
-<div id="list">Loading...</div>
-</div>
+<div class="card"><h2>📦 Delivery List</h2><input id="search" placeholder="Search customer / mobile / delivery boy"><div id="list">Loading...</div></div>
 </div>
 
 <script>
+/* ===== SUPABASE ===== */
 const SUPABASE_URL="https://mrozcbaendyheujcmfpi.supabase.co";
 const SUPABASE_KEY="sb_publishable_p5tiMbyZOZR9_bcTbHuYbw_5JFSFiSF";
-const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
-let user=null, deliveries=[];
+const db=supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+let user=null,rows=[];
 
 const $=id=>document.getElementById(id);
 const money=n=>"₹"+Number(n||0).toFixed(2);
-const localDate=d=>{d=d||new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
-const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
-function msg(id,t,type="error"){$(id).innerHTML=`<div class="message ${type}">${esc(t)}</div>`}
+const dateStr=d=>{d=d||new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function msg(id,t,ok=false){$(id).innerHTML='<div class="message '+(ok?'success':'error')+'">'+esc(t)+'</div>'}
 
-async function login(){
-const email=$("loginEmail").value.trim(),password=$("loginPassword").value;
-if(!email||!password)return msg("loginMessage","Email और password डालें.");
-$("loginBtn").disabled=true;
-try{const r=await sb.auth.signInWithPassword({email,password});if(r.error)throw r.error;user=r.data.user;showApp()}catch(e){msg("loginMessage",e.message)}finally{$("loginBtn").disabled=false}
+/* ===== AUTH ===== */
+$("login").onclick=async()=>{
+const email=$("email").value.trim(),password=$("password").value;
+if(!email||!password)return msg("loginMsg","Email और password डालें.");
+$("login").disabled=true;
+try{const r=await db.auth.signInWithPassword({email,password});if(r.error)throw r.error;user=r.data.user;await openApp()}catch(e){msg("loginMsg","Login failed: "+e.message)}finally{$("login").disabled=false}
+};
+$("signup").onclick=async()=>{
+const email=$("email").value.trim(),password=$("password").value;
+if(!email||password.length<6)return msg("loginMsg","Valid email और कम से कम 6 character password डालें.");
+try{const r=await db.auth.signUp({email,password});if(r.error)throw r.error;msg("loginMsg",r.data.session?"Account created.":"Account created. Email confirmation करके login करें.",true)}catch(e){msg("loginMsg",e.message)}
+};
+$("forgot").onclick=async()=>{
+const email=$("email").value.trim();if(!email)return msg("loginMsg","पहले email डालें.");
+try{const r=await db.auth.resetPasswordForEmail(email,{redirectTo:location.href});if(r.error)throw r.error;msg("loginMsg","Password reset email भेज दिया गया.",true)}catch(e){msg("loginMsg",e.message)}
+};
+$("logout").onclick=()=>db.auth.signOut();
+
+/* ===== APP ===== */
+async function openApp(){
+$("loginPage").classList.add("hidden");$("app").classList.remove("hidden");$("userEmail").textContent=user.email;$("day").value=dateStr();
+await ensureProfile();await loadProfile();await loadRows();
 }
-$("loginBtn").onclick=login;
-
-$("createBtn").onclick=async()=>{
-const email=$("loginEmail").value.trim(),password=$("loginPassword").value;
-if(!email||password.length<6)return msg("loginMessage","Valid email और कम से कम 6 character password डालें.");
-try{const r=await sb.auth.signUp({email,password});if(r.error)throw r.error;msg("loginMessage",r.data.session?"Account created.":"Account created. Email confirmation required.","success")}catch(e){msg("loginMessage",e.message)}
-};
-
-$("resetBtn").onclick=async()=>{
-const email=$("loginEmail").value.trim();if(!email)return msg("loginMessage","Email डालें.");
-try{const r=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.href});if(r.error)throw r.error;msg("loginMessage","Password reset email भेज दिया गया.","success")}catch(e){msg("loginMessage",e.message)}
-};
-
-$("logoutBtn").onclick=()=>sb.auth.signOut();
-
-async function showApp(){
-$("loginPage").classList.add("hidden");$("appPage").classList.remove("hidden");$("userEmail").textContent=user.email;
-$("dailyDate").value=localDate();await loadProfile();await loadDeliveries();
+async function ensureProfile(){
+const r=await db.from("profiles").select("id").eq("id",user.id).maybeSingle();
+if(!r.data&&!r.error)await db.from("profiles").insert({id:user.id,firm_name:"DELIVERY TO HOME"});
 }
 async function loadProfile(){
-const r=await sb.from("profiles").select("*").eq("id",user.id).maybeSingle();
-if(r.error){$("firmNameText").textContent="DELIVERY TO HOME";return}
-if(!r.data)await sb.from("profiles").insert({id:user.id,firm_name:"DELIVERY TO HOME"});
-else{$("firmNameText").textContent=r.data.firm_name||"DELIVERY TO HOME";$("headerFirm").textContent=r.data.firm_name||"DELIVERY TO HOME"}
+const r=await db.from("profiles").select("*").eq("id",user.id).maybeSingle();
+if(r.data){const n=r.data.firm_name||"DELIVERY TO HOME";$("firm").textContent=n;$("headerFirm").textContent=n}
 }
 
-function daysSinceOldestUnpaid(){
-const unpaid=deliveries.filter(d=>Number(d.order_amount||d.total_amount||0)>Number(d.received_amount||0)&&d.delivery_status!=="Cancelled");
-if(!unpaid.length)return 0;
-const oldest=Math.min(...unpaid.map(d=>new Date(d.delivery_date||d.created_at).getTime()));
-return Math.floor((new Date().setHours(0,0,0,0)-new Date(oldest).setHours(0,0,0,0))/86400000);
+/* ===== LOAD ===== */
+async function loadRows(){
+const r=await db.from("deliveries").select("*").eq("user_id",user.id).order("delivery_date",{ascending:false});
+if(r.error){$("list").innerHTML='<div class="message error">'+esc(r.error.message)+'</div>';return}
+rows=r.data||[];render();daily();updateBlock();savedBoys();
+}
+function savedBoys(){const a=[...new Set(rows.map(x=>x.delivery_boy_name).filter(Boolean))];$("boys").innerHTML=a.map(x=>'<option value="'+esc(x)+'">').join("")}
+
+/* ===== 2-DAY BLOCK RULE =====
+If ANY unpaid delivery is at least 2 full calendar days old,
+new entries are blocked for everyone until that payment is fully received.
+*/
+function blockingDelivery(){
+const today=new Date();today.setHours(0,0,0,0);
+const bad=rows.filter(x=>{
+const total=Number(x.order_amount||x.total_amount||0),received=Number(x.received_amount||0);
+if(total<=received||x.delivery_status==="Cancelled")return false;
+const d=new Date(x.delivery_date||x.created_at);d.setHours(0,0,0,0);
+const age=Math.floor((today-d)/86400000);
+return age>=2;
+});
+return bad;
 }
 function updateBlock(){
-const days=daysSinceOldestUnpaid();
-if(days>=2){$("blockBox").classList.remove("hidden");$("blockText").textContent=`कम से कम एक customer का payment ${days} दिन से pending है। Payment clear होने तक नई delivery entry बंद है।`;$("saveBtn").disabled=true}
-else{$("blockBox").classList.add("hidden");$("saveBtn").disabled=false}
+const bad=blockingDelivery();
+if(bad.length){
+const oldest=bad.reduce((a,b)=>new Date(a.delivery_date||a.created_at)<new Date(b.delivery_date||b.created_at)?a:b);
+const age=Math.floor((new Date().setHours(0,0,0,0)-new Date(oldest.delivery_date||oldest.created_at).setHours(0,0,0,0))/86400000);
+$("block").classList.remove("hidden");$("blockMsg").textContent=`${bad.length} payment pending है और कम से कम एक payment ${age} दिन पुराना है। सभी नई delivery entries payment clear होने तक बंद हैं.`;$("save").disabled=true;
+}else{$("block").classList.add("hidden");$("save").disabled=false}
 }
 
-async function loadDeliveries(){
-const r=await sb.from("deliveries").select("*").eq("user_id",user.id).order("delivery_date",{ascending:false});
-if(r.error){$("list").innerHTML=`<div class="message error">${esc(r.error.message)}</div>`;return}
-deliveries=r.data||[];render();daily();updateBlock();loadSavedBoys();
-}
-
-function loadSavedBoys(){
-const names=[...new Set(deliveries.map(d=>d.delivery_boy_name).filter(Boolean))];
-$("boyList").innerHTML=names.map(n=>`<option value="${esc(n)}">`).join("");
-}
-
-function render(){
-const q=$("search").value.trim().toLowerCase();
-const arr=deliveries.filter(d=>!q||(`${d.customer_name||""} ${d.customer_mobile||""} ${d.delivery_boy_name||""}`).toLowerCase().includes(q));
-$("total").textContent=arr.length;$("amount").textContent=money(arr.reduce((a,d)=>a+Number(d.order_amount||d.total_amount||0),0));$("paid").textContent=money(arr.reduce((a,d)=>a+Math.min(Number(d.order_amount||d.total_amount||0),Number(d.received_amount||0)),0));$("unpaid").textContent=money(arr.reduce((a,d)=>a+Math.max(Number(d.order_amount||d.total_amount||0)-Number(d.received_amount||0),0),0));
-if(!arr.length){$("list").innerHTML="<p>No deliveries found.</p>";return}
-$("list").innerHTML=arr.map(d=>{
-const total=Number(d.order_amount||d.total_amount||0),rec=Number(d.received_amount||0),bal=Math.max(total-rec,0),phone=d.customer_mobile||"",name=d.customer_name||"Customer";
-const wa=`नमस्ते ${name},\n\nआपकी Delivery To Home delivery का ${money(bal)} payment अभी pending है।\n\nकृपया ${money(bal)} का payment कर दें।\n\nधन्यवाद 🙏\nDELIVERY TO HOME`;
-return `<div class="delivery"><h3>👤 ${esc(name)}</h3><p>👨‍✈️ ${esc(d.delivery_boy_name||"-")}</p><p>📞 ${esc(phone)}</p><p>📍 ${esc(d.customer_address||"-")}</p><p>📅 ${new Date(d.delivery_date||d.created_at).toLocaleString("en-IN")}</p><p>💰 Order: <b>${money(total)}</b> | Received: <b>${money(rec)}</b> | Balance: <b>${money(bal)}</b></p><p>💳 ${esc(d.payment_type||"-")} | 🚚 ${esc(d.delivery_status||"-")}</p>${bal>0?`<button class="green" onclick="whatsapp('${encodeURIComponent(phone)}','${encodeURIComponent(wa)}')">📱 WhatsApp Pending Payment</button><button class="orange" onclick="receive('${d.id}')">💳 Receive Payment</button>`:""}${d.delivery_status!=="Delivered"?`<button class="green" onclick="delivered('${d.id}')">✅ Delivered</button>`:""}<button class="blue" onclick="call('${esc(phone)}')">📞 Call</button><button class="red" onclick="removeDelivery('${d.id}')">🗑 Delete</button></div>`
-}).join("");
-}
-$("search").oninput=render;
-
+/* ===== DAILY ===== */
 function daily(){
-const day=$("dailyDate").value||localDate(),arr=deliveries.filter(d=>localDate(new Date(d.delivery_date||d.created_at))===day);
-const total=arr.reduce((a,d)=>a+Number(d.order_amount||d.total_amount||0),0),rec=arr.reduce((a,d)=>a+Number(d.received_amount||0),0);
-$("dailyCount").textContent=arr.length;$("dailyTotal").textContent=arr.length;$("dailyDelivered").textContent=arr.filter(d=>d.delivery_status==="Delivered").length;$("dailyPending").textContent=arr.filter(d=>d.delivery_status!=="Delivered"&&d.delivery_status!=="Cancelled").length;$("dailyOrder").textContent=money(total);$("dailyReceived").textContent=money(rec);$("dailyBalance").textContent=money(Math.max(total-rec,0));
+const day=$("day").value||dateStr(),a=rows.filter(x=>dateStr(new Date(x.delivery_date||x.created_at))===day);
+const order=a.reduce((s,x)=>s+Number(x.order_amount||x.total_amount||0),0),rec=a.reduce((s,x)=>s+Number(x.received_amount||0),0);
+$("dayCount").textContent=a.length;$("dayTotal").textContent=a.length;$("dayDelivered").textContent=a.filter(x=>x.delivery_status==="Delivered").length;$("dayPending").textContent=a.filter(x=>x.delivery_status!=="Delivered"&&x.delivery_status!=="Cancelled").length;$("dayOrder").textContent=money(order);$("dayReceived").textContent=money(rec);$("dayBalance").textContent=money(Math.max(order-rec,0));
 }
-$("dailyDate").onchange=daily;$("dailyToday").onclick=()=>{$("dailyDate").value=localDate();daily()};$("dailyYesterday").onclick=()=>{let d=new Date();d.setDate(d.getDate()-1);$("dailyDate").value=localDate(d);daily()};
+$("day").onchange=daily;$("today").onclick=()=>{$("day").value=dateStr();daily()};$("yesterday").onclick=()=>{let d=new Date();d.setDate(d.getDate()-1);$("day").value=dateStr(d);daily()};
 
-$("orderAmount").oninput=updateMoney;$("receivedAmount").oninput=updateMoney;
-function updateMoney(){const a=Number($("orderAmount").value)||0,r=Number($("receivedAmount").value)||0;$("balance").textContent=money(Math.max(a-r,0))}
+/* ===== NEW DELIVERY ===== */
+function newMoney(){const a=Number($("order").value)||0,r=Number($("received").value)||0;$("newBalance").textContent=money(Math.max(a-r,0))}
+$("order").oninput=newMoney;$("received").oninput=newMoney;
 
 $("customerSearch").oninput=()=>{
 const q=$("customerSearch").value.trim().toLowerCase(),box=$("suggestions");
 if(!q){box.classList.add("hidden");return}
-const arr=[];deliveries.forEach(d=>{if(`${d.customer_name||""} ${d.customer_mobile||""} ${d.customer_address||""}`.toLowerCase().includes(q)&&!arr.some(x=>x.customer_mobile===d.customer_mobile))arr.push(d)});
-box.classList.remove("hidden");box.innerHTML=arr.slice(0,10).map(d=>`<div class="customerItem" onclick="selectCustomer('${esc(d.customer_name)}','${esc(d.customer_mobile)}','${esc(d.customer_address)}')"><b>${esc(d.customer_name)}</b><br>📞 ${esc(d.customer_mobile||"-")}<br>📍 ${esc(d.customer_address||"-")}</div>`).join("")||"No saved customer found.";
+const a=[];rows.forEach(x=>{const key=`${x.customer_name||""} ${x.customer_mobile||""} ${x.customer_address||""}`.toLowerCase();if(key.includes(q)&&!a.some(y=>y.customer_mobile===x.customer_mobile))a.push(x)});
+box.classList.remove("hidden");box.innerHTML=a.slice(0,10).map(x=>`<div class="customerItem" onclick="pickCustomer('${esc(x.customer_name)}','${esc(x.customer_mobile)}','${esc(x.customer_address)}')"><b>👤 ${esc(x.customer_name)}</b><br>📞 ${esc(x.customer_mobile||"-")}<br>📍 ${esc(x.customer_address||"-")}</div>`).join("")||"कोई customer नहीं मिला.";
 };
-window.selectCustomer=(n,m,a)=>{$("customer").value=n;$("mobile").value=m;$("address").value=a;$("suggestions").classList.add("hidden")};
+window.pickCustomer=(n,m,a)=>{$("customer").value=n;$("mobile").value=m;$("address").value=a;$("suggestions").classList.add("hidden")};
 
-$("saveBtn").onclick=async()=>{
-updateBlock();if($("saveBtn").disabled)return;
-const boy=$("boy").value.trim(),customer=$("customer").value.trim(),mobile=$("mobile").value.trim(),address=$("address").value.trim(),amount=Number($("orderAmount").value)||0,received=Number($("receivedAmount").value)||0;
-if(!boy||!customer||!mobile||!address||amount<=0)return msg("deliveryMessage","सभी details भरें.");
-if(received>amount)return msg("deliveryMessage","Received amount order amount से ज्यादा नहीं हो सकता.");
-$("saveBtn").disabled=true;
+$("save").onclick=async()=>{
+updateBlock();if($("save").disabled)return;
+const boy=$("boy").value.trim(),customer=$("customer").value.trim(),mobile=$("mobile").value.trim(),address=$("address").value.trim(),amount=Number($("order").value)||0,received=Number($("received").value)||0;
+if(!boy||!customer||!mobile||!address||amount<=0)return msg("saveMsg","सभी जरूरी details भरें.");
+if(received>amount)return msg("saveMsg","Received amount order amount से ज्यादा नहीं हो सकता.");
+$("save").disabled=true;
 try{
-const now=new Date().toISOString();
-const r=await sb.from("deliveries").insert({user_id:user.id,delivery_boy_name:boy,customer_name:customer,customer_mobile:mobile,customer_address:address,order_amount:amount,total_amount:amount,received_amount:received,change_amount:0,payment_type:$("paymentType").value,payment_status:received>=amount?"Paid":"Unpaid",delivery_status:$("deliveryStatus").value,delivery_date:now,created_at:now});
+const now=new Date().toISOString(),r=await db.from("deliveries").insert({user_id:user.id,delivery_boy_name:boy,customer_name:customer,customer_mobile:mobile,customer_address:address,order_amount:amount,total_amount:amount,received_amount:received,change_amount:0,payment_type:$("ptype").value,payment_status:received>=amount?"Paid":"Unpaid",delivery_status:$("dstatus").value,delivery_date:now,created_at:now});
 if(r.error)throw r.error;
-$("boy").value="";$("customer").value="";$("mobile").value="";$("address").value="";$("orderAmount").value="";$("receivedAmount").value="";updateMoney();msg("deliveryMessage","Delivery saved successfully.","success");await loadDeliveries();
-}catch(e){msg("deliveryMessage",e.message);$("saveBtn").disabled=false}
+["boy","customer","mobile","address","order","received"].forEach(id=>$(id).value="");$("customerSearch").value="";newMoney();msg("saveMsg","Delivery successfully saved.","success");await loadRows();
+}catch(e){msg("saveMsg",e.message);$("save").disabled=false}
 };
 
-window.whatsapp=(p,m)=>{if(!p)return alert("Mobile number नहीं है.");let n=decodeURIComponent(p).replace(/\D/g,"");if(n.length===10)n="91"+n;window.open("https://wa.me/"+n+"?text="+m,"_blank")};
-window.call=n=>{if(n)location.href="tel:"+n};
-window.delivered=async id=>{const r=await sb.from("deliveries").update({delivery_status:"Delivered"}).eq("id",id).eq("user_id",user.id);if(r.error)alert(r.error.message);else await loadDeliveries()};
-window.removeDelivery=async id=>{if(!confirm("Delete delivery?"))return;const r=await sb.from("deliveries").delete().eq("id",id).eq("user_id",user.id);if(r.error)alert(r.error.message);else await loadDeliveries()};
+/* ===== LIST ===== */
+function render(){
+const q=$("search").value.trim().toLowerCase(),a=rows.filter(x=>!q||(`${x.customer_name||""} ${x.customer_mobile||""} ${x.delivery_boy_name||""}`).toLowerCase().includes(q));
+const total=a.reduce((s,x)=>s+Number(x.order_amount||x.total_amount||0),0),rec=a.reduce((s,x)=>s+Number(x.received_amount||0),0);
+$("allCount").textContent=a.length;$("allAmount").textContent=money(total);$("allReceived").textContent=money(rec);$("allPending").textContent=money(Math.max(total-rec,0));
+if(!a.length){$("list").innerHTML="<p>📦 No deliveries found.</p>";return}
+$("list").innerHTML=a.map(x=>{
+const total=Number(x.order_amount||x.total_amount||0),rec=Number(x.received_amount||0),bal=Math.max(total-rec,0),phone=x.customer_mobile||"",name=x.customer_name||"Customer";
+const text=`नमस्ते ${name},\n\nआपकी Delivery To Home delivery का ${money(bal)} payment अभी pending है।\n\nकृपया ${money(bal)} का payment कर दें।\n\nधन्यवाद 🙏\nDELIVERY TO HOME`;
+return `<div class="delivery"><h3>👤 ${esc(name)}</h3><p>👨‍✈️ Delivery Boy: <b>${esc(x.delivery_boy_name||"-")}</b></p><p>📞 ${esc(phone)}</p><p>📍 ${esc(x.customer_address||"-")}</p><p>📅 ${new Date(x.delivery_date||x.created_at).toLocaleString("en-IN")}</p><p>💰 Order: <b>${money(total)}</b><br>💵 Received: <b>${money(rec)}</b><br>⚠️ Balance: <b>${money(bal)}</b></p><p>💳 ${esc(x.payment_type||"-")} | 🚚 ${esc(x.delivery_status||"-")}</p>${bal>0?`<button class="green" onclick="wa('${encodeURIComponent(phone)}','${encodeURIComponent(text)}')">📱 WhatsApp Pending Payment</button><button class="orange" onclick="receive('${x.id}')">💳 Receive Payment</button>`:""}${x.delivery_status!=="Delivered"?`<button class="green" onclick="delivered('${x.id}')">✅ Delivered</button>`:""}<button class="blue" onclick="callNow('${esc(phone)}')">📞 Call</button><button class="red" onclick="del('${x.id}')">🗑 Delete</button></div>`;
+}).join("");
+}
+$("search").oninput=render;
+
+window.wa=(p,m)=>{let n=decodeURIComponent(p).replace(/\D/g,"");if(n.length===10)n="91"+n;if(!n)return alert("Mobile number नहीं है.");window.open("https://wa.me/"+n+"?text="+m,"_blank")};
+window.callNow=n=>{if(n)location.href="tel:"+n};
+window.delivered=async id=>{const r=await db.from("deliveries").update({delivery_status:"Delivered"}).eq("id",id).eq("user_id",user.id);if(r.error)alert(r.error.message);else loadRows()};
+window.del=async id=>{if(!confirm("यह delivery delete करें?"))return;const r=await db.from("deliveries").delete().eq("id",id).eq("user_id",user.id);if(r.error)alert(r.error.message);else loadRows()};
 window.receive=async id=>{
-const d=deliveries.find(x=>x.id===id);if(!d)return;
-const total=Number(d.order_amount||d.total_amount||0),old=Number(d.received_amount||0),left=total-old;if(left<=0)return;
+const x=rows.find(y=>y.id===id);if(!x)return;
+const total=Number(x.order_amount||x.total_amount||0),old=Number(x.received_amount||0),left=total-old;
+if(left<=0)return alert("Payment already complete.");
 const v=prompt("बाकी payment कितना मिला?",left.toFixed(2));if(v===null)return;const p=Number(v);if(!p||p<=0||p>left)return alert("सही amount डालें.");
-const r=await sb.from("deliveries").update({received_amount:old+p,payment_status:old+p>=total?"Paid":"Unpaid"}).eq("id",id).eq("user_id",user.id);if(r.error)alert(r.error.message);else await loadDeliveries();
+const r=await db.from("deliveries").update({received_amount:old+p,payment_status:old+p>=total?"Paid":"Unpaid"}).eq("id",id).eq("user_id",user.id);
+if(r.error)alert(r.error.message);else loadRows();
 };
 
-sb.auth.onAuthStateChange((e,s)=>{if(s){user=s.user;showApp()}else{$("loginPage").classList.remove("hidden");$("appPage").classList.add("hidden")}});
-(async()=>{const r=await sb.auth.getSession();if(r.data.session){user=r.data.session.user;showApp()}})();
+/* ===== AUTH STATE ===== */
+db.auth.onAuthStateChange((event,session)=>{
+if(session){user=session.user;setTimeout(()=>openApp(),0)}
+else{$("loginPage").classList.remove("hidden");$("app").classList.add("hidden")}
+});
+(async()=>{const r=await db.auth.getSession();if(r.data.session){user=r.data.session.user;await openApp()}})();
 </script>
 </body>
 </html>
